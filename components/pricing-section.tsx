@@ -9,53 +9,53 @@ export function PricingSection() {
 
   const pricingPlans = [
     {
-      name: "Free",
-      monthlyPrice: "$0",
-      annualPrice: "$0",
-      description: "Perfect for individuals starting their journey.",
+      name: "Starter",
+      monthlyPrice: "$499",
+      annualPrice: "$399",
+      description: "Perfect for small businesses and startups.",
       features: [
-        "Real-time code suggestions",
-        "Basic integration logos",
-        "Single MCP server connection",
-        "Up to 2 AI coding agents",
-        "Vercel deployments with Pointer branding",
+        "Basic website development",
+        "Logo and brand identity design",
+        "Basic AI automation setup",
+        "1 month support",
+        "Mobile responsive design",
       ],
       buttonText: "Get Started",
       buttonClass:
         "bg-zinc-300 shadow-[0px_1px_1px_-0.5px_rgba(16,24,40,0.20)] outline outline-0.5 outline-[#1e29391f] outline-offset-[-0.5px] text-gray-800 text-shadow-[0px_1px_1px_rgba(16,24,40,0.08)] hover:bg-zinc-400",
     },
     {
-      name: "Pro",
-      monthlyPrice: "$20",
-      annualPrice: "$16",
-      description: "Ideal for professionals.",
+      name: "Professional",
+      monthlyPrice: "$1299",
+      annualPrice: "$999",
+      description: "Ideal for growing businesses.",
       features: [
-        "Enhanced real-time previews",
-        "Unlimited integrations with custom logos",
-        "Multiple MCP server connections",
-        "Up to 10 concurrent AI coding agents",
-        "Collaborative coding with team chat",
-        "Advanced version control integrations",
-        "Priority email and chat support",
+        "Advanced web development",
+        "Complete brand package",
+        "AI automation & integration",
+        "DevOps setup & deployment",
+        "3 months support",
+        "SEO optimization",
+        "Analytics integration",
       ],
-      buttonText: "Join now",
+      buttonText: "Choose Pro",
       buttonClass:
         "bg-primary-foreground shadow-[0px_1px_1px_-0.5px_rgba(16,24,40,0.20)] text-primary text-shadow-[0px_1px_1px_rgba(16,24,40,0.08)] hover:bg-primary-foreground/90",
       popular: true,
     },
     {
-      name: "Ultra",
-      monthlyPrice: "$200",
-      annualPrice: "$160",
-      description: "Tailored solutions for teams.",
+      name: "Enterprise",
+      monthlyPrice: "$2999",
+      annualPrice: "$2399",
+      description: "Complete solutions for large organizations.",
       features: [
-        "Dedicated account support",
-        "Unlimited MCP server clusters",
-        "Unlimited AI coding agents",
-        "Enterprise-grade security and compliance",
-        "Priority deployments and SLA guarantees",
+        "Custom enterprise solutions",
+        "Dedicated project manager",
+        "Advanced AI implementations",
+        "Full DevOps infrastructure",
+        "6 months support & maintenance",
       ],
-      buttonText: "Talk to Sales",
+      buttonText: "Contact Sales",
       buttonClass:
         "bg-secondary shadow-[0px_1px_1px_-0.5px_rgba(16,24,40,0.20)] text-secondary-foreground text-shadow-[0px_1px_1px_rgba(16,24,40,0.08)] hover:bg-secondary/90",
     },
@@ -66,11 +66,11 @@ export function PricingSection() {
       <div className="self-stretch relative flex flex-col justify-center items-center gap-2 py-0">
         <div className="flex flex-col justify-start items-center gap-4">
           <h2 className="text-center text-foreground text-4xl md:text-5xl font-semibold leading-tight md:leading-[40px]">
-            Pricing built for every developer
+            Choose Your Service Package
           </h2>
           <p className="self-stretch text-center text-muted-foreground text-sm font-medium leading-tight">
-            Choose a plan that fits your coding workflow, from individuals starting out to <br /> growing professionals
-            and large organizations.
+            Flexible packages designed for startups, growing businesses, and enterprises. <br />
+            Get the perfect solution that fits your needs and budget.
           </p>
         </div>
         <div className="pt-4">
@@ -166,7 +166,7 @@ export function PricingSection() {
               >
                 <div className="px-1.5 flex justify-center items-center gap-2">
                   <span
-                    className={`text-center text-sm font-medium leading-tight ${plan.name === "Free" ? "text-gray-800" : plan.name === "Pro" ? "text-primary" : "text-zinc-950"}`}
+                    className={`text-center text-sm font-medium leading-tight ${plan.name === "Starter" ? "text-gray-800" : plan.name === "Professional" ? "text-primary" : "text-zinc-950"}`}
                   >
                     {plan.buttonText}
                   </span>
@@ -177,7 +177,7 @@ export function PricingSection() {
               <div
                 className={`self-stretch text-sm font-medium leading-tight ${plan.popular ? "text-primary-foreground/70" : "text-muted-foreground"}`}
               >
-                {plan.name === "Free" ? "Get Started today:" : "Everything in Free +"}
+                {plan.name === "Starter" ? "Get Started today:" : "Everything in Free +"}
               </div>
               <div className="self-stretch flex flex-col justify-start items-start gap-3">
                 {plan.features.map((feature) => (

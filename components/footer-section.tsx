@@ -8,9 +8,11 @@ export function FooterSection() {
       {/* Left Section: Logo, Description, Social Links */}
       <div className="flex flex-col justify-start items-start gap-8 p-4 md:p-8">
         <div className="flex gap-3 items-stretch justify-center">
-          <div className="text-center text-foreground text-xl font-semibold leading-4">Pointer</div>
+          <div className="text-center text-foreground text-xl font-semibold leading-4">Quadgentics</div>
         </div>
-        <p className="text-foreground/90 text-sm font-medium leading-[18px] text-left">Coding made effortless</p>
+        <p className="text-foreground/90 text-sm font-medium leading-[18px] text-left">
+          Smart digital solutions for modern businesses
+        </p>
         <div className="flex justify-start items-start gap-3">
           <a href="#" aria-label="Twitter" className="w-4 h-4 flex items-center justify-center">
             <Twitter className="w-full h-full text-muted-foreground" />
@@ -26,22 +28,22 @@ export function FooterSection() {
       {/* Right Section: Product, Company, Resources */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 p-4 md:p-8 w-full md:w-auto">
         <div className="flex flex-col justify-start items-start gap-3">
-          <h3 className="text-muted-foreground text-sm font-medium leading-5">Product</h3>
+          <h3 className="text-muted-foreground text-sm font-medium leading-5">Services</h3>
           <div className="flex flex-col justify-end items-start gap-2">
             <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
-              Features
+              AI Automation
             </a>
             <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
-              Pricing
+              Web Development
             </a>
             <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
-              Integrations
+              Graphic Design
             </a>
             <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
-              Real-time Previews
+              DevOps & Deployment
             </a>
             <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
-              Multi-Agent Coding
+              Custom Solutions
             </a>
           </div>
         </div>
@@ -49,19 +51,19 @@ export function FooterSection() {
           <h3 className="text-muted-foreground text-sm font-medium leading-5">Company</h3>
           <div className="flex flex-col justify-center items-start gap-2">
             <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
-              About us
+              About Quadgentics
             </a>
             <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
-              Our team
+              Our Team
             </a>
             <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
               Careers
             </a>
             <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
-              Brand
+              Portfolio
             </a>
             <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
-              Contact
+              Contact Us
             </a>
           </div>
         </div>
