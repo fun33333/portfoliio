@@ -1,92 +1,185 @@
 "use client"
 
 import { Twitter, Github, Linkedin } from "lucide-react"
+import { motion } from "framer-motion"
+import Link from "next/link"
 
 export function FooterSection() {
   return (
-    <footer className="w-full max-w-[1320px] mx-auto px-5 flex flex-col md:flex-row justify-between items-start gap-8 md:gap-0 py-10 md:py-[70px]">
+    <footer className="w-full max-w-[1320px] mx-auto container-padding flex flex-col md:flex-row justify-between items-start grid-gap py-10 md:py-[70px]">
       {/* Left Section: Logo, Description, Social Links */}
-      <div className="flex flex-col justify-start items-start gap-8 p-4 md:p-8">
+      <motion.div
+        className="flex flex-col justify-start items-start gap-8 p-4 md:p-0"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="flex gap-3 items-stretch justify-center">
-          <div className="text-center text-foreground text-xl font-semibold leading-4">Quadgentics</div>
+          <span className="text-foreground text-2xl font-tech font-bold">
+            <span className="text-primary">&lt;</span>
+            Quadgentics
+            <span className="text-primary">/&gt;</span>
+          </span>
         </div>
-        <p className="text-foreground/90 text-sm font-medium leading-[18px] text-left">
-          Smart digital solutions for modern businesses
+        <p className="text-foreground/90 text-base font-tech leading-[22px] text-left max-w-xs">
+          Smart digital solutions for modern businesses, crafted with creativity and precision.
         </p>
-        <div className="flex justify-start items-start gap-3">
-          <a href="#" aria-label="Twitter" className="w-4 h-4 flex items-center justify-center">
-            <Twitter className="w-full h-full text-muted-foreground" />
-          </a>
-          <a href="#" aria-label="GitHub" className="w-4 h-4 flex items-center justify-center">
-            <Github className="w-full h-full text-muted-foreground" />
-          </a>
-          <a href="#" aria-label="LinkedIn" className="w-4 h-4 flex items-center justify-center">
-            <Linkedin className="w-full h-full text-muted-foreground" />
-          </a>
+        <div className="flex justify-start items-start gap-4">
+          <motion.a
+            href="#"
+            aria-label="Twitter"
+            className="w-8 h-8 flex items-center justify-center rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors duration-300"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <Twitter className="w-5 h-5" />
+          </motion.a>
+          <motion.a
+            href="#"
+            aria-label="GitHub"
+            className="w-8 h-8 flex items-center justify-center rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors duration-300"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <Github className="w-5 h-5" />
+          </motion.a>
+          <motion.a
+            href="#"
+            aria-label="LinkedIn"
+            className="w-8 h-8 flex items-center justify-center rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors duration-300"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <Linkedin className="w-5 h-5" />
+          </motion.a>
         </div>
-      </div>
+      </motion.div>
       {/* Right Section: Product, Company, Resources */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 p-4 md:p-8 w-full md:w-auto">
-        <div className="flex flex-col justify-start items-start gap-3">
-          <h3 className="text-muted-foreground text-sm font-medium leading-5">Services</h3>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 p-4 md:p-0 w-full md:w-auto">
+        <motion.div
+          className="flex flex-col justify-start items-start gap-3"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+        >
+          <h3 className="text-muted-foreground text-base font-tech font-medium leading-5">Services</h3>
           <div className="flex flex-col justify-end items-start gap-2">
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
+            <Link
+              href="#services-section"
+              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+            >
               AI Automation
-            </a>
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
+            </Link>
+            <Link
+              href="#services-section"
+              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+            >
               Web Development
-            </a>
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
+            </Link>
+            <Link
+              href="#services-section"
+              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+            >
               Graphic Design
-            </a>
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
+            </Link>
+            <Link
+              href="#services-section"
+              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+            >
               DevOps & Deployment
-            </a>
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
+            </Link>
+            <Link
+              href="#services-section"
+              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+            >
               Custom Solutions
-            </a>
+            </Link>
           </div>
-        </div>
-        <div className="flex flex-col justify-start items-start gap-3">
-          <h3 className="text-muted-foreground text-sm font-medium leading-5">Company</h3>
+        </motion.div>
+        <motion.div
+          className="flex flex-col justify-start items-start gap-3"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <h3 className="text-muted-foreground text-base font-tech font-medium leading-5">Company</h3>
           <div className="flex flex-col justify-center items-start gap-2">
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
+            <Link
+              href="#about-section"
+              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+            >
               About Quadgentics
-            </a>
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
+            </Link>
+            <Link
+              href="#about-section"
+              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+            >
               Our Team
-            </a>
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
+            </Link>
+            <Link
+              href="#"
+              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+            >
               Careers
-            </a>
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
+            </Link>
+            <Link
+              href="#projects-section"
+              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+            >
               Portfolio
-            </a>
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
+            </Link>
+            <Link
+              href="#contact-section"
+              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+            >
               Contact Us
-            </a>
+            </Link>
           </div>
-        </div>
-        <div className="flex flex-col justify-start items-start gap-3">
-          <h3 className="text-muted-foreground text-sm font-medium leading-5">Resources</h3>
+        </motion.div>
+        <motion.div
+          className="flex flex-col justify-start items-start gap-3"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
+          <h3 className="text-muted-foreground text-base font-tech font-medium leading-5">Resources</h3>
           <div className="flex flex-col justify-center items-start gap-2">
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
+            <Link
+              href="#"
+              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+            >
               Terms of use
-            </a>
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
+            </Link>
+            <Link
+              href="#"
+              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+            >
               API Reference
-            </a>
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
+            </Link>
+            <Link
+              href="#"
+              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+            >
               Documentation
-            </a>
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
+            </Link>
+            <Link
+              href="#"
+              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+            >
               Community
-            </a>
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
+            </Link>
+            <Link
+              href="#"
+              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+            >
               Support
-            </a>
+            </Link>
           </div>
-        </div>
+        </motion.div>
       </div>
     </footer>
   )

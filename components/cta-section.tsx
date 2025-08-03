@@ -1,9 +1,12 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { motion } from "framer-motion"
 
 export function CTASection() {
   return (
-    <section className="w-full pt-20 md:pt-60 lg:pt-60 pb-10 md:pb-20 px-5 relative flex flex-col justify-center items-center overflow-visible">
+    <section className="w-full section-padding container-padding relative flex flex-col justify-center items-center overflow-visible">
       <div className="absolute inset-0 top-[-90px]">
         <svg
           className="w-full h-full"
@@ -101,25 +104,35 @@ export function CTASection() {
           </defs>
         </svg>
       </div>
-      <div className="relative z-10 flex flex-col justify-start items-center gap-9 max-w-4xl mx-auto">
-        <div className="flex flex-col justify-start items-center gap-4 text-center">
-          <h2 className="text-foreground text-4xl md:text-5xl lg:text-[68px] font-semibold leading-tight md:leading-tight lg:leading-[76px] break-words max-w-[435px]">
-            Ready to Transform Your Business?
-          </h2>
-          <p className="text-muted-foreground text-sm md:text-base font-medium leading-[18.20px] md:leading-relaxed break-words max-w-2xl">
-            Join the businesses that trust Quadgentics for their digital transformation. Let's build something amazing
-            together with our creative and modern solutions.
-          </p>
-        </div>
+      <motion.div
+        className="relative z-10 flex flex-col justify-start items-center content-spacing max-w-4xl mx-auto text-center"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <motion.h2
+          className="text-foreground text-4xl md:text-5xl lg:text-6xl font-tech font-semibold leading-tight mb-4"
+          whileInView={{ scale: [0.9, 1] }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="text-primary font-mono">&lt;</span>
+          Ready to Transform Your Business?
+          <span className="text-primary font-mono">/&gt;</span>
+        </motion.h2>
+        <p className="text-muted-foreground text-lg md:text-xl font-tech font-medium leading-relaxed max-w-3xl">
+          Join the businesses that trust Quadgentics for their digital transformation. Let's build something amazing
+          together with our creative and modern solutions.
+        </p>
         <Link href="https://vercel.com/home" target="_blank" rel="noopener noreferrer">
           <Button
-            className="px-[30px] py-2 bg-primary text-primary-foreground text-base font-medium leading-6 rounded-[99px] shadow-[0px_0px_0px_4px_rgba(255,255,255,0.13)] hover:bg-primary/90 transition-all duration-200"
+            className="px-8 py-4 bg-primary text-primary-foreground text-lg font-tech font-medium rounded-[99px] shadow-[0px_0px_0px_4px_rgba(255,255,255,0.13)] hover:bg-primary/90 transition-all duration-200 btn-tech"
             size="lg"
           >
             Start Your Project
           </Button>
         </Link>
-      </div>
+      </motion.div>
     </section>
   )
 }
