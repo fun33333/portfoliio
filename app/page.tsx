@@ -2,6 +2,7 @@ import { HeroSection } from "@/components/hero-section"
 import { DashboardPreview } from "@/components/dashboard-preview"
 import { SocialProof } from "@/components/social-proof"
 import { BentoSection } from "@/components/bento-section"
+import { ProjectsSection } from "@/components/projects-section"
 import { LargeTestimonial } from "@/components/large-testimonial"
 import { PricingSection } from "@/components/pricing-section"
 import { TestimonialGridSection } from "@/components/testimonial-grid-section"
@@ -23,13 +24,13 @@ export default function LandingPage() {
         <main className="max-w-[1320px] mx-auto relative">
           <HeroSection />
           {/* Dashboard Preview Wrapper */}
-          <div className="absolute bottom-[-150px] md:bottom-[-400px] left-1/2 transform -translate-x-1/2 z-30">
+          <div className="absolute bottom-[-200px] md:bottom-[-450px] left-1/2 transform -translate-x-1/2 z-30">
             <DashboardPreview />
           </div>
         </main>
 
         <AnimatedSection
-          className="relative z-10 max-w-[1320px] mx-auto px-6 mt-[411px] md:mt-[400px] backdrop-blur-sm bg-background/20 rounded-2xl border border-white/10 mx-4"
+          className="relative z-10 max-w-[1320px] mx-auto mt-[450px] md:mt-[500px]"
           delay={0.1}
           variant="fadeUp"
         >
@@ -38,7 +39,7 @@ export default function LandingPage() {
 
         <AnimatedSection
           id="services-section"
-          className="relative z-10 max-w-[1320px] mx-auto mt-16"
+          className="relative z-10 max-w-[1320px] mx-auto"
           delay={0.2}
           variant="stagger"
         >
@@ -46,25 +47,30 @@ export default function LandingPage() {
         </AnimatedSection>
 
         <AnimatedSection
+          id="projects-section"
+          className="relative z-10 max-w-[1320px] mx-auto"
+          delay={0.2}
+          variant="fadeUp"
+        >
+          <ProjectsSection />
+        </AnimatedSection>
+
+        <AnimatedSection
           id="about-section"
-          className="relative z-10 max-w-[1320px] mx-auto mt-8 md:mt-16 backdrop-blur-sm bg-background/20 rounded-2xl border border-white/10 mx-4"
+          className="relative z-10 max-w-[1320px] mx-auto"
           delay={0.2}
           variant="fadeUp"
         >
           <TeamSection />
         </AnimatedSection>
 
-        <AnimatedSection
-          className="relative z-10 max-w-[1320px] mx-auto mt-8 md:mt-16 backdrop-blur-sm bg-background/30 rounded-2xl border border-white/10 mx-4"
-          delay={0.2}
-          variant="scale"
-        >
+        <AnimatedSection className="relative z-10 max-w-[1320px] mx-auto" delay={0.2} variant="scale">
           <LargeTestimonial />
         </AnimatedSection>
 
         <AnimatedSection
           id="pricing-section"
-          className="relative z-10 max-w-[1320px] mx-auto mt-8 md:mt-16 backdrop-blur-sm bg-background/20 rounded-2xl border border-white/10 mx-4 p-8"
+          className="relative z-10 max-w-[1320px] mx-auto"
           delay={0.2}
           variant="slideLeft"
         >
@@ -73,7 +79,7 @@ export default function LandingPage() {
 
         <AnimatedSection
           id="testimonials-section"
-          className="relative z-10 max-w-[1320px] mx-auto mt-8 md:mt-16"
+          className="relative z-10 max-w-[1320px] mx-auto"
           delay={0.2}
           variant="fadeUp"
         >
@@ -82,20 +88,20 @@ export default function LandingPage() {
 
         <AnimatedSection
           id="faq-section"
-          className="relative z-10 max-w-[1320px] mx-auto mt-8 md:mt-16 backdrop-blur-sm bg-background/20 rounded-2xl border border-white/10 mx-4"
+          className="relative z-10 max-w-[1320px] mx-auto"
           delay={0.2}
           variant="slideRight"
         >
           <FAQSection />
         </AnimatedSection>
 
-        <AnimatedSection className="relative z-10 max-w-[1320px] mx-auto mt-8 md:mt-16" delay={0.2} variant="scale">
+        <AnimatedSection className="relative z-10 max-w-[1320px] mx-auto" delay={0.2} variant="scale">
           <CTASection />
         </AnimatedSection>
 
         <AnimatedSection
           id="contact-section"
-          className="relative z-10 max-w-[1320px] mx-auto mt-8 md:mt-16 backdrop-blur-sm bg-background/30 rounded-2xl border border-white/10 mx-4"
+          className="relative z-10 max-w-[1320px] mx-auto"
           delay={0.2}
           variant="fadeIn"
         >
