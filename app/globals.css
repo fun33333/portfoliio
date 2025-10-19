@@ -2,46 +2,74 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Lastica';
+  src: url('/fonts/Lastica.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lastica';
+  src: url('/fonts/Lastica.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
+  /* Light theme */
   :root {
-    /* Enhanced Dark Theme with Minimal Gradients */
-    --background: 210 15% 4%;
-    --foreground: 160 20% 96%;
+    /* Light Modern Theme */
+    --background: 0 0% 100%;    /* White */
+    --foreground: 180 33% 11%;  /* #172222 */
 
-    --muted: 240 5% 12%;
-    --muted-foreground: 160 15% 85% / 0.8;
-    --muted-foreground-light: 160 15% 85% / 0.6;
-    --muted-foreground-dark: 160 15% 85% / 0.7;
+    --muted: 180 33% 96%;      /* Light muted cyan */
+    --muted-foreground: 180 33% 25%;
+    --muted-foreground-light: 180 33% 45%;
+    --muted-foreground-dark: 180 33% 15%;
 
-    --card: 220 20% 8% / 0.6;
-    --card-foreground: 160 20% 96%;
+    --card: 0 0% 100%;         /* White */
+    --card-foreground: 180 33% 11%;
 
-    --popover: 210 15% 4%;
-    --popover-foreground: 160 20% 96%;
+    --popover: 0 0% 100%;      /* White */
+    --popover-foreground: 180 33% 11%;
 
-    /* Clean Primary Colors */
-    --primary: 220 100% 65%;
-    --primary-foreground: 0 0% 100%;
-    --primary-dark: 220 100% 55%;
-    --primary-light: 220 70% 85%;
+    /* Dark Section Backgrounds */
+    --dark-bg-primary: 180 45% 6%;      /* #0f1b1b - Deep teal-black */
+    --dark-bg-secondary: 180 40% 8%;    /* Slightly lighter for footer */
+    --dark-foreground: 180 20% 95%;     /* Light text for dark sections */
+    --dark-muted: 180 15% 70%;          /* Muted text on dark */
+    
+    /* Light Section Backgrounds */
+    --light-bg-pure: 0 0% 100%;         /* Pure white */
+    --light-bg-tinted: 180 60% 99%;     /* #f8fffe - Soft teal tint */
+    --light-foreground: 180 33% 11%;    /* Dark text for light sections */
+    
+    /* Modern Cyan Accents */
+    --primary: 177 58% 43%;          /* #2dafa7 */
+    --primary-foreground: 0 0% 100%; /* White */
+    --primary-dark: 177 58% 33%;     /* Darker teal */
+    --primary-light: 177 58% 53%;    /* Lighter teal */
 
-    --secondary: 160 15% 85%;
-    --secondary-foreground: 210 15% 4%;
+    --secondary: 180 33% 98%;        /* Very light cyan */
+    --secondary-foreground: 180 33% 11%;
 
-    --accent: 240 8% 20%;
-    --accent-foreground: 240 8% 96%;
+    --accent: 177 58% 43%;          /* #2dafa7 */
+    --accent-foreground: 0 0% 100%; /* White */
 
-    --border: 240 100% 100% / 0.15;
-    --border-light: 210 20% 8% / 0.2;
-    --border-dark: 210 20% 8% / 0.1;
+    --border: 180 89% 95% / 0.15;    /* Based on e7fdfd */
+    --border-light: 180 20% 85%;     /* Light border */
+    --border-dark: 180 20% 20%;      /* Dark border */
 
-    --ring: 220 100% 65%;
+    --ring: 177 58% 43%;      /* #2dafa7 */
     --radius: 0.75rem;
 
     /* Tech accent colors */
-    --tech-green: 142 76% 36%;
-    --tech-orange: 32 95% 44%;
-    --tech-purple: 262 83% 58%;
+    --tech-green: 177 58% 43%;   /* #2dafa7 */
+    --tech-orange: 177 58% 53%;  /* Lighter primary */
+    --tech-purple: 177 58% 33%;  /* Darker primary */
   }
 }
 
@@ -63,6 +91,12 @@
     font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
       sans-serif;
     font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  .font-lastica {
+    font-family: 'Lastica', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 700;
     letter-spacing: -0.02em;
   }
 }
@@ -166,43 +200,83 @@
   animation: iframe-load 0.8s ease-out;
 }
 
-/* Card hover effects */
+/* Enhanced Card Effects */
 .card-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
 }
 
 .card-hover:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px hsl(var(--primary) / 0.2);
+  transform: translateY(-4px);
+  border-color: hsl(var(--primary) / 0.5);
+  box-shadow: 
+    0 4px 12px hsl(var(--primary) / 0.1),
+    0 12px 24px hsl(var(--background) / 0.2);
 }
 
-/* Button effects */
+/* Modern Button Effects */
 .btn-tech {
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
+  background: linear-gradient(
+    135deg, 
+    hsl(var(--primary)) 0%,
+    hsl(var(--primary-dark)) 100%
+  );
+  border: 1px solid hsl(var(--primary) / 0.2);
+  color: hsl(var(--primary-foreground));
 }
 
-.btn-tech::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transition: left 0.5s;
+.btn-tech:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary-light)) 0%,
+    hsl(var(--primary)) 100%
+  );
+  border-color: hsl(var(--primary) / 0.4);
 }
 
-.btn-tech:hover::before {
-  left: 100%;
+/* Section Spacing */
+.section-spacing {
+  @apply py-16 md:py-24 lg:py-32;
+}
+
+.section-spacing-sm {
+  @apply py-12 md:py-16 lg:py-20;
+}
+
+.section-spacing-lg {
+  @apply py-20 md:py-32 lg:py-40;
+}
+
+.content-spacing {
+  @apply space-y-8 md:space-y-12 lg:space-y-16;
+}
+
+/* Section Patterns */
+.pattern-grid {
+  background-image: 
+    linear-gradient(to right, hsl(var(--primary) / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--primary) / 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.pattern-dots {
+  background-image: radial-gradient(
+    hsl(var(--primary) / 0.1) 1px,
+    transparent 1px
+  );
+  background-size: 16px 16px;
 }
 
 /* Glassmorphism */
 .glass-card {
   backdrop-filter: blur(16px);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: hsl(var(--background) / 0.8);
+  border: 1px solid hsl(var(--border) / 0.1);
 }
 
 /* Tech grid pattern */
@@ -324,4 +398,165 @@
     font-size: 16px;
     max-width: calc(100% - 180px);
   }
+}
+
+/* neon grid background (hero/chat can reuse) */
+:root {
+  --bg0: #172222;
+  --grid-cyan: rgba(45,175,167,0.06);
+}
+html, body { background: var(--bg0); }
+
+/* Enhanced Radial Glow */
+body::before {
+  content: "";
+  position: fixed; 
+  inset: -20%;
+  background: 
+    radial-gradient(60% 60% at 70% 0%, hsl(var(--primary) / 0.15), transparent 60%),
+    radial-gradient(40% 40% at 0% 100%, hsl(var(--secondary) / 0.1), transparent 55%);
+  filter: blur(40px); 
+  pointer-events: none; 
+  z-index: -1;
+  animation: drift 18s ease-in-out infinite alternate;
+}
+@keyframes grid-slide {
+  0% { background-position: 0 0; }
+  100% { background-position: 60px 60px; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-slow-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes drift { from { transform: translateY(-2%);} to { transform: translateY(2%);} }
+
+@keyframes gradient-slow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-grid-slide {
+  animation: grid-slide 20s linear infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+.animate-spin-slow-reverse {
+  animation: spin-slow-reverse 15s linear infinite;
+}
+
+.animate-gradient-slow {
+  background-size: 400% 400%;
+  animation: gradient-slow 15s ease infinite;
+}
+
+/* Enhanced Typing Animation */
+.typing-dots { 
+  display: inline-flex; 
+  gap: 4px; 
+  align-items: center; 
+}
+.typing-dots span {
+  width: 6px; 
+  height: 6px; 
+  border-radius: 9999px; 
+  background: hsl(var(--primary)); 
+  opacity: 0.6;
+  animation: bounce 1.2s infinite ease-in-out;
+}
+.typing-dots span:nth-child(2){ 
+  animation-delay: 0.15s; 
+  opacity: 0.4;
+}
+.typing-dots span:nth-child(3){ 
+  animation-delay: 0.3s; 
+  opacity: 0.2;
+}
+@keyframes bounce { 0%,80%,100%{ transform: translateY(0);} 40%{ transform: translateY(-4px);} }
+
+/* Enhanced Scrollbar */
+.scrollbar-thin::-webkit-scrollbar { 
+  height: 8px; 
+  width: 8px; 
+}
+.scrollbar-thin::-webkit-scrollbar-thumb { 
+  background: hsl(var(--primary) / 0.2); 
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+.scrollbar-thin::-webkit-scrollbar-track { 
+  background: hsl(var(--background) / 0.5);
+  border-radius: 8px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.3);
+  background-clip: padding-box;
+}
+
+/* Section Background Utility Classes */
+.section-dark-primary {
+  background: hsl(var(--dark-bg-primary));
+  color: hsl(var(--dark-foreground));
+}
+
+.section-dark-secondary {
+  background: hsl(var(--dark-bg-secondary));
+  color: hsl(var(--dark-foreground));
+}
+
+.section-light-pure {
+  background: hsl(var(--light-bg-pure));
+  color: hsl(var(--light-foreground));
+}
+
+.section-light-tinted {
+  background: hsl(var(--light-bg-tinted));
+  color: hsl(var(--light-foreground));
+}
+
+/* Dark section text utilities */
+.text-dark-muted {
+  color: hsl(var(--dark-muted));
+}
+
+.text-dark-foreground {
+  color: hsl(var(--dark-foreground));
+}
+
+/* Border utilities for dark sections */
+.border-dark {
+  border-color: hsl(var(--border-dark));
+}
+
+/* Smooth section transitions */
+.section-transition {
+  position: relative;
+  transition: background-color 0.6s ease;
+}
+
+.section-transition::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsl(var(--primary) / 0.2),
+    transparent
+  );
+  pointer-events: none;
 }

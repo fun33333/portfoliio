@@ -6,7 +6,7 @@ import { motion } from "framer-motion"
 
 export function CTASection() {
   return (
-    <section className="w-full section-padding container-padding relative flex flex-col justify-center items-center overflow-visible">
+    <section className="w-full py-16 md:py-20 lg:py-24 px-4 md:px-6 lg:px-8 relative flex flex-col justify-center items-center overflow-visible">
       <div className="absolute inset-0 top-[-90px]">
         <svg
           className="w-full h-full"
@@ -105,28 +105,26 @@ export function CTASection() {
         </svg>
       </div>
       <motion.div
-        className="relative z-10 flex flex-col justify-start items-center content-spacing max-w-4xl mx-auto text-center"
+        className="relative z-10 flex flex-col justify-start items-center space-y-6 md:space-y-8 max-w-4xl mx-auto text-center"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
       >
         <motion.h2
-          className="text-foreground text-4xl md:text-5xl lg:text-6xl font-tech font-semibold leading-tight mb-4"
+          className="text-foreground text-3xl md:text-4xl lg:text-5xl font-tech font-semibold leading-tight mb-4"
           whileInView={{ scale: [0.9, 1] }}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-primary font-mono">&lt;</span>
           Ready to Transform Your Business?
-          <span className="text-primary font-mono">/&gt;</span>
         </motion.h2>
-        <p className="text-muted-foreground text-lg md:text-xl font-tech font-medium leading-relaxed max-w-3xl">
+        <p className="text-muted-foreground text-base md:text-lg font-tech font-medium leading-relaxed max-w-3xl">
           Join the businesses that trust Quadgentics for their digital transformation. Let's build something amazing
           together with our creative and modern solutions.
         </p>
-        <Link href="https://vercel.com/home" target="_blank" rel="noopener noreferrer">
+        <Link href="#contact-section">
           <Button
-            className="px-8 py-4 bg-primary text-primary-foreground text-lg font-tech font-medium rounded-[99px] shadow-[0px_0px_0px_4px_rgba(255,255,255,0.13)] hover:bg-primary/90 transition-all duration-200 btn-tech"
+            className="px-8 py-3 bg-primary hover:bg-primary/90 text-white text-base md:text-lg font-tech font-medium rounded-full transition-all duration-300"
             size="lg"
           >
             Start Your Project

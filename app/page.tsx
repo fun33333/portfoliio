@@ -13,6 +13,8 @@ import { AnimatedSection } from "@/components/animated-section"
 import { VideoBackground } from "@/components/video-background"
 import { TeamSection } from "@/components/team-section"
 
+// bitBYTE8
+
 export default function LandingPage() {
   return (
     <div className="min-h-screen relative overflow-hidden pb-0">
@@ -21,8 +23,9 @@ export default function LandingPage() {
 
       {/* Scrollable Content */}
       <div className="relative z-10">
-        <main className="max-w-[1320px] mx-auto relative">
+        <main className="mx-auto relative">
           <HeroSection />
+          
           {/* Dashboard Preview Wrapper */}
           <div className="absolute bottom-[-200px] md:bottom-[-450px] left-1/2 transform -translate-x-1/2 z-30">
             <DashboardPreview />
@@ -30,82 +33,108 @@ export default function LandingPage() {
         </main>
 
         <AnimatedSection
-          className="relative z-10 max-w-[1320px] mx-auto mt-[450px] md:mt-[500px]"
+          className="relative z-10 section-light-tinted section-transition"
           delay={0.1}
           variant="fadeUp"
         >
-          <SocialProof />
+          <div className="max-w-[1320px] mx-auto mt-[450px] md:mt-[500px]">
+            <SocialProof />
+          </div>
         </AnimatedSection>
 
         <AnimatedSection
           id="services-section"
-          className="relative z-10 max-w-[1320px] mx-auto"
+          className="relative z-10 section-light-pure section-transition"
           delay={0.2}
           variant="stagger"
         >
-          <BentoSection />
+          <div className="max-w-[1320px] mx-auto">
+            <BentoSection />
+          </div>
         </AnimatedSection>
 
         <AnimatedSection
           id="projects-section"
-          className="relative z-10 max-w-[1320px] mx-auto"
+          className="relative z-10 section-dark-primary section-transition"
           delay={0.2}
           variant="fadeUp"
         >
-          <ProjectsSection />
+          <div className="max-w-[1320px] mx-auto">
+            <ProjectsSection />
+          </div>
         </AnimatedSection>
 
         <AnimatedSection
           id="about-section"
-          className="relative z-10 max-w-[1320px] mx-auto"
+          className="relative z-10 section-light-pure section-transition"
           delay={0.2}
           variant="fadeUp"
         >
-          <TeamSection />
+          <div className="max-w-[1320px] mx-auto">
+            <TeamSection />
+          </div>
         </AnimatedSection>
 
-        <AnimatedSection className="relative z-10 max-w-[1320px] mx-auto" delay={0.2} variant="scale">
-          <LargeTestimonial />
+        <AnimatedSection 
+          className="relative z-10 section-light-tinted section-transition" 
+          delay={0.2} 
+          variant="scale"
+        >
+          <div className="max-w-[1320px] mx-auto">
+            <LargeTestimonial />
+          </div>
         </AnimatedSection>
 
-        <AnimatedSection
+        {/* <AnimatedSection
           id="pricing-section"
           className="relative z-10 max-w-[1320px] mx-auto"
           delay={0.2}
           variant="slideLeft"
         >
           <PricingSection />
-        </AnimatedSection>
+        </AnimatedSection> */}
 
         <AnimatedSection
           id="testimonials-section"
-          className="relative z-10 max-w-[1320px] mx-auto"
+          className="relative z-10 section-dark-primary section-transition"
           delay={0.2}
           variant="fadeUp"
         >
-          <TestimonialGridSection />
+          <div className="max-w-[1320px] mx-auto">
+            <TestimonialGridSection />
+          </div>
         </AnimatedSection>
 
         <AnimatedSection
           id="faq-section"
-          className="relative z-10 max-w-[1320px] mx-auto"
+          className="relative z-10 section-light-tinted section-transition"
           delay={0.2}
           variant="slideRight"
         >
-          <FAQSection />
+          <div className="max-w-[1320px] mx-auto">
+            <FAQSection />
+          </div>
         </AnimatedSection>
 
-        <AnimatedSection className="relative z-10 max-w-[1320px] mx-auto" delay={0.2} variant="scale">
-          <CTASection />
+        <AnimatedSection 
+          className="relative z-10 section-light-pure section-transition" 
+          delay={0.2} 
+          variant="scale"
+        >
+          <div className="max-w-[1320px] mx-auto">
+            <CTASection />
+          </div>
         </AnimatedSection>
 
         <AnimatedSection
           id="contact-section"
-          className="relative z-10 max-w-[1320px] mx-auto"
+          className="relative z-10 section-dark-secondary section-transition"
           delay={0.2}
           variant="fadeIn"
         >
-          <FooterSection />
+          <div className="max-w-[1320px] mx-auto">
+            <FooterSection />
+          </div>
         </AnimatedSection>
       </div>
     </div>

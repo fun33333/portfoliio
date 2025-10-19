@@ -103,28 +103,26 @@ export function FAQSection() {
     setOpenItems(newOpenItems)
   }
   return (
-    <section className="w-full section-padding container-padding relative flex flex-col justify-center items-center">
+    <section className="w-full py-16 md:py-20 lg:py-24 px-4 md:px-6 lg:px-8 relative flex flex-col justify-center items-center">
       <div className="w-[300px] h-[500px] absolute top-[150px] left-1/2 -translate-x-1/2 origin-top-left rotate-[-33.39deg] bg-primary/10 blur-[100px] z-0" />
       <motion.div
-        className="self-stretch py-8 md:py-14 flex flex-col justify-center items-center gap-6 relative z-10 text-center"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-      >
-        <motion.h2
-          className="w-full max-w-[600px] text-foreground text-4xl md:text-5xl lg:text-6xl font-tech font-semibold leading-tight mb-4"
+          className="text-center mb-12 md:mb-16 space-y-6 md:space-y-8"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+            <motion.h2
+          className="w-full max-w-[600px] mx-auto text-foreground text-3xl md:text-4xl lg:text-5xl font-tech font-semibold leading-tight mb-4"
           whileInView={{ scale: [0.9, 1] }}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-primary font-mono">&lt;</span>
           Frequently Asked Questions
-          <span className="text-primary font-mono">/&gt;</span>
         </motion.h2>
-        <p className="self-stretch text-muted-foreground text-lg md:text-xl font-tech font-medium leading-relaxed max-w-3xl">
+          <p className="text-base md:text-lg text-muted-foreground font-tech max-w-3xl mx-auto leading-relaxed">
           Everything you need to know about Quadgentics and how it can transform your development workflow
-        </p>
-      </motion.div>
+          </p>
+        </motion.div>
       <div className="w-full max-w-[800px] pt-0.5 pb-10 flex flex-col justify-start items-start gap-4 relative z-10">
         {faqData.map((faq, index) => (
           <FAQItem

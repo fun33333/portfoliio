@@ -205,7 +205,7 @@ export function TeamSection() {
         </div>
 
         {/* Team stats */}
-        <motion.div
+        {/* <motion.div
           className="mt-20 grid grid-cols-2 md:grid-cols-4 grid-gap"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -231,7 +231,7 @@ export function TeamSection() {
               <div className="text-sm text-muted-foreground font-tech">{stat.label}</div>
             </motion.div>
           ))}
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   )

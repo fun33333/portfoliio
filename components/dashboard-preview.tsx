@@ -22,7 +22,7 @@ export function DashboardPreview() {
         transition={{ duration: 0.3 }}
       >
         {/* Holographic border effect */}
-        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/20 via-purple-500/20 to-pink-500/20 p-px">
+        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/20 via-primary-foreground to-secondary-foreground p-px">
           <div className="w-full h-full rounded-2xl bg-background/20 backdrop-blur-xl"></div>
         </div>
 

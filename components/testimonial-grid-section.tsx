@@ -62,11 +62,30 @@ const testimonials = [
   },
 ]
 
-const TestimonialCard = ({ quote, name, company, avatar, type, index }) => {
-  const isLargeCard = type.startsWith("large")
-  const avatarSize = isLargeCard ? 64 : 48
-  const avatarBorderRadius = isLargeCard ? "rounded-2xl" : "rounded-xl"
-  const padding = isLargeCard ? "p-8" : "p-6"
+// TypeScript types add kar diye gaye hain taake linting error door ho jaayein.
+// TypeScript types have been added to fix the linting errors.
+
+interface TestimonialCardProps {
+  quote: string;
+  name: string;
+  company: string;
+  avatar: string;
+  type: string;
+  index: number;
+}
+
+const TestimonialCard = ({
+  quote,
+  name,
+  company,
+  avatar,
+  type,
+  index,
+}: TestimonialCardProps) => {
+  const isLargeCard = type.startsWith("large");
+  const avatarSize = isLargeCard ? 64 : 48;
+  const avatarBorderRadius = isLargeCard ? "rounded-2xl" : "rounded-xl";
+  const padding = isLargeCard ? "p-8" : "p-6";
 
   let cardClasses = `flex flex-col justify-between items-start overflow-hidden rounded-2xl shadow-[0px_2px_4px_rgba(0,0,0,0.08)] relative ${padding} card-hover`
   let quoteClasses = ""
@@ -76,12 +95,13 @@ const TestimonialCard = ({ quote, name, company, avatar, type, index }) => {
   let cardHeight = ""
   const cardWidth = "w-full"
 
+  // Responsive heights for cards - Dark theme optimized
   if (type === "large-teal") {
     cardClasses += " bg-primary"
-    quoteClasses += " text-primary-foreground text-2xl md:text-3xl font-tech font-medium leading-8 md:leading-10"
-    nameClasses += " text-primary-foreground text-lg font-tech font-normal leading-6"
-    companyClasses += " text-primary-foreground/60 text-base font-tech font-normal leading-6"
-    cardHeight = "h-[502px]" // Keep fixed height for visual consistency in grid
+    quoteClasses += " text-primary-foreground text-xl md:text-2xl lg:text-3xl font-tech font-medium leading-7 md:leading-9"
+    nameClasses += " text-primary-foreground text-base md:text-lg font-tech font-normal leading-6"
+    companyClasses += " text-primary-foreground/60 text-sm md:text-base font-tech font-normal leading-6"
+    cardHeight = "h-[340px] sm:h-[400px] md:h-[502px]"
     backgroundElements = (
       <div
         className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat opacity-20"
@@ -89,11 +109,11 @@ const TestimonialCard = ({ quote, name, company, avatar, type, index }) => {
       />
     )
   } else if (type === "large-light") {
-    cardClasses += " glass-card"
-    quoteClasses += " text-foreground text-2xl md:text-3xl font-tech font-medium leading-8 md:leading-10"
-    nameClasses += " text-foreground text-lg font-tech font-normal leading-6"
-    companyClasses += " text-muted-foreground text-base font-tech font-normal leading-6"
-    cardHeight = "h-[502px]" // Keep fixed height for visual consistency in grid
+    cardClasses += " bg-[#1a2f2f] border-primary/20"
+    quoteClasses += " text-dark-foreground text-xl md:text-2xl lg:text-3xl font-tech font-medium leading-7 md:leading-9"
+    nameClasses += " text-dark-foreground text-base md:text-lg font-tech font-normal leading-6"
+    companyClasses += " text-dark-muted text-sm md:text-base font-tech font-normal leading-6"
+    cardHeight = "h-[340px] sm:h-[400px] md:h-[502px]"
     backgroundElements = (
       <div
         className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat opacity-10"
@@ -101,11 +121,11 @@ const TestimonialCard = ({ quote, name, company, avatar, type, index }) => {
       />
     )
   } else {
-    cardClasses += " glass-card"
-    quoteClasses += " text-foreground/80 text-base md:text-lg font-tech font-normal leading-6 md:leading-7"
-    nameClasses += " text-foreground text-base font-tech font-normal leading-[22px]"
-    companyClasses += " text-muted-foreground text-sm font-tech font-normal leading-[22px]"
-    cardHeight = "h-[280px]" // Adjusted for better content fit
+    cardClasses += " bg-[#1a2f2f] border-primary/20"
+    quoteClasses += " text-dark-muted text-sm md:text-base font-tech font-normal leading-6 md:leading-7"
+    nameClasses += " text-dark-foreground text-sm md:text-base font-tech font-normal leading-[22px]"
+    companyClasses += " text-dark-muted/70 text-xs md:text-sm font-tech font-normal leading-[22px]"
+    cardHeight = "h-[180px] sm:h-[220px] md:h-[280px]"
   }
 
   return (
@@ -123,7 +143,7 @@ const TestimonialCard = ({ quote, name, company, avatar, type, index }) => {
     >
       {backgroundElements}
       <div className={`relative z-10 font-normal break-words ${quoteClasses}`}>{quote}</div>
-      <div className="relative z-10 flex justify-start items-center gap-4">
+      <div className="relative z-10 flex justify-start items-center gap-4 mt-4">
         <Image
           src={avatar || "/placeholder.svg"}
           alt={`${name} avatar`}
@@ -143,39 +163,40 @@ const TestimonialCard = ({ quote, name, company, avatar, type, index }) => {
 
 export function TestimonialGridSection() {
   return (
-    <section className="w-full section-padding container-padding overflow-hidden flex flex-col justify-start">
+    <section className="w-full py-16 md:py-20 lg:py-24 px-4 md:px-6 lg:px-8 overflow-hidden flex flex-col justify-start">
       <motion.div
-        className="self-stretch py-6 md:py-8 lg:py-14 flex flex-col justify-center items-center gap-4 text-center"
+        className="self-stretch py-6 md:py-8 flex flex-col justify-center items-center gap-6 md:gap-8 text-center"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
       >
-        <motion.h2
-          className="text-foreground text-4xl md:text-5xl lg:text-6xl font-tech font-semibold leading-tight mb-4"
+            <motion.h2
+          className="text-dark-foreground text-3xl md:text-4xl lg:text-5xl font-tech font-semibold leading-tight mb-4"
           whileInView={{ scale: [0.9, 1] }}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-primary font-mono">&lt;</span>
-          Coding Made Effortless
-          <span className="text-primary font-mono">/&gt;</span>
+          Client Success Stories
         </motion.h2>
-        <p className="self-stretch text-muted-foreground text-lg md:text-xl font-tech font-medium leading-relaxed max-w-3xl">
-          {"Hear how developers ship products faster, collaborate seamlessly,"} <br />{" "}
-          {"and build with confidence using Quadgentics's powerful AI tools"}
+        <p className="self-stretch text-dark-muted text-base md:text-lg font-tech font-medium leading-relaxed max-w-3xl">
+          {"Hear how businesses transform their digital presence with our innovative solutions,"} <br />{" "}
+          {"delivering exceptional results and driving growth"}
         </p>
       </motion.div>
-      <div className="w-full pt-0.5 pb-4 md:pb-6 lg:pb-10 flex flex-col md:flex-row justify-center items-start grid-gap max-w-[1100px] mx-auto">
-        <div className="flex-1 flex flex-col justify-start items-start grid-gap">
+      <div className="w-full pt-0.5 pb-4 md:pb-6 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-[1100px] mx-auto">
+        {/* Column 1 */}
+        <div className="flex flex-col justify-start items-start gap-4">
           <TestimonialCard {...testimonials[0]} index={0} />
           <TestimonialCard {...testimonials[1]} index={1} />
         </div>
-        <div className="flex-1 flex flex-col justify-start items-start grid-gap">
+        {/* Column 2 */}
+        <div className="flex flex-col justify-start items-start gap-4">
           <TestimonialCard {...testimonials[2]} index={2} />
           <TestimonialCard {...testimonials[3]} index={3} />
           <TestimonialCard {...testimonials[4]} index={4} />
         </div>
-        <div className="flex-1 flex flex-col justify-start items-start grid-gap">
+        {/* Column 3 */}
+        <div className="flex flex-col justify-start items-start gap-4">
           <TestimonialCard {...testimonials[5]} index={5} />
           <TestimonialCard {...testimonials[6]} index={6} />
         </div>

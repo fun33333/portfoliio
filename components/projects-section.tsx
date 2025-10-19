@@ -78,7 +78,7 @@ const projects: Project[] = [
     title: "SaaS Management Platform",
     description: "Complete SaaS solution with user management, billing, and analytics.",
     category: "Web Development",
-    url: "https://saas-demo-platform.vercel.app",
+    url: "http://localhost:3000/",
     image: "/placeholder.svg?height=300&width=500&text=SaaS+Platform",
     tech: ["Next.js", "Supabase", "Stripe", "Vercel"],
     icon: Cpu,
@@ -110,29 +110,27 @@ export function ProjectsSection() {
   }
 
   return (
-    <section className="w-full section-padding container-padding relative overflow-hidden">
-      {/* Background tech grid */}
-      <div className="absolute inset-0 tech-grid opacity-20"></div>
+    <section className="w-full py-16 md:py-20 lg:py-24 px-4 md:px-6 lg:px-8 relative overflow-hidden">
+      {/* Background tech grid for dark theme */}
+      <div className="absolute inset-0 tech-grid opacity-10"></div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <motion.div
-          className="text-center mb-16 content-spacing"
+          className="text-center mb-16 space-y-6 md:space-y-8"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
           <motion.h2
-            className="text-4xl md:text-5xl lg:text-6xl font-tech font-bold text-foreground mb-6"
+            className="text-3xl md:text-4xl lg:text-5xl font-tech font-bold text-dark-foreground mb-6"
             whileInView={{ scale: [0.9, 1] }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-primary font-mono">&lt;</span>
             Our Projects
-            <span className="text-primary font-mono">/&gt;</span>
           </motion.h2>
-          <p className="text-lg md:text-xl text-muted-foreground font-tech max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg text-dark-muted font-tech max-w-3xl mx-auto leading-relaxed">
             Explore our portfolio of successful projects across different domains.
             <br />
             <span className="text-primary font-mono">Click to interact • Live demos available</span>
@@ -154,7 +152,7 @@ export function ProjectsSection() {
               className={`px-4 py-2 rounded-lg font-tech font-medium text-sm transition-all duration-300 ${
                 filter === category
                   ? "bg-primary text-primary-foreground shadow-lg"
-                  : "bg-primary/10 text-primary hover:bg-primary/20 border border-primary/20"
+                  : "bg-primary/20 text-primary hover:bg-primary/30 border border-primary/30"
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -165,7 +163,7 @@ export function ProjectsSection() {
         </motion.div>
 
         {/* Projects grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-gap">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {filteredProjects.map((project, index) => (
             <motion.div
               key={project.id}
@@ -176,17 +174,17 @@ export function ProjectsSection() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
               <motion.div
-                className="glass-card rounded-2xl border border-white/10 overflow-hidden card-hover cursor-pointer"
+                className="bg-[#1a2f2f] rounded-2xl border border-primary/20 overflow-hidden cursor-pointer transition-all duration-300"
                 whileHover={{
                   y: -10,
                   scale: 1.02,
-                  boxShadow: "0 25px 50px rgba(0, 0, 0, 0.3), 0 0 30px rgba(59, 130, 246, 0.2)",
+                  boxShadow: "0 25px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(45, 175, 167, 0.3)",
                 }}
                 onClick={() => openProject(project)}
               >
                 {/* Tech corners */}
-                <div className="absolute top-3 left-3 w-4 h-4 border-l-2 border-t-2 border-primary/40 group-hover:border-primary transition-colors duration-300 z-10"></div>
-                <div className="absolute top-3 right-3 w-4 h-4 border-r-2 border-t-2 border-primary/40 group-hover:border-primary transition-colors duration-300 z-10"></div>
+                <div className="absolute top-3 left-3 w-4 h-4 border-l-2 border-t-2 border-primary/50 group-hover:border-primary transition-colors duration-300 z-10"></div>
+                <div className="absolute top-3 right-3 w-4 h-4 border-r-2 border-t-2 border-primary/50 group-hover:border-primary transition-colors duration-300 z-10"></div>
 
                 {/* Project image */}
                 <div className="relative h-48 overflow-hidden">
@@ -214,15 +212,15 @@ export function ProjectsSection() {
                 <div className="p-6 space-y-4">
                   <div className="flex items-start justify-between">
                     <motion.h3
-                      className="text-xl font-tech font-bold text-foreground group-hover:text-primary transition-colors duration-300"
+                      className="text-xl md:text-2xl font-tech font-bold text-dark-foreground group-hover:text-primary transition-colors duration-300"
                       whileHover={{ x: 5 }}
                     >
                       {project.title}
                     </motion.h3>
-                    <project.icon className="w-5 h-5 text-primary opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+                    <project.icon className="w-5 h-5 text-primary opacity-70 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
 
-                  <p className="text-muted-foreground font-tech text-sm leading-relaxed">{project.description}</p>
+                  <p className="text-dark-muted font-tech text-sm leading-relaxed">{project.description}</p>
 
                   {/* Tech stack */}
                   <div className="flex flex-wrap gap-2">
@@ -239,7 +237,7 @@ export function ProjectsSection() {
                   {/* View project button */}
                   <motion.div className="pt-2" whileHover={{ scale: 1.02 }}>
                     <Button
-                      className="w-full btn-tech bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 hover:border-primary/40 font-tech"
+                      className="w-full bg-primary/20 hover:bg-primary/30 text-primary border border-primary/30 hover:border-primary font-tech transition-all duration-300"
                       size="sm"
                     >
                       <ExternalLink className="w-4 h-4 mr-2" />

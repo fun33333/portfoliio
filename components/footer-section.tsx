@@ -6,7 +6,7 @@ import Link from "next/link"
 
 export function FooterSection() {
   return (
-    <footer className="w-full max-w-[1320px] mx-auto container-padding flex flex-col md:flex-row justify-between items-start grid-gap py-10 md:py-[70px]">
+    <footer className="w-full max-w-[1320px] mx-auto px-4 md:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-start gap-8 md:gap-12 py-16 md:py-20">
       {/* Left Section: Logo, Description, Social Links */}
       <motion.div
         className="flex flex-col justify-start items-start gap-8 p-4 md:p-0"
@@ -16,20 +16,18 @@ export function FooterSection() {
         transition={{ duration: 0.8 }}
       >
         <div className="flex gap-3 items-stretch justify-center">
-          <span className="text-foreground text-2xl font-tech font-bold">
-            <span className="text-primary">&lt;</span>
+          <span className="text-dark-foreground text-2xl font-tech font-bold">
             Quadgentics
-            <span className="text-primary">/&gt;</span>
           </span>
         </div>
-        <p className="text-foreground/90 text-base font-tech leading-[22px] text-left max-w-xs">
+        <p className="text-dark-muted text-base font-tech leading-[22px] text-left max-w-xs">
           Smart digital solutions for modern businesses, crafted with creativity and precision.
         </p>
         <div className="flex justify-start items-start gap-4">
           <motion.a
             href="#"
             aria-label="Twitter"
-            className="w-8 h-8 flex items-center justify-center rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors duration-300"
+            className="w-10 h-10 flex items-center justify-center rounded-lg bg-primary/20 text-primary hover:bg-primary/30 transition-colors duration-300"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
@@ -38,7 +36,7 @@ export function FooterSection() {
           <motion.a
             href="#"
             aria-label="GitHub"
-            className="w-8 h-8 flex items-center justify-center rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors duration-300"
+            className="w-10 h-10 flex items-center justify-center rounded-lg bg-primary/20 text-primary hover:bg-primary/30 transition-colors duration-300"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
@@ -47,7 +45,7 @@ export function FooterSection() {
           <motion.a
             href="#"
             aria-label="LinkedIn"
-            className="w-8 h-8 flex items-center justify-center rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors duration-300"
+            className="w-10 h-10 flex items-center justify-center rounded-lg bg-primary/20 text-primary hover:bg-primary/30 transition-colors duration-300"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
@@ -64,35 +62,35 @@ export function FooterSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.1 }}
         >
-          <h3 className="text-muted-foreground text-base font-tech font-medium leading-5">Services</h3>
+          <h3 className="text-dark-muted text-base font-tech font-medium leading-5">Services</h3>
           <div className="flex flex-col justify-end items-start gap-2">
             <Link
               href="#services-section"
-              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+              className="text-dark-foreground text-base font-tech font-normal leading-5 hover:text-primary transition-colors"
             >
               AI Automation
             </Link>
             <Link
               href="#services-section"
-              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+              className="text-dark-foreground text-base font-tech font-normal leading-5 hover:text-primary transition-colors"
             >
               Web Development
             </Link>
             <Link
               href="#services-section"
-              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+              className="text-dark-foreground text-base font-tech font-normal leading-5 hover:text-primary transition-colors"
             >
               Graphic Design
             </Link>
             <Link
               href="#services-section"
-              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+              className="text-dark-foreground text-base font-tech font-normal leading-5 hover:text-primary transition-colors"
             >
               DevOps & Deployment
             </Link>
             <Link
               href="#services-section"
-              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+              className="text-dark-foreground text-base font-tech font-normal leading-5 hover:text-primary transition-colors"
             >
               Custom Solutions
             </Link>
@@ -105,35 +103,35 @@ export function FooterSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h3 className="text-muted-foreground text-base font-tech font-medium leading-5">Company</h3>
+          <h3 className="text-dark-muted text-base font-tech font-medium leading-5">Company</h3>
           <div className="flex flex-col justify-center items-start gap-2">
             <Link
               href="#about-section"
-              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+              className="text-dark-foreground text-base font-tech font-normal leading-5 hover:text-primary transition-colors"
             >
               About Quadgentics
             </Link>
             <Link
               href="#about-section"
-              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+              className="text-dark-foreground text-base font-tech font-normal leading-5 hover:text-primary transition-colors"
             >
               Our Team
             </Link>
             <Link
               href="#"
-              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+              className="text-dark-foreground text-base font-tech font-normal leading-5 hover:text-primary transition-colors"
             >
               Careers
             </Link>
             <Link
               href="#projects-section"
-              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+              className="text-dark-foreground text-base font-tech font-normal leading-5 hover:text-primary transition-colors"
             >
               Portfolio
             </Link>
             <Link
               href="#contact-section"
-              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+              className="text-dark-foreground text-base font-tech font-normal leading-5 hover:text-primary transition-colors"
             >
               Contact Us
             </Link>
@@ -146,35 +144,35 @@ export function FooterSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <h3 className="text-muted-foreground text-base font-tech font-medium leading-5">Resources</h3>
+          <h3 className="text-dark-muted text-base font-tech font-medium leading-5">Resources</h3>
           <div className="flex flex-col justify-center items-start gap-2">
             <Link
               href="#"
-              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+              className="text-dark-foreground text-base font-tech font-normal leading-5 hover:text-primary transition-colors"
             >
               Terms of use
             </Link>
             <Link
               href="#"
-              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+              className="text-dark-foreground text-base font-tech font-normal leading-5 hover:text-primary transition-colors"
             >
-              API Reference
+              Case Studies
             </Link>
             <Link
               href="#"
-              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+              className="text-dark-foreground text-base font-tech font-normal leading-5 hover:text-primary transition-colors"
             >
               Documentation
             </Link>
             <Link
               href="#"
-              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+              className="text-dark-foreground text-base font-tech font-normal leading-5 hover:text-primary transition-colors"
             >
               Community
             </Link>
             <Link
               href="#"
-              className="text-foreground text-base font-tech font-normal leading-5 hover:underline hover:text-primary transition-colors"
+              className="text-dark-foreground text-base font-tech font-normal leading-5 hover:text-primary transition-colors"
             >
               Support
             </Link>
