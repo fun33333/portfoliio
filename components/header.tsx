@@ -1,24 +1,24 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import Image from "next/image"
-import { motion, AnimatePresence } from "framer-motion"
+import type React from "react";
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function Header() {
-  const [scrolled, setScrolled] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleScrollEffect = () => {
-    setScrolled(window.scrollY > 50)
-  }
+    setScrolled(window.scrollY > 50);
+  };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScrollEffect)
-    return () => window.removeEventListener("scroll", handleScrollEffect)
-  }, [])
+    window.addEventListener("scroll", handleScrollEffect);
+    return () => window.removeEventListener("scroll", handleScrollEffect);
+  }, []);
 
   const navItems = [
     { name: "Home", href: "#home" },
@@ -26,84 +26,65 @@ export function Header() {
     { name: "Projects", href: "#projects-section" },
     { name: "About", href: "#about-section" },
     { name: "Contact", href: "#contact-section" },
-  ]
+  ];
 
-  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault()
-    const targetId = href.substring(1)
-    const target = document.getElementById(targetId)
+  const handleScroll = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    e.preventDefault();
+    const targetId = href.substring(1);
+    const target = document.getElementById(targetId);
     if (target) {
-      const headerOffset = 80
-      const elementPosition = target.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.scrollY - headerOffset
+      const headerOffset = 80;
+      const elementPosition = target.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
       window.scrollTo({
         top: offsetPosition,
-        behavior: "smooth"
-      })
+        behavior: "smooth",
+      });
     }
     if (mobileMenuOpen) {
-      setMobileMenuOpen(false)
+      setMobileMenuOpen(false);
     }
-  }
+  };
 
   return (
     <header
-      className={`fixed w-full transition-all duration-500 ease-out z-50 ${
-        scrolled 
-          ? "z-50 bg-background/80 backdrop-blur-xl border-b border-border/20 py-4" 
-          : "bg-transparent py-6 z-50"
-      }`}
+    className={`fixed w-full transition-all duration-500 ease-out !z-[99999] ${
+      scrolled
+        ? "bg-background/80 backdrop-blur-xl border-b border-border/20 py-4"
+        : "bg-transparent py-6"
+    }`}
     >
-      <div className="max-w-7xl mx-auto ">
-        <div className="flex items-center justify-between">
-          {/* Logo Section */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative h-10 w-10">
-              {/* Logo for scrolled state (dark text) */}
+<div className="min-w-7xl px-4 md:px-24 pt-3">
+
+              <div className="flex items-center justify-between">
+          {/* Logo Section - Two Logos as per reference */}
+          {/* Logo Section - Two Logos as per reference */}
+          <Link href="/" className="flex items-center gap-4 group  ">
+            {/* Q Icon Logo */}
+            <div className="relative h-12 w-12">
               <Image
-                src="/logos/Dark-theme/light theme logo.png"
-                alt="Quadgentics"
-                className={`absolute transition-all duration-500 ${
-                  scrolled ? "opacity-100 scale-100" : "opacity-0 scale-95"
-                }`}
-                width={40}
-                height={40}
-              />
-              {/* Logo for hero state (light text) */}
-              <Image
-                src="/logos/Dark-theme/light theme logo.png"
-                alt="Quadgentics"
-                className={`absolute transition-all duration-500 ${
-                  scrolled ? "opacity-0 scale-95" : "opacity-100 scale-100"
-                }`}
-                width={40}
-                height={40}
+                src="logos/Dark-theme/light theme logo.png"
+                alt="Quadgentics Q Logo"
+                width={60}
+                height={60}
+                className="object-contain"
               />
             </div>
-            <div className="hidden sm:block">
-              <div className="relative h-6">
-                {/* Text logo for scrolled state */}
-                <Image
-                  src="/logos/Dark-theme/Light THeme Name.png"
-                  alt="Quadgentics"
-                  className={`absolute transition-all duration-500 ${
-                    scrolled ? "opacity-100 scale-100" : "opacity-0 scale-95"
-                  }`}
-                  width={120}
-                  height={24}
-                />
-                {/* Text logo for hero state */}
-                <Image
-                  src="/logos/Dark-theme/White Name.png"
-                  alt="Quadgentics"
-                  className={`absolute transition-all duration-500 ${
-                    scrolled ? "opacity-0 scale-95" : "opacity-100 scale-100"
-                  }`}
-                  width={190}
-                  height={24}
-                />
-              </div>
-            </div>
+
+            {/* QUADGENTICS Text Logo */}
+            {/* QUADGENTICS Text Logo - Dynamic based on background */}
+<div className="hidden sm:block">
+  <Image
+    src={scrolled ? "/logos/Mockup/name.png" : "/logos/Dark-theme/WhiteName.png"}
+    alt="Quadgentics Text"
+    width={250}
+    height={50}
+    className="object-contain z-50"
+  />
+</div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -114,8 +95,8 @@ export function Header() {
                 href={item.href}
                 onClick={(e) => handleScroll(e, item.href)}
                 className={`relative px-4 py-2 rounded-lg transition-all duration-300 group ${
-                  scrolled 
-                    ? "text-foreground hover:text-primary" 
+                  scrolled
+                    ? "text-foreground hover:text-primary"
                     : "text-secondary hover:text-white"
                 }`}
               >
@@ -125,7 +106,7 @@ export function Header() {
             ))}
             <div className="ml-4">
               <Link href="#contact-section">
-                <Button 
+                <Button
                   className={`relative overflow-hidden group ${
                     scrolled
                       ? "bg-primary hover:bg-primary/90 text-white"
@@ -189,10 +170,11 @@ export function Header() {
                       {item.name}
                     </Link>
                   ))}
-                  <Link href="#contact-section" onClick={() => setMobileMenuOpen(false)}>
-                    <Button 
-                      className="mt-8 bg-primary hover:bg-primary/90 text-white px-8"
-                    >
+                  <Link
+                    href="#contact-section"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Button className="mt-8 bg-primary hover:bg-primary/90 text-white px-8">
                       Get Started
                     </Button>
                   </Link>
@@ -203,5 +185,5 @@ export function Header() {
         </div>
       </div>
     </header>
-  )
+  );
 }

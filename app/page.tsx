@@ -19,29 +19,12 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen relative overflow-hidden pb-0">
       {/* Sticky Video Background */}
-      <VideoBackground />
-
       {/* Scrollable Content */}
       <div className="relative z-10">
         <main className="mx-auto relative">
           <HeroSection />
-          
-          {/* Dashboard Preview Wrapper */}
-          <div className="absolute bottom-[-200px] md:bottom-[-450px] left-1/2 transform -translate-x-1/2 z-30">
-            <DashboardPreview />
-          </div>
+
         </main>
-
-        <AnimatedSection
-          className="relative z-10 section-light-tinted section-transition"
-          delay={0.1}
-          variant="fadeUp"
-        >
-          <div className="max-w-[1320px] mx-auto mt-[450px] md:mt-[500px]">
-            <SocialProof />
-          </div>
-        </AnimatedSection>
-
         <AnimatedSection
           id="services-section"
           className="relative z-10 section-light-pure section-transition"
