@@ -9,23 +9,22 @@ import { ArrowRight } from "lucide-react"
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen bg-[#0a1515] flex flex-col overflow-hidden" style={{backgroundImage: 'none'}}>
+    <section className="relative min-h-fit bg-[#0a1515] flex flex-col overflow-hidden" style={{backgroundImage: 'none'}}>
       {/* Clean solid background - no patterns */}
 
-      {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
         className="relative z-10"
       >
-        <Header />
+      
       </motion.div>
 
       {/* Main Content */}
       <div className="flex-1 flex items-center relative z-10">
         <div className="px-4 md:px-24 py-16 w-full">
-          <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center ">
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center pt-10">
             {/* Left Column: Main Content */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -35,19 +34,18 @@ export function HeroSection() {
             >
               {/* Heading - Match reference exactly */}
               <div className="space-y-8">
-                <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-7xl xl:text-[80px] font-lastica leading-[0.85] tracking-tight">
-                  <div className="text-white mb-2">IMAGINATION</div>
-                  <div className="text-primary relative">
+                <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-7xl xl:text-[84px] font-lastica leading-[0.85] tracking-tight font-black">
+                  <div className="text-white pt-10">IMAGINATION</div>
+                  <div className="text-primary">
                     CREATIVITY &
-                    <div className="absolute -bottom-2 left-0 w-32 h-0.5 bg-primary"></div>
                   </div>
-                  <div className="text-white relative">
+                  <div className="text-white  ">
                     INNOVATION
-                    <div className="absolute -bottom-2 left-0 w-40 h-0.5 bg-white"></div>
-                  </div>
+                    <div className="absolute -bottom-2 left-0 w-32 h-1.5 border-primary"></div>
+                    </div>
                 </h1>
                 
-                <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl pt-4">
+                <p className="text-lg md:text-xl lg:text-3xl  text-gray-300 leading-relaxed max-w-2xl pt-4">
                   We help startups and businesses build modern digital products — from sleek websites to intelligent automation tools.
                 </p>
               </div>
@@ -57,10 +55,10 @@ export function HeroSection() {
                 <Link href="#contact-section">
                   <Button
                     size="lg"
-                    className="bg-primary hover:bg-primary/90 text-white rounded-lg transition-all duration-300 px-10 py-4 text-lg font-semibold shadow-lg hover:shadow-xl hover:scale-105 group"
+                    className="bg-primary/20 hover:bg-white/90 hover:text-primary text-white rounded-tl-xl rounded-br-xl transition-all duration-300 px-10 py-6 text-xl font-semibold shadow-lg hover:shadow-xl hover:scale-105 group"
                   >
                     Get Started
-                    <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-8 h-8 ml-2 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
               </div>
@@ -72,8 +70,8 @@ export function HeroSection() {
                 transition={{ duration: 0.6, delay: 0.8 }}
                 className="pt-6"
               >
-                <div className="text-white text-lg font-normal">
-                  Trusted By <span className="text-primary font-semibold">Idara Al Khair</span>
+                <div className="text-white text-2xl font-semibold">
+                  Trusted By <span className="text-primary font-bold text-2xl">Idara Al Khair</span>
                 </div>
               </motion.div>
             </motion.div>
@@ -97,24 +95,6 @@ export function HeroSection() {
                 />
               </div>
 
-              {/* Robot Icon - Bottom Right */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 1.2 }}
-                className="absolute bottom-8 right-8 w-16 h-16 rounded-full overflow-hidden border-2 border-primary/50 shadow-2xl"
-              >
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover"
-                >
-                  <source src="/Technology startup (1).mp4" type="video/mp4" />
-                </video>
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-full animate-pulse"></div>
-              </motion.div>
             </motion.div>
 
             {/* Mobile Visual - Show on small screens */}
