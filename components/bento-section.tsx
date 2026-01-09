@@ -158,15 +158,15 @@ export function BentoSection() {
               whileInView={{ opacity: 1, y: 0 }}
               className="text-5xl md:text-6xl lg:text-6xl font-lastica text-foreground leading-[0.9] uppercase tracking-tighter"
             >
-              What we offer <span className="text-primary opacity-30">for you</span>
+              What we offer <span className="text-primary opacity-60">for you</span>
             </motion.h2>
           </div>
-          <div className="max-w-md pb-4 px-4">
+          <div className="max-w-md lg:max-w-2xl pb-4 px-4">
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
-              className="text-muted-foreground text-sm md:text-lg leading-relaxed font-medium"
+              className="text-muted-foreground font-mono  lg:text-2xl  text-sm md:text-lg leading-relaxed font-medium"
             >
               Discover growth with our customized IT solutions. As a trusted web design agency, global organizations rely on us for the best software, services, and brand success.
             </motion.p>
