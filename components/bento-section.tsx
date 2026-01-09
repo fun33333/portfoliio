@@ -1,137 +1,275 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { Cpu, Code, Palette, Server, Wrench, HeadphonesIcon } from "lucide-react"
+import { useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import {
+  Monitor,
+  Megaphone,
+  Palette,
+  Code,
+  Cpu,
+  Layers,
+  Target,
+  Share2,
+  Zap,
+  Award,
+  BookOpen,
+  Image,
+  MessageSquare,
+  Workflow,
+  Brain,
+  Box
+} from "lucide-react"
 
-type ServiceCardProps = {
+type ServiceSubItem = {
   title: string
   description: string
-  icon: any
-  index: number
-  gradient: string
+  cta: string
 }
 
-const ServiceCard = ({ title, description, icon: Icon, index, gradient }: ServiceCardProps) => (
-  <motion.div
-    initial={{ opacity: 0, y: 50 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6, delay: index * 0.1 }}
-    className="group relative"
-  >
-    <div className={`absolute inset-0 ${gradient} opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 rounded-3xl`} />
-    
-    <div className="relative bg-white rounded-2xl p-8 border border-gray-100 hover:border-primary/30 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full flex flex-col">
-      {/* Icon Container */}
-      <div className={`w-16 h-16 rounded-2xl ${gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-        <Icon className="w-8 h-8 text-white" />
-      </div>
+type Service = {
+  id: string
+  title: string
+  icon: any
+  description: string
+  subItems: ServiceSubItem[]
+}
 
-      {/* Content */}
-      <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">
-        {title}
-      </h3>
-      <p className="text-gray-600 leading-relaxed flex-grow">
-        {description}
-      </p>
-
-      {/* Hover Arrow */}
-      <div className="mt-6 flex items-center text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <span className="text-sm font-semibold mr-2">Learn more</span>
-        <svg className="w-4 h-4 group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
-      </div>
-
-      {/* Corner Accent */}
-      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-primary/5 to-transparent rounded-bl-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-    </div>
-  </motion.div>
-)
+const services: Service[] = [
+  {
+    id: "web-design",
+    title: "Web Designing",
+    icon: Monitor,
+    description: "Developing eye-catching, high-performance websites that strengthen your digital presence and convert visitors into customers.",
+    subItems: [
+      {
+        title: "Web Design",
+        description: "Learn more about web design service",
+        cta: "READ NOW"
+      },
+      {
+        title: "Web Portfolio",
+        description: "Check out our latest web design portfolio",
+        cta: "CHECK NOW"
+      },
+      {
+        title: "Web Packages",
+        description: "Check out our web design packages",
+        cta: "CHECK NOW"
+      }
+    ]
+  },
+  {
+    id: "digital-marketing",
+    title: "Digital Marketing",
+    icon: Megaphone,
+    description: "Discover growth with our customized digital marketing solutions to scale your reach and maximize ROI.",
+    subItems: [
+      {
+        title: "SEO Optimization",
+        description: "Rank higher on search engines and attract traffic.",
+        cta: "READ NOW"
+      },
+      {
+        title: "Social Media",
+        description: "Engage your audience on all major platforms.",
+        cta: "CHECK NOW"
+      },
+      {
+        title: "PPC Campaigns",
+        description: "Direct targeted leads to your landing pages.",
+        cta: "CHECK NOW"
+      }
+    ]
+  },
+  {
+    id: "branding",
+    title: "Branding Design",
+    icon: Palette,
+    description: "Crafting unique visual identities that tell your story and resonate with your target audience.",
+    subItems: [
+      {
+        title: "Logo Design",
+        description: "Memorable icons that define your brand.",
+        cta: "READ NOW"
+      },
+      {
+        title: "Brand Guidelines",
+        description: "Consistent voice and visuals company wide.",
+        cta: "CHECK NOW"
+      },
+      {
+        title: "Visual Assets",
+        description: "High-quality graphics for all platforms.",
+        cta: "CHECK NOW"
+      }
+    ]
+  },
+  {
+    id: "ai-automation",
+    title: "AI Automation",
+    icon: Cpu,
+    description: "Smart workflows and intelligent bots to automate repetitive tasks and save your team valuable time.",
+    subItems: [
+      {
+        title: "WhatsApp Bots",
+        description: "24/7 automated customer interaction.",
+        cta: "READ NOW"
+      },
+      {
+        title: "Workflow Automation",
+        description: "Streamline your business operations.",
+        cta: "CHECK NOW"
+      },
+      {
+        title: "AI Integrations",
+        description: "Empower your software with LLMs.",
+        cta: "CHECK NOW"
+      }
+    ]
+  }
+]
 
 export function BentoSection() {
-  const services = [
-    {
-      title: "AI Automation",
-      description: "Intelligent automation tools to streamline your business processes with cutting-edge AI technology and machine learning solutions.",
-      icon: Cpu,
-      gradient: "bg-gradient-to-br from-blue-500 to-blue-600"
-    },
-    {
-      title: "Web Development",
-      description: "Modern, responsive websites and applications built with the latest technologies, frameworks, and best practices for optimal performance.",
-      icon: Code,
-      gradient: "bg-gradient-to-br from-primary to-primary-dark"
-    },
-    {
-      title: "Graphic Design",
-      description: "Creative visual solutions for your brand identity, marketing campaigns, and digital assets that stand out and engage your audience.",
-      icon: Palette,
-      gradient: "bg-gradient-to-br from-purple-500 to-pink-500"
-    },
-    {
-      title: "DevOps Solutions",
-      description: "Seamless deployment, infrastructure management, and CI/CD pipelines for scalable, reliable, and secure applications.",
-      icon: Server,
-      gradient: "bg-gradient-to-br from-orange-500 to-red-500"
-    },
-    {
-      title: "Custom Solutions",
-      description: "Tailored digital solutions designed specifically for your unique business requirements, challenges, and growth objectives.",
-      icon: Wrench,
-      gradient: "bg-gradient-to-br from-green-500 to-emerald-600"
-    },
-    {
-      title: "24/7 Support",
-      description: "Dedicated technical support and maintenance to ensure your digital solutions run smoothly around the clock with minimal downtime.",
-      icon: HeadphonesIcon,
-      gradient: "bg-gradient-to-br from-indigo-500 to-purple-600"
-    },
-  ]
+  const [activeTab, setActiveTab] = useState(services[0].id)
 
   return (
-    <section className="relative w-full py-20 md:py-28 px-4 md:px-6 lg:px-8 overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-gray-50 to-white" />
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
-      
-      {/* Decorative Blobs */}
-      <div className="absolute top-20 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 left-0 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
+    <section className="relative w-full min-h-screen py-24 px-6 md:px-12 lg:px-24 bg-white overflow-hidden font-tech flex flex-col justify-center">
+      {/* Subtle Background Elements */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/[0.03] rounded-full blur-[150px]" />
+        <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-primary/[0.02] rounded-full blur-[150px]" />
+        <div className="absolute inset-0 opacity-[0.4]" style={{ backgroundImage: 'linear-gradient(to right, #2dafa711 1px, transparent 1px), linear-gradient(to bottom, #2dafa711 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+      </div>
 
-      <div className="relative max-w-7xl mx-auto">
-        {/* Header */}
-        <motion.div
-          className="text-center mb-16 space-y-6"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="inline-block"
-          >
-            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
-              What We Offer
-            </span>
-          </motion.div>
-          
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-            Our Core Services
-          </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Comprehensive digital solutions tailored to transform your business and drive sustainable growth
-          </p>
-        </motion.div>
+      <div className="relative z-10 w-full max-w-[1700px] mx-auto">
+        {/* Header - Fixed to User Request */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-8">
+          <div className="max-w-2xl px-4">
+            <motion.h4
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              className="text-primary font-mono text-[11px] tracking-[0.5em] uppercase mb-6 font-bold"
+            >
+              OUR SERVICES
+            </motion.h4>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="text-5xl md:text-6xl lg:text-6xl font-lastica text-foreground leading-[0.9] uppercase tracking-tighter"
+            >
+              What we offer <span className="text-primary opacity-30">for you</span>
+            </motion.h2>
+          </div>
+          <div className="max-w-md pb-4 px-4">
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="text-muted-foreground text-sm md:text-lg leading-relaxed font-medium"
+            >
+              Discover growth with our customized IT solutions. As a trusted web design agency, global organizations rely on us for the best software, services, and brand success.
+            </motion.p>
+          </div>
+        </div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <ServiceCard key={service.title} {...service} index={index} />
+        {/* Accordion Panels Layout - Fixed Height for Stability */}
+        <div className="flex flex-col lg:flex-row w-full h-auto lg:h-[750px] gap-3 px-4">
+          {services.map((service) => (
+            <motion.div
+              key={service.id}
+              layout
+              initial={false}
+              animate={{
+                flex: activeTab === service.id ? 12 : 1,
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 150,
+                damping: 35,
+                mass: 1.2
+              }}
+              onClick={() => setActiveTab(service.id)}
+              className={`relative group cursor-pointer overflow-hidden rounded-[40px] border transition-colors duration-700 ${activeTab === service.id
+                ? "bg-[#fafdfd] border-primary/20 shadow-[0_30px_60px_-15px_rgba(45,175,167,0.1)]"
+                : "bg-white border-primary/5 hover:border-primary/20 hover:bg-[#f8fffe]"
+                }`}
+            >
+              <AnimatePresence initial={false}>
+                {activeTab !== service.id ? (
+                  /* Vertical Sidebar (Collapsed) */
+                  <motion.div
+                    key="collapsed"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                  >
+                    <div className="flex flex-col items-center gap-10">
+                      <div className="p-4 rounded-2xl bg-primary/[0.05] border border-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                        <Box className="w-6 h-6" />
+                      </div>
+                      <span className="[writing-mode:vertical-lr] rotate-180 uppercase tracking-[0.5em] font-black text-[#172222]/20 group-hover:text-primary transition-colors text-[10px] whitespace-nowrap">
+                        {service.title}
+                      </span>
+                    </div>
+                  </motion.div>
+                ) : (
+                  /* Expanded Panel */
+                  <motion.div
+                    key="expanded"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+                    className="h-full w-full p-8 md:p-16 lg:p-20 flex flex-col justify-between overflow-hidden"
+                  >
+                    <div>
+                      {/* Icon & Title */}
+                      <div className="mb-14 flex flex-col md:flex-row items-start gap-8">
+                        <div className="relative">
+                          <div className="p-6 md:p-8 rounded-[32px] border border-primary/20 bg-primary/10 text-primary shadow-[0_20px_40px_-10px_rgba(45,175,167,0.15)]">
+                            <Box className="w-10 h-10 md:w-14 md:h-14" />
+                          </div>
+                        </div>
+                        <div className="mt-2">
+                          <h3 className="text-4xl md:text-7xl lg:text-8xl font-lastica text-foreground uppercase tracking-tighter leading-[0.85] mb-8">
+                            {service.title}
+                          </h3>
+                          <p className="text-muted-foreground text-lg md:text-2xl max-w-3xl leading-relaxed font-medium">
+                            {service.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Sub-item Cards */}
+                    <div className="grid md:grid-cols-3 gap-8 mt-12">
+                      {service.subItems.map((item, idx) => (
+                        <motion.div
+                          key={item.title}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 0.2 + (idx * 0.1) }}
+                          className="group/card p-10 rounded-[40px] border border-primary/5 bg-white hover:bg-[#f0f9f9] hover:border-primary/20 hover:shadow-[0_20px_40px_-10px_rgba(45,175,167,0.08)] transition-all duration-500 flex flex-col items-center text-center"
+                        >
+                          <h4 className="text-foreground font-black text-xl mb-4 uppercase tracking-tighter">
+                            {item.title}
+                          </h4>
+                          <p className="text-muted-foreground/70 text-sm mb-12 flex-grow leading-relaxed font-semibold">
+                            {item.description}
+                          </p>
+                          <button className="text-[11px] font-black tracking-[0.4em] uppercase text-[#172222]/40 group-hover/card:text-primary transition-all py-3 px-6 border border-primary/10 rounded-full group-hover/card:bg-primary group-hover/card:text-white group-hover/card:shadow-[0_10px_20px_rgba(45,175,167,0.2)]">
+                            {item.cta}
+                          </button>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
           ))}
         </div>
       </div>

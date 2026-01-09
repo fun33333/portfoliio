@@ -51,9 +51,7 @@ export default function LandingPage() {
           delay={0.2}
           variant="stagger"
         >
-          <div className="max-w-[1320px] mx-auto">
-            <BentoSection />
-          </div>
+          <BentoSection />
         </AnimatedSection>
 
         <AnimatedSection
