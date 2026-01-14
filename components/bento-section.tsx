@@ -441,137 +441,97 @@ export function BentoSection() {
             ))}
           </div>
         ) : (
-          /* Mobile: Carousel */
-          <Carousel
-            opts={{
-              align: "start",
-              loop: true,
-            }}
-            className="w-full max-w-md md:max-w-full mx-auto px-4 pb-12"
-          >
-            <CarouselContent>
-              {services.map((service, i) => (
-                <CarouselItem key={service.id}>
-                  <div className="p-1">
-                    <div className="flex flex-col relative w-full rounded-[30px] border-2 border-primary/20 shadow-xl overflow-hidden bg-white">
-                      {/* Card Header */}
-                      <div className="p-6 flex items-center justify-between border-b border-primary/10 bg-gradient-to-r from-primary/5 to-transparent">
-                        <div className="flex items-center gap-4">
-                          <div className="p-3 rounded-xl bg-primary text-white">
-                            <service.icon className="w-6 h-6" />
-                          </div>
-                          <h3 className="text-xl font-bold font-raleway uppercase tracking-wide text-foreground">{service.title}</h3>
-                        </div>
-                        <span className="text-sm font-mono text-primary font-bold">0{i + 1}</span>
-                      </div>
-
-                      {/* Card Content */}
-                      <div className="flex-1 p-6 flex flex-col bg-white">
-                        <p className="text-muted-foreground text-sm font-medium leading-relaxed mb-6">{service.description}</p>
-
-                        {/* Animation/Image */}
-                        <div className="relative w-full h-56 rounded-2xl overflow-hidden bg-gradient-to-br from-primary/5 to-transparent mb-6 flex items-center justify-center border border-primary/10">
-                          {service.animationData ? (
-                            <Lottie
-                              animationData={service.animationData}
-                              loop={true}
-                              className="w-full h-full p-6"
-                              rendererSettings={{
-                                preserveAspectRatio: 'xMidYMid meet'
-                              }}
-                            />
-                          ) : (
-                            <img src={service.image} alt={service.title} className="w-full h-full object-contain p-8" />
-                          )}
-                        </div>
-
-                        {/* Sub Items */}
-                        <div className="grid grid-cols-1 gap-3">
-                          {service.subItems.map((item: any, idx: number) => (
-                            <div key={idx} className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-primary/5 to-transparent hover:from-primary/10 transition-all border border-primary/10 cursor-pointer group">
-                              <div>
-                                <span className="text-sm font-bold font-raleway uppercase text-foreground block mb-1">{item.title}</span>
-                                <span className="text-xs text-muted-foreground">{item.description}</span>
-                              </div>
-                              <span className="text-xs text-primary font-bold opacity-0 group-hover:opacity-100 transition-opacity">→</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="left-2 bg-primary text-white hover:bg-primary/90 border-none" />
-            <CarouselNext className="right-2 bg-primary text-white hover:bg-primary/90 border-none" />
-          </Carousel>
+          /* Mobile & Tablet: Sticky Scroll Reveal Stack */
+          <div className="relative w-full px-4 pb-20 flex flex-col gap-10">
+            {services.map((service, i) => (
+              <MobileRevealCard
+                key={service.id}
+                service={service}
+                index={i}
+                total={services.length}
+              />
+            ))}
+          </div>
         )}
       </div>
     </section>
   )
 }
 
-function MobileCard({ i, title, description, icon: Icon, image, animationData, subItems, color, range, targetScale, total }: any) {
+function MobileRevealCard({ service, index, total }: { service: Service, index: number, total: number }) {
   const container = useRef(null)
   const { scrollYProgress } = useScroll({
     target: container,
     offset: ['start start', 'end end']
   })
 
-  // Scale down as the card moves up (sticky phase) being covered by next ones
+  // Dynamic values for stacking effect
+  const targetScale = 1 - ((total - index) * 0.05);
   const scale = useTransform(scrollYProgress, [0, 1], [1, targetScale])
+  const opacity = useTransform(scrollYProgress, [0.8, 1], [1, 0.6])
 
-  // Calculate dynamic top offset so they stack visibly with a title bar
-  const topOffset = 80 + (i * 25);
+  // Dynamic top offset for stacking visibility
+  const topOffset = 100 + (index * 20);
 
   return (
-    <div ref={container} className="h-[80vh] flex items-start justify-center sticky top-0" style={{ top: topOffset }}>
+    <div
+      ref={container}
+      className="h-[80vh] flex items-start justify-center sticky top-0"
+      style={{ top: topOffset }}
+    >
       <motion.div
         style={{
           scale,
-          top: 0,
+          opacity,
           transformOrigin: "top center"
         }}
-        className="flex flex-col relative w-full rounded-[30px] border border-primary/10 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)] overflow-hidden bg-white"
+        className="flex flex-col relative w-full rounded-[30px] border-2 border-primary/20 shadow-2xl overflow-hidden bg-white"
       >
         {/* Card Header */}
-        <div className="p-6 flex items-center justify-between border-b border-primary/5 bg-white/80 backdrop-blur-sm sticky top-0 z-10">
+        <div className="p-6 flex items-center justify-between border-b border-primary/10 bg-gradient-to-r from-primary/5 to-transparent">
           <div className="flex items-center gap-4">
-            <div className="p-2.5 rounded-xl bg-primary/10 text-primary">
-              <Icon className="w-5 h-5" />
+            <div className="p-3 rounded-xl bg-primary text-white">
+              <service.icon className="w-6 h-6" />
             </div>
-            <h3 className="text-lg font-bold font-raleway uppercase tracking-wide text-foreground">{title}</h3>
+            <h3 className="text-xl font-bold font-raleway uppercase tracking-wide text-foreground">{service.title}</h3>
           </div>
-          <span className="text-sm font-mono text-muted-foreground/40 font-bold">0{i + 1}</span>
+          <span className="text-sm font-mono text-primary font-bold">0{index + 1}</span>
         </div>
 
         {/* Card Content */}
-        <div className="flex-1 p-6 flex flex-col justify-between bg-white relative">
-          <div className="mb-4">
-            <p className="text-muted-foreground text-sm font-medium leading-relaxed mb-6">{description}</p>
+        <div className="flex-1 p-6 flex flex-col bg-white">
+          <p className="text-muted-foreground text-sm font-medium leading-relaxed mb-6">
+            {service.description}
+          </p>
 
-            <div className="relative w-full h-48 rounded-2xl overflow-hidden bg-gray-50/50 mb-6 flex items-center justify-center border border-dashed border-gray-200">
-              {animationData ? (
-                <Lottie
-                  animationData={animationData}
-                  loop={true}
-                  className="w-full h-full p-4"
-                  rendererSettings={{
-                    preserveAspectRatio: 'xMidYMid meet'
-                  }}
-                />
-              ) : (
-                <img src={image} alt={title} className="w-full h-full object-contain p-8" />
-              )}
-            </div>
+          {/* Animation/Image */}
+          <div className="relative w-full h-48 md:h-64 rounded-2xl overflow-hidden bg-gradient-to-br from-primary/5 to-transparent mb-6 flex items-center justify-center border border-primary/10">
+            {service.animationData ? (
+              <Lottie
+                animationData={service.animationData}
+                loop={true}
+                className="w-full h-full p-6"
+                rendererSettings={{
+                  preserveAspectRatio: 'xMidYMid meet'
+                }}
+              />
+            ) : (
+              <img src={service.image} alt={service.title} className="w-full h-full object-contain p-8" />
+            )}
           </div>
 
-          <div className="grid grid-cols-1 gap-2.5">
-            {subItems.map((item: any, idx: number) => (
-              <div key={idx} className="flex items-center justify-between p-3.5 rounded-xl bg-gray-50 hover:bg-primary/5 transition-colors border border-gray-100/50 cursor-pointer group">
-                <span className="text-xs font-bold font-raleway uppercase text-foreground/80">{item.title}</span>
-                <span className="text-[10px] text-primary font-bold opacity-0 group-hover:opacity-100 transition-opacity translate-x-[-10px] group-hover:translate-x-0 duration-300">EXPLORE &rarr;</span>
+          {/* Sub Items */}
+          <div className="grid grid-cols-1 gap-3">
+            {service.subItems.map((item, idx) => (
+              <div
+                key={idx}
+                className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-primary/5 to-transparent hover:from-primary/10 transition-all border border-primary/10 cursor-pointer group"
+              >
+                <div>
+                  <span className="text-sm font-bold font-raleway uppercase text-foreground block mb-1">{item.title}</span>
+                  <p className="text-xs text-muted-foreground leading-tight">{item.description}</p>
+                </div>
+                <span className="text-xs text-primary font-bold opacity-0 group-hover:opacity-100 transition-opacity">→</span>
               </div>
             ))}
           </div>
