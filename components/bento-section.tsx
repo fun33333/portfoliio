@@ -26,6 +26,9 @@ import {
   Brain,
   Box
 } from "lucide-react"
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel"
+
+
 
 type ServiceSubItem = {
   title: string
@@ -230,12 +233,26 @@ export function BentoSection() {
   }, [])
 
   return (
-    <section className="relative w-full bg-white font-tech">
-      {/* Subtle Background Elements */}
+    <section
+      className="relative w-full font-tech overflow-hidden"
+      style={{ background: 'linear-gradient(273deg,rgba(118, 245, 224, 1) 3%, rgba(194, 237, 237, 1) 43%, rgba(255, 255, 255, 1) 58%)' }}
+    >
+      {/* Premium Shining Elements */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/[0.03] rounded-full blur-[150px]" />
-        <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-primary/[0.02] rounded-full blur-[150px]" />
-        <div className="absolute inset-0 opacity-[0.4]" style={{ backgroundImage: 'linear-gradient(to right, #2dafa711 1px, transparent 1px), linear-gradient(to bottom, #2dafa711 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+        {/* Subtle Internal Glows */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.1),transparent_40%)]" />
+
+        {/* Dynamic Shining Highlight */}
+        <motion.div
+          animate={{
+            x: ["-100%", "200%"],
+            transition: { duration: 15, repeat: Infinity, ease: "linear" }
+          }}
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12"
+        />
+
+        {/* Subtle Grid Pattern */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(to right, #2EADA7 1px, transparent 1px), linear-gradient(to bottom, #2EADA7 1px, transparent 1px)', backgroundSize: '70px 70px' }} />
       </div>
 
       <div className="relative z-10 w-full max-w-[1600px] mx-auto">
@@ -252,9 +269,9 @@ export function BentoSection() {
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="text-3xl md:text-5xl lg:text-5xl font-lastica text-foreground leading-[0.9] uppercase tracking-tighter"
+              className="text-3xl md:text-5xl lg:text-5xl font-lastica text-[#172222] leading-[0.9] uppercase tracking-tighter"
             >
-              What we offer <span className="text-primary opacity-60">for you</span>
+              What we offer <span className="text-primary">for you</span>
             </motion.h2>
           </div>
           <div className="max-w-md lg:max-w-xl pb-0">
@@ -262,7 +279,7 @@ export function BentoSection() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
-              className="text-muted-foreground font-inter lg:text-xl text-sm md:text-lg leading-relaxed font-medium"
+              className="text-[#172222]/60 font-inter lg:text-xl text-sm md:text-lg leading-relaxed font-medium"
             >
               Discover growth with our customized IT solutions. As a trusted web design agency, global organizations rely on us for the best software, services, and brand success.
             </motion.p>
@@ -281,16 +298,30 @@ export function BentoSection() {
                   flex: activeTab === service.id ? 12 : 1,
                 }}
                 transition={{
-                  type: "spring",
-                  stiffness: 150,
-                  damping: 35,
-                  mass: 1.2
+                  duration: 0.4,
+                  ease: [0.4, 0, 0.2, 1]
                 }}
                 onClick={() => setActiveTab(service.id)}
-                className={`relative group cursor-pointer overflow-hidden rounded-[24px] lg:rounded-[40px] transition-colors duration-700 w-full lg:w-auto ${activeTab === service.id
-                  ? "bg-[#fafdfd] shadow-[0_30px_60px_-15px_rgba(45,175,167,0.1)]"
-                  : "bg-white hover:bg-[#f8fffe] border border-transparent hover:border-primary/5"
+                className={`relative group cursor-pointer overflow-hidden rounded-[24px] lg:rounded-[40px] transition-all duration-500 w-full lg:w-auto ${activeTab === service.id
+                  ? "bg-white/90 backdrop-blur-xl border-2 border-primary/20 shadow-[0_50px_100px_-20px_rgba(45,175,167,0.25)]"
+                  : "border-2 border-primary/30 hover:border-primary shadow-lg hover:shadow-2xl"
                   }`}
+                style={activeTab !== service.id ? {
+                  background: 'linear-gradient(135deg, rgba(46, 173, 167, 0.15) 0%, rgba(255, 255, 255, 0.25) 100%)',
+                  backdropFilter: 'blur(10px)',
+                  WebkitBackdropFilter: 'blur(10px)',
+                  transition: 'all 0.3s ease',
+                } : undefined}
+                onMouseEnter={(e) => {
+                  if (activeTab !== service.id) {
+                    e.currentTarget.style.background = 'linear-gradient(135deg, rgba(46, 173, 167, 0.85) 0%, rgba(46, 173, 167, 0.65) 100%)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (activeTab !== service.id) {
+                    e.currentTarget.style.background = 'linear-gradient(135deg, rgba(46, 173, 167, 0.15) 0%, rgba(255, 255, 255, 0.25) 100%)';
+                  }
+                }}
               >
                 <AnimatePresence initial={false} mode="wait">
                   {activeTab !== service.id ? (
@@ -303,11 +334,17 @@ export function BentoSection() {
                       transition={{ duration: 0.3 }}
                       className="absolute inset-0 flex items-center justify-center pointer-events-none"
                     >
-                      <div className="flex flex-col items-center gap-10">
-                        <div className="p-4 rounded-2xl bg-primary text-white group-hover:bg-[#172222] transition-all duration-300">
-                          <service.icon className="w-6 h-6" />
+                      {/* Glass overlay for collapsed state */}
+                      <div className="absolute inset-0 pointer-events-none">
+                        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white/20 to-transparent" />
+                        <div className="absolute inset-0 rounded-[24px] lg:rounded-[40px] bg-gradient-to-br from-white/10 via-transparent to-primary/20 opacity-50" />
+                      </div>
+
+                      <div className="flex flex-col items-center gap-10 relative z-10">
+                        <div className="p-4 rounded-2xl bg-primary/80 text-white backdrop-blur-sm border border-primary/40 group-hover:bg-white group-hover:text-primary transition-all duration-300 shadow-xl">
+                          <service.icon className="w-7 h-7" />
                         </div>
-                        <span className="[writing-mode:vertical-lr] rotate-180 uppercase tracking-[0.5em] font-black text-primary group-hover:text-[#172222] transition-colors text-[10px] whitespace-nowrap">
+                        <span className="[writing-mode:vertical-lr] rotate-180 uppercase tracking-[0.4em] font-black text-primary drop-shadow-md transition-colors text-xs whitespace-nowrap group-hover:text-white">
                           {service.title}
                         </span>
                       </div>
@@ -320,22 +357,22 @@ export function BentoSection() {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-                      className="h-full w-full p-6 md:p-10 lg:p-12 xl:p-16 flex flex-col overflow-hidden" // Removed justify-between to allow natural flow
+                      className="h-full w-full p-6 md:p-10 lg:p-12 xl:p-16 flex flex-col bg-[#0A1515] overflow-hidden" // Removed justify-between to allow natural flow
                     >
                       <div>
                         {/* Title, Description & Image Container */}
                         <div className="mb-8 md:mb-10 flex flex-col xl:flex-row items-center justify-between gap-8 md:gap-12 text-center xl:text-left">
                           <div className="flex-1 w-full relative z-10">
-                            <h3 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-lastica text-foreground uppercase tracking-tighter leading-[0.9] mb-4 md:mb-6 break-words">
+                            <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-lastica text-white uppercase tracking-tighter leading-[0.9] mb-4 md:mb-6 break-words">
                               {service.title}
                             </h3>
-                            <p className="text-muted-foreground text-sm md:text-base lg:text-lg max-w-2xl leading-relaxed font-medium mx-auto xl:mx-0">
+                            <p className="text-white/70 text-base md:text-lg lg:text-xl max-w-2xl leading-relaxed font-medium mx-auto xl:mx-0">
                               {service.description}
                             </p>
                           </div>
 
                           <div className="relative shrink-0 w-full md:w-auto flex justify-center xl:justify-end mt-4 xl:mt-0 px-4 md:px-0">
-                            <div className="w-40 h-40 md:w-52 md:h-52 lg:w-56 lg:h-56 xl:w-72 xl:h-72 rounded-[30px] flex items-center justify-center overflow-hidden">
+                            <div className="w-40 h-40 md:w-52 md:h-52 lg:w-56 lg:h-56 xl:w-72 xl:h-72 bg-[#0A1515] flex items-center justify-center overflow-hidden">
                               {service.animationData ? (
                                 <Lottie
                                   animationData={service.animationData}
@@ -365,17 +402,33 @@ export function BentoSection() {
                               transition: { duration: 0.2 }
                             }}
                             transition={{ delay: 0.3 + (idx * 0.1) }}
-                            className="group/card p-5 md:p-6 xl:p-8 rounded-[24px] xl:rounded-[36px] bg-white border border-primary/10 backdrop-blur-sm shadow-sm transition-all duration-300 flex flex-col items-center text-center relative overflow-visible h-full justify-between"
+                            className="group/card p-5 md:p-6 xl:p-8 rounded-[24px] xl:rounded-[10px] border border-white/30 hover:border-white/50 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center relative overflow-hidden h-full justify-between"
+                            style={{
+                              background: 'rgba(255, 255, 255, 0.25)',
+                              backdropFilter: 'blur(5px)',
+                              WebkitBackdropFilter: 'blur(5px)',
+                            }}
                           >
-                            <div>
-                              <h4 className="text-foreground font-raleway font-bold text-base md:text-xl mb-2 uppercase tracking-tight">
+                            {/* Subtle glassmorphism overlay */}
+                            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                              {/* Top gradient shine */}
+                              <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-white/10 to-transparent" />
+
+                              {/* Subtle border glow */}
+                              <div className="absolute inset-0 rounded-[24px] xl:rounded-[10px] bg-gradient-to-br from-white/20 via-transparent to-primary/10 opacity-30" />
+                            </div>
+
+                            {/* Content with proper z-index */}
+                            <div className="relative z-10">
+                              <h4 className="text-white font-raleway font-bold text-lg md:text-xl mb-2 uppercase tracking-tight drop-shadow-sm">
                                 {item.title}
                               </h4>
-                              <p className="text-muted-foreground font-raleway text-xs md:text-sm mb-4 flex-grow leading-relaxed font-medium">
+                              <p className="text-white/90 font-raleway text-sm md:text-base mb-4 flex-grow leading-relaxed font-medium drop-shadow-sm">
                                 {item.description}
                               </p>
                             </div>
-                            <button className="text-[10px] md:text-xs font-raleway font-bold tracking-[1.5px] uppercase text-primary hover:text-primary/70 transition-colors py-2">
+
+                            <button className="relative z-10 text-xs md:text-sm font-raleway font-bold tracking-[1.5px] uppercase text-primary hover:text-white transition-colors py-2 drop-shadow-sm">
                               {item.cta} &rarr;
                             </button>
                           </motion.div>
@@ -388,12 +441,71 @@ export function BentoSection() {
             ))}
           </div>
         ) : (
-          /* Mobile: Sticky Scroll Stack (Lenis Friendly) */
-          <div className="relative w-full pb-20 px-4">
-            {services.map((service, i) => (
-              <MobileCard key={service.id} i={i} {...service} progress={undefined} range={[i * 0.25, 1]} targetScale={1 - ((services.length - i) * 0.05)} total={services.length} />
-            ))}
-          </div>
+          /* Mobile: Carousel */
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full max-w-md md:max-w-full mx-auto px-4 pb-12"
+          >
+            <CarouselContent>
+              {services.map((service, i) => (
+                <CarouselItem key={service.id}>
+                  <div className="p-1">
+                    <div className="flex flex-col relative w-full rounded-[30px] border-2 border-primary/20 shadow-xl overflow-hidden bg-white">
+                      {/* Card Header */}
+                      <div className="p-6 flex items-center justify-between border-b border-primary/10 bg-gradient-to-r from-primary/5 to-transparent">
+                        <div className="flex items-center gap-4">
+                          <div className="p-3 rounded-xl bg-primary text-white">
+                            <service.icon className="w-6 h-6" />
+                          </div>
+                          <h3 className="text-xl font-bold font-raleway uppercase tracking-wide text-foreground">{service.title}</h3>
+                        </div>
+                        <span className="text-sm font-mono text-primary font-bold">0{i + 1}</span>
+                      </div>
+
+                      {/* Card Content */}
+                      <div className="flex-1 p-6 flex flex-col bg-white">
+                        <p className="text-muted-foreground text-sm font-medium leading-relaxed mb-6">{service.description}</p>
+
+                        {/* Animation/Image */}
+                        <div className="relative w-full h-56 rounded-2xl overflow-hidden bg-gradient-to-br from-primary/5 to-transparent mb-6 flex items-center justify-center border border-primary/10">
+                          {service.animationData ? (
+                            <Lottie
+                              animationData={service.animationData}
+                              loop={true}
+                              className="w-full h-full p-6"
+                              rendererSettings={{
+                                preserveAspectRatio: 'xMidYMid meet'
+                              }}
+                            />
+                          ) : (
+                            <img src={service.image} alt={service.title} className="w-full h-full object-contain p-8" />
+                          )}
+                        </div>
+
+                        {/* Sub Items */}
+                        <div className="grid grid-cols-1 gap-3">
+                          {service.subItems.map((item: any, idx: number) => (
+                            <div key={idx} className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-primary/5 to-transparent hover:from-primary/10 transition-all border border-primary/10 cursor-pointer group">
+                              <div>
+                                <span className="text-sm font-bold font-raleway uppercase text-foreground block mb-1">{item.title}</span>
+                                <span className="text-xs text-muted-foreground">{item.description}</span>
+                              </div>
+                              <span className="text-xs text-primary font-bold opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-2 bg-primary text-white hover:bg-primary/90 border-none" />
+            <CarouselNext className="right-2 bg-primary text-white hover:bg-primary/90 border-none" />
+          </Carousel>
         )}
       </div>
     </section>
