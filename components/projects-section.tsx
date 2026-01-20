@@ -1,298 +1,233 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { useState } from "react"
-import { ExternalLink, X, Code, Palette, Server, Cpu } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { ArrowRight, ExternalLink, Github, Layers, Zap, Database, Smartphone } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface Project {
-  id: string
-  title: string
-  description: string
-  category: string
-  url: string
-  image: string
-  tech: string[]
-  icon: any
-  color: string
+  id: string;
+  title: string;
+  subtitle: string;
+  category: "Web Apps" | "Mobile Apps" | "AI / Automation" | "SaaS";
+  description: string;
+  image: string;
+  tech: string[];
+  link: string;
+  stats?: string;
 }
 
 const projects: Project[] = [
   {
-    id: "ai-dashboard",
-    title: "AI Analytics Dashboard",
-    description: "Real-time analytics dashboard with AI-powered insights and data visualization.",
-    category: "AI Automation",
-    url: "https://dashboard-template-ai.vercel.app",
-    image: "/placeholder.svg?height=300&width=500&text=AI+Dashboard",
-    tech: ["React", "TypeScript", "TensorFlow", "D3.js"],
-    icon: Cpu,
-    color: "from-blue-500 to-cyan-500",
+    id: "fin-track",
+    title: "FinTrack",
+    subtitle: "Financial Intelligence Platform",
+    category: "SaaS",
+    description: "Real-time financial insights platform processing over $50M in monthly transactions for enterprise clients.",
+    image: "/placeholder.svg?height=600&width=800&text=Fintech+Dashboard+UI",
+    tech: ["React", "Node.js", "AWS", "PostgreSQL"],
+    link: "#",
+    stats: "+45% Efficiency",
   },
   {
-    id: "ecommerce-platform",
-    title: "Modern E-commerce Platform",
-    description: "Full-stack e-commerce solution with advanced features and seamless UX.",
-    category: "Web Development",
-    url: "https://ecommerce-demo-modern.vercel.app",
-    image: "/placeholder.svg?height=300&width=500&text=E-commerce+Platform",
-    tech: ["Next.js", "Stripe", "Prisma", "Tailwind"],
-    icon: Code,
-    color: "from-green-500 to-emerald-500",
+    id: "sales-iq",
+    title: "SalesIQ",
+    subtitle: "AI-Powered Sales Analytics",
+    category: "AI / Automation",
+    description: "Machine learning algorithms that predict customer behavior and automate lead scoring pipelines.",
+    image: "/placeholder.svg?height=600&width=800&text=AI+Analytics+Dashboard",
+    tech: ["Python", "TensorFlow", "FastAPI", "Next.js"],
+    link: "#",
+    stats: "98% Accuracy",
   },
   {
-    id: "brand-identity",
-    title: "Creative Brand Identity",
-    description: "Complete brand identity design with logo, guidelines, and marketing materials.",
-    category: "Graphic Design",
-    url: "https://brand-showcase-demo.vercel.app",
-    image: "/placeholder.svg?height=300&width=500&text=Brand+Identity",
-    tech: ["Figma", "Adobe CC", "Framer", "Webflow"],
-    icon: Palette,
-    color: "from-purple-500 to-pink-500",
+    id: "med-assist",
+    title: "MedAssist",
+    subtitle: "Healthcare Management System",
+    category: "Mobile Apps",
+    description: "HIPAA-compliant mobile application for streaming patient management and telemedicine coordination.",
+    image: "/placeholder.svg?height=600&width=800&text=Healthcare+Mobile+App",
+    tech: ["React Native", "Firebase", "Node.js", "WebRTC"],
+    link: "#",
+    stats: "20k+ Active Users",
   },
   {
-    id: "cloud-infrastructure",
-    title: "Cloud Infrastructure Setup",
-    description: "Scalable cloud infrastructure with automated deployment and monitoring.",
-    category: "DevOps & Deployment",
-    url: "https://devops-dashboard-demo.vercel.app",
-    image: "/placeholder.svg?height=300&width=500&text=Cloud+Infrastructure",
-    tech: ["AWS", "Docker", "Kubernetes", "Terraform"],
-    icon: Server,
-    color: "from-orange-500 to-red-500",
+    id: "edustream",
+    title: "EduStream",
+    subtitle: "LMS for Modern Universities",
+    category: "Web Apps",
+    description: "Comprehensive learning management system reducing administrative workload by 70% automatically.",
+    image: "/placeholder.svg?height=600&width=800&text=Education+Platform+UI",
+    tech: ["Next.js", "GraphQL", "Supabase", "Tailwind"],
+    link: "#",
   },
-  {
-    id: "mobile-app",
-    title: "Cross-Platform Mobile App",
-    description: "React Native mobile application with native performance and modern UI.",
-    category: "Custom Solutions",
-    url: "https://mobile-app-showcase.vercel.app",
-    image: "/placeholder.svg?height=300&width=500&text=Mobile+App",
-    tech: ["React Native", "Expo", "Firebase", "Redux"],
-    icon: Code,
-    color: "from-indigo-500 to-blue-500",
-  },
-  {
-    id: "saas-platform",
-    title: "SaaS Management Platform",
-    description: "Complete SaaS solution with user management, billing, and analytics.",
-    category: "Web Development",
-    url: "http://localhost:3000/",
-    image: "/placeholder.svg?height=300&width=500&text=SaaS+Platform",
-    tech: ["Next.js", "Supabase", "Stripe", "Vercel"],
-    icon: Cpu,
-    color: "from-teal-500 to-green-500",
-  },
-]
+];
+
+const categories = ["All", "Web Apps", "Mobile Apps", "AI / Automation", "SaaS"];
 
 export function ProjectsSection() {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
-  const [filter, setFilter] = useState("All")
+  const [activeCategory, setActiveCategory] = useState("All");
 
-  const categories = [
-    "All",
-    "AI Automation",
-    "Web Development",
-    "Graphic Design",
-    "DevOps & Deployment",
-    "Custom Solutions",
-  ]
-
-  const filteredProjects = filter === "All" ? projects : projects.filter((project) => project.category === filter)
-
-  const openProject = (project: Project) => {
-    setSelectedProject(project)
-  }
-
-  const closeProject = () => {
-    setSelectedProject(null)
-  }
+  const filteredProjects =
+    activeCategory === "All"
+      ? projects
+      : projects.filter((project) => project.category === activeCategory);
 
   return (
-    <section className="w-full py-16 md:py-20 lg:py-24 px-4 md:px-6 lg:px-8 relative overflow-hidden">
-      {/* Background tech grid for dark theme */}
-      <div className="absolute inset-0 tech-grid opacity-10"></div>
+    <section className="relative w-full py-24 md:py-32 px-4 overflow-hidden bg-[#030706]">
+      {/* Dynamic Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-teal-500/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-emerald-600/5 rounded-full blur-[100px]" />
+        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay" />
+      </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Header */}
-        <motion.div
-          className="text-center mb-16 space-y-6 md:space-y-8"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
+        {/* Section Header */}
+        <div className="text-center mb-16 space-y-4">
           <motion.h2
-            className="text-3xl md:text-4xl lg:text-5xl font-tech font-bold text-dark-foreground mb-6"
-            whileInView={{ scale: [0.9, 1] }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4"
           >
             Our Projects
           </motion.h2>
-          <p className="text-base md:text-lg text-dark-muted font-tech max-w-3xl mx-auto leading-relaxed">
-            Explore our portfolio of successful projects across different domains.
-            <br />
-            <span className="text-primary font-mono">Click to interact • Live demos available</span>
-          </p>
-        </motion.div>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-lg text-gray-400 max-w-2xl mx-auto font-light"
+          >
+            Real-world solutions built for real businesses. scaling from startups to enterprise-level infrastructure.
+          </motion.p>
+        </div>
 
-        {/* Filter buttons */}
+        {/* Category Filters */}
         <motion.div
-          className="flex flex-wrap justify-center gap-3 mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ delay: 0.2 }}
+          className="flex flex-wrap justify-center gap-3 mb-16"
         >
           {categories.map((category) => (
-            <motion.button
+            <button
               key={category}
-              onClick={() => setFilter(category)}
-              className={`px-4 py-2 rounded-lg font-tech font-medium text-sm transition-all duration-300 ${
-                filter === category
-                  ? "bg-primary text-primary-foreground shadow-lg"
-                  : "bg-primary/20 text-primary hover:bg-primary/30 border border-primary/30"
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              onClick={() => setActiveCategory(category)}
+              className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 border backdrop-blur-sm ${activeCategory === category
+                ? "bg-teal-500/10 border-teal-500/50 text-teal-400 shadow-[0_0_20px_rgba(45,212,191,0.2)]"
+                : "bg-white/5 border-white/5 text-gray-400 hover:bg-white/10 hover:text-white hover:border-white/10"
+                }`}
             >
               {category}
-            </motion.button>
+            </button>
           ))}
         </motion.div>
 
-        {/* Projects grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 lg:gap-10">
           {filteredProjects.map((project, index) => (
             <motion.div
               key={project.id}
-              className="group relative"
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              transition={{ delay: index * 0.1 }}
+              className="group relative"
             >
-              <motion.div
-                className="bg-[#1a2f2f] rounded-2xl border border-primary/20 overflow-hidden cursor-pointer transition-all duration-300"
-                whileHover={{
-                  y: -10,
-                  scale: 1.02,
-                  boxShadow: "0 25px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(45, 175, 167, 0.3)",
-                }}
-                onClick={() => openProject(project)}
+              <div
+                className="relative h-full bg-[#0a1014]/80 backdrop-blur-xl border border-white/5 rounded-2xl overflow-hidden hover:border-teal-500/30 transition-all duration-500 hover:shadow-[0_0_40px_rgba(45,212,191,0.1)] hover:-translate-y-2"
               >
-                {/* Tech corners */}
-                <div className="absolute top-3 left-3 w-4 h-4 border-l-2 border-t-2 border-primary/50 group-hover:border-primary transition-colors duration-300 z-10"></div>
-                <div className="absolute top-3 right-3 w-4 h-4 border-r-2 border-t-2 border-primary/50 group-hover:border-primary transition-colors duration-300 z-10"></div>
-
-                {/* Project image */}
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
-
-                  {/* Category badge */}
-                  <div className="absolute top-4 left-4 px-3 py-1 bg-primary/90 text-primary-foreground text-xs font-tech font-semibold rounded-full">
-                    {project.category}
+                {/* Browser Frame Visual */}
+                <div className="bg-[#05090c] border-b border-white/5 p-3 flex items-center gap-2">
+                  <div className="flex gap-1.5 ml-1">
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/20" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/20" />
                   </div>
-
-                  {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <motion.div className="bg-white/90 backdrop-blur-sm rounded-full p-3" whileHover={{ scale: 1.1 }}>
-                      <ExternalLink className="w-6 h-6 text-primary" />
-                    </motion.div>
+                  <div className="mx-auto text-[10px] text-gray-600 font-mono bg-white/5 px-3 py-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                    {project.category}
                   </div>
                 </div>
 
-                {/* Project info */}
-                <div className="p-6 space-y-4">
-                  <div className="flex items-start justify-between">
-                    <motion.h3
-                      className="text-xl md:text-2xl font-tech font-bold text-dark-foreground group-hover:text-primary transition-colors duration-300"
-                      whileHover={{ x: 5 }}
-                    >
-                      {project.title}
-                    </motion.h3>
-                    <project.icon className="w-5 h-5 text-primary opacity-70 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Project Thumbnail Area */}
+                <div className="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-gray-900 to-black group-hover:via-gray-900 transition-all">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 opacity-80 group-hover:opacity-100"
+                  />
+
+                  {/* Overlay Gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a1014] via-transparent to-transparent opacity-90" />
+
+                  {/* Floating Stats Badge */}
+                  {project.stats && (
+                    <div className="absolute top-20 right-4 bg-black/40 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg">
+                      <span className="text-teal-400 text-xs font-bold">{project.stats}</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Content Area */}
+                <div className="p-6 md:p-8 relative -mt-12">
+                  <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-teal-400 transition-colors drop-shadow-md">
+                    {project.title}
+                  </h3>
+
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="text-xs font-medium text-teal-400/80 uppercase tracking-wider">{project.subtitle}</span>
                   </div>
 
-                  <p className="text-dark-muted font-tech text-sm leading-relaxed">{project.description}</p>
+                  <p className="text-gray-400 mb-6 text-sm leading-relaxed line-clamp-2 shadow-black drop-shadow-sm">
+                    {project.description}
+                  </p>
 
-                  {/* Tech stack */}
-                  <div className="flex flex-wrap gap-2">
+                  {/* Tech Stack Tags - Moved below description */}
+                  <div className="flex flex-wrap gap-2 mb-6">
                     {project.tech.map((tech) => (
                       <span
                         key={tech}
-                        className="px-2 py-1 bg-primary/10 text-primary text-xs font-mono rounded border border-primary/20"
+                        className="px-2.5 py-1 text-[11px] font-medium tracking-wide uppercase text-teal-300/90 bg-teal-950/50 border border-teal-500/20 rounded-md shadow-sm"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
 
-                  {/* View project button */}
-                  <motion.div className="pt-2" whileHover={{ scale: 1.02 }}>
-                    <Button
-                      className="w-full bg-primary/20 hover:bg-primary/30 text-primary border border-primary/30 hover:border-primary font-tech transition-all duration-300"
-                      size="sm"
+                  <div className="flex items-center justify-between pt-4 border-t border-white/5">
+                    <a
+                      href={project.link}
+                      className="w-full inline-flex items-center justify-end gap-2 text-sm font-medium text-white group-hover:text-teal-400 transition-colors"
                     >
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      View Live Demo
-                    </Button>
-                  </motion.div>
+                      View Case Study
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    </a>
+                  </div>
                 </div>
-
-                {/* Hover glow */}
-                <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-              </motion.div>
+              </div>
             </motion.div>
           ))}
         </div>
-      </div>
 
-      {/* Iframe Modal */}
-      {selectedProject && (
+        {/* Bottom CTA */}
         <motion.div
-          className="iframe-modal"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={closeProject}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mt-20 text-center"
         >
-          <motion.div
-            className="iframe-container animate-iframe-load"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
-            onClick={(e) => e.stopPropagation()}
+          <p className="text-gray-400 mb-6">Ready to build something similar?</p>
+          <Button
+            size="lg"
+            className="bg-teal-500 hover:bg-teal-400 text-black font-semibold rounded-full px-8 shadow-[0_0_20px_rgba(20,184,166,0.3)] hover:shadow-[0_0_30px_rgba(20,184,166,0.5)] transition-all"
           >
-            {/* Browser header */}
-            <div className="iframe-header">
-              <div className="iframe-controls">
-                <div className="iframe-control close" onClick={closeProject}></div>
-                <div className="iframe-control minimize"></div>
-                <div className="iframe-control maximize"></div>
-              </div>
-              <div className="iframe-url">{selectedProject.url}</div>
-              <button onClick={closeProject} className="text-gray-500 hover:text-gray-700 transition-colors">
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Iframe content */}
-            <iframe
-              src={selectedProject.url}
-              className="w-full h-full border-0"
-              title={selectedProject.title}
-              loading="lazy"
-            />
-          </motion.div>
+            Start Your Project
+          </Button>
         </motion.div>
-      )}
+      </div>
     </section>
-  )
+  );
 }

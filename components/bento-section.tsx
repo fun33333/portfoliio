@@ -1,140 +1,542 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { Cpu, Code, Palette, Server, Wrench, HeadphonesIcon } from "lucide-react"
+import { useState, useEffect, useRef } from "react"
+import { motion, AnimatePresence, useScroll, useTransform, MotionValue } from "framer-motion"
+import Lottie from "lottie-react"
+import Lenis from 'lenis'
+import webDevAnimation from "../assets/Web Development.json"
+import aiAutomationAnimation from "../assets/Ai-Automation.json"
+import graphicDesignAnimation from "../assets/Graphic-design.json"
+import saasAnimation from "../assets/Saas.json"
+import {
+  Monitor,
+  Megaphone,
+  Palette,
+  Code,
+  Cpu,
+  Layers,
+  Target,
+  Share2,
+  Zap,
+  Award,
+  BookOpen,
+  Image,
+  MessageSquare,
+  Workflow,
+  Brain,
+  Box
+} from "lucide-react"
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel"
 
-type ServiceCardProps = {
+
+
+type ServiceSubItem = {
   title: string
   description: string
-  icon: any
-  index: number
-  gradient: string
+  cta: string
 }
 
-const ServiceCard = ({ title, description, icon: Icon, index, gradient }: ServiceCardProps) => (
-  <motion.div
-    initial={{ opacity: 0, y: 50 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6, delay: index * 0.1 }}
-    className="group relative"
-  >
-    <div className={`absolute inset-0 ${gradient} opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 rounded-3xl`} />
-    
-    <div className="relative bg-white rounded-2xl p-8 border border-gray-100 hover:border-primary/30 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-full flex flex-col">
-      {/* Icon Container */}
-      <div className={`w-16 h-16 rounded-2xl ${gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-        <Icon className="w-8 h-8 text-white" />
-      </div>
+type Service = {
+  id: string
+  title: string
+  icon: any
+  image: string
+  description: string
+  subItems: ServiceSubItem[]
+  animationData?: any
+  color: string
+}
 
-      {/* Content */}
-      <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">
-        {title}
-      </h3>
-      <p className="text-gray-600 leading-relaxed flex-grow">
-        {description}
-      </p>
-
-      {/* Hover Arrow */}
-      <div className="mt-6 flex items-center text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <span className="text-sm font-semibold mr-2">Learn more</span>
-        <svg className="w-4 h-4 group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
-      </div>
-
-      {/* Corner Accent */}
-      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-primary/5 to-transparent rounded-bl-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-    </div>
-  </motion.div>
-)
+const services: Service[] = [
+  {
+    id: "ai-automation",
+    title: "AI Automation",
+    icon: Cpu,
+    image: "/illustrations/ai-automation.png",
+    description: "Smart workflows and intelligent bots to automate repetitive tasks and save your team valuable time.",
+    color: "#BBACAF",
+    subItems: [
+      {
+        title: "WhatsApp Bots",
+        description: "24/7 automated customer interaction.",
+        cta: "READ NOW"
+      },
+      {
+        title: "Workflow Automation",
+        description: "Streamline your business operations.",
+        cta: "CHECK NOW"
+      },
+      {
+        title: "AI Integrations",
+        description: "Empower your software with LLMs.",
+        cta: "CHECK NOW"
+      }
+    ],
+    animationData: aiAutomationAnimation
+  },
+  {
+    id: "web-development",
+    title: "Web Development",
+    icon: Monitor,
+    image: "/illustrations/web-design.png",
+    description: "Developing eye-catching, high-performance websites that strengthen your digital presence and convert visitors into customers.",
+    color: "#977F6D",
+    subItems: [
+      {
+        title: "Frontend Development",
+        description: "Clean, responsive, and interactive UIs.",
+        cta: "READ NOW"
+      },
+      {
+        title: "Backend Systems",
+        description: "Robust and scalable server architectures.",
+        cta: "CHECK NOW"
+      },
+      {
+        title: "E-Commerce",
+        description: "Scale your business with online stores.",
+        cta: "CHECK NOW"
+      }
+    ],
+    animationData: webDevAnimation
+  },
+  {
+    id: "graphic-design",
+    title: "Graphic Design",
+    icon: Palette,
+    image: "/illustrations/branding.png",
+    description: "Crafting unique visual identities that tell your story and resonate with your target audience.",
+    color: "#C2491D",
+    subItems: [
+      {
+        title: "Logo Design",
+        description: "Memorable icons that define your brand.",
+        cta: "READ NOW"
+      },
+      {
+        title: "Brand Guidelines",
+        description: "Consistent voice and visuals company wide.",
+        cta: "CHECK NOW"
+      },
+      {
+        title: "Visual Assets",
+        description: "High-quality graphics for all platforms.",
+        cta: "CHECK NOW"
+      }
+    ],
+    animationData: graphicDesignAnimation
+  },
+  {
+    id: "devops-solutions",
+    title: "SaaS",
+    icon: Workflow,
+    image: "/illustrations/devops.png",
+    description: "Streamline your development lifecycle with automated pipelines and cloud infrastructure management.",
+    color: "#B62429",
+    subItems: [
+      {
+        title: "CI/CD Pipelines",
+        description: "Automate delivery for faster releases.",
+        cta: "READ NOW"
+      },
+      {
+        title: "Cloud Infrastructure",
+        description: "Scalable and secure cloud environments.",
+        cta: "CHECK NOW"
+      },
+      {
+        title: "Containerization",
+        description: "Docker & Kubernetes orchestration.",
+        cta: "CHECK NOW"
+      }
+    ],
+    animationData: saasAnimation
+  },
+  {
+    id: "custom-solutions",
+    title: "Custom Solutions",
+    icon: Layers,
+    image: "/illustrations/custom-solutions.png",
+    description: "Tailor-made software solutions designed to solve your specific business challenges and drive innovation.",
+    color: "#88A28D",
+    subItems: [
+      {
+        title: "Software Consulting",
+        description: "Expert guidance for your tech stacks.",
+        cta: "READ NOW"
+      },
+      {
+        title: "Custom CRM/ERP",
+        description: "Manage your business more efficiently.",
+        cta: "CHECK NOW"
+      },
+      {
+        title: "API Development",
+        description: "Connect your applications seamlessly.",
+        cta: "CHECK NOW"
+      }
+    ]
+  },
+  {
+    id: "support-24-7",
+    title: "24/7 Support",
+    icon: MessageSquare,
+    image: "/illustrations/digital-marketing.png", // Reusing for now as placeholder for support
+    description: "Round-the-clock technical assistance and maintenance to ensure your systems are always running smoothly.",
+    color: "#050505",
+    subItems: [
+      {
+        title: "Help Desk",
+        description: "Immediate technical troubleshooting.",
+        cta: "READ NOW"
+      },
+      {
+        title: "App Maintenance",
+        description: "Regular updates and security patches.",
+        cta: "CHECK NOW"
+      },
+      {
+        title: "Site Monitoring",
+        description: "Proactive uptime and health checks.",
+        cta: "CHECK NOW"
+      }
+    ]
+  }
+]
 
 export function BentoSection() {
-  const services = [
-    {
-      title: "AI Automation",
-      description: "Intelligent automation tools to streamline your business processes with cutting-edge AI technology and machine learning solutions.",
-      icon: Cpu,
-      gradient: "bg-gradient-to-br from-blue-500 to-blue-600"
-    },
-    {
-      title: "Web Development",
-      description: "Modern, responsive websites and applications built with the latest technologies, frameworks, and best practices for optimal performance.",
-      icon: Code,
-      gradient: "bg-gradient-to-br from-primary to-primary-dark"
-    },
-    {
-      title: "Graphic Design",
-      description: "Creative visual solutions for your brand identity, marketing campaigns, and digital assets that stand out and engage your audience.",
-      icon: Palette,
-      gradient: "bg-gradient-to-br from-purple-500 to-pink-500"
-    },
-    {
-      title: "DevOps Solutions",
-      description: "Seamless deployment, infrastructure management, and CI/CD pipelines for scalable, reliable, and secure applications.",
-      icon: Server,
-      gradient: "bg-gradient-to-br from-orange-500 to-red-500"
-    },
-    {
-      title: "Custom Solutions",
-      description: "Tailored digital solutions designed specifically for your unique business requirements, challenges, and growth objectives.",
-      icon: Wrench,
-      gradient: "bg-gradient-to-br from-green-500 to-emerald-600"
-    },
-    {
-      title: "24/7 Support",
-      description: "Dedicated technical support and maintenance to ensure your digital solutions run smoothly around the clock with minimal downtime.",
-      icon: HeadphonesIcon,
-      gradient: "bg-gradient-to-br from-indigo-500 to-purple-600"
-    },
-  ]
+  const [activeTab, setActiveTab] = useState(services[0].id)
+  const [isDesktop, setIsDesktop] = useState(true)
+
+  useEffect(() => {
+    const checkDesktop = () => {
+      setIsDesktop(window.innerWidth >= 1024)
+    }
+    // Check initially
+    checkDesktop()
+
+    // Add listener
+    window.addEventListener('resize', checkDesktop)
+
+    // Initialize Lenis for smooth scrolling
+    const lenis = new Lenis()
+    function raf(time: number) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+    requestAnimationFrame(raf)
+
+    return () => {
+      window.removeEventListener('resize', checkDesktop)
+      lenis.destroy()
+    }
+  }, [])
 
   return (
-    <section className="relative w-full py-20 md:py-28 px-4 md:px-6 lg:px-8 overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-gray-50 to-white" />
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
-      
-      {/* Decorative Blobs */}
-      <div className="absolute top-20 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 left-0 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
+    <section
+      className="relative w-full font-tech overflow-hidden"
+      style={{ background: 'linear-gradient(273deg,rgba(118, 245, 224, 1) 3%, rgba(194, 237, 237, 1) 43%, rgba(255, 255, 255, 1) 58%)' }}
+    >
+      {/* Premium Shining Elements */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* Subtle Internal Glows */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.1),transparent_40%)]" />
 
-      <div className="relative max-w-7xl mx-auto">
-        {/* Header */}
+        {/* Dynamic Shining Highlight */}
         <motion.div
-          className="text-center mb-16 space-y-6"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="inline-block"
-          >
-            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
-              What We Offer
-            </span>
-          </motion.div>
-          
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-            Our Core Services
-          </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Comprehensive digital solutions tailored to transform your business and drive sustainable growth
-          </p>
-        </motion.div>
+          animate={{
+            x: ["-100%", "200%"],
+            transition: { duration: 15, repeat: Infinity, ease: "linear" }
+          }}
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12"
+        />
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <ServiceCard key={service.title} {...service} index={index} />
-          ))}
+        {/* Subtle Grid Pattern */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(to right, #2EADA7 1px, transparent 1px), linear-gradient(to bottom, #2EADA7 1px, transparent 1px)', backgroundSize: '70px 70px' }} />
+      </div>
+
+      <div className="relative z-10 w-full max-w-[1600px] mx-auto">
+        {/* Header - Fixed */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-20 gap-8 px-4 md:px-12 lg:px-24 pt-16">
+          <div className="max-w-2xl">
+            <motion.h4
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              className="text-primary font-mono text-[11px] tracking-[0.5em] uppercase mb-6 font-bold"
+            >
+              OUR SERVICES
+            </motion.h4>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="text-3xl md:text-5xl lg:text-5xl font-lastica text-[#172222] leading-[0.9] uppercase tracking-tighter"
+            >
+              What we offer <span className="text-primary">for you</span>
+            </motion.h2>
+          </div>
+          <div className="max-w-md lg:max-w-xl pb-0">
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="text-[#172222]/60 font-inter lg:text-xl text-sm md:text-lg leading-relaxed font-medium"
+            >
+              Discover growth with our customized IT solutions. As a trusted web design agency, global organizations rely on us for the best software, services, and brand success.
+            </motion.p>
+          </div>
         </div>
+
+        {isDesktop ? (
+          /* Desktop: Horizontal Accordion */
+          <div className="flex flex-col lg:flex-row w-full h-auto lg:h-[700px] gap-3 px-4 md:px-12 lg:px-24 pb-16">
+            {services.map((service) => (
+              <motion.div
+                key={service.id}
+                layout
+                initial={false}
+                animate={{
+                  flex: activeTab === service.id ? 12 : 1,
+                }}
+                transition={{
+                  duration: 0.4,
+                  ease: [0.4, 0, 0.2, 1]
+                }}
+                onClick={() => setActiveTab(service.id)}
+                className={`relative group cursor-pointer overflow-hidden rounded-[24px] lg:rounded-[40px] transition-all duration-500 w-full lg:w-auto ${activeTab === service.id
+                  ? "bg-white/90 backdrop-blur-xl border-2 border-primary/20 shadow-[0_50px_100px_-20px_rgba(45,175,167,0.25)]"
+                  : "border-2 border-primary/30 hover:border-primary shadow-lg hover:shadow-2xl"
+                  }`}
+                style={activeTab !== service.id ? {
+                  background: 'linear-gradient(135deg, rgba(46, 173, 167, 0.15) 0%, rgba(255, 255, 255, 0.25) 100%)',
+                  backdropFilter: 'blur(10px)',
+                  WebkitBackdropFilter: 'blur(10px)',
+                  transition: 'all 0.3s ease',
+                } : undefined}
+                onMouseEnter={(e) => {
+                  if (activeTab !== service.id) {
+                    e.currentTarget.style.background = 'linear-gradient(135deg, rgba(46, 173, 167, 0.85) 0%, rgba(46, 173, 167, 0.65) 100%)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (activeTab !== service.id) {
+                    e.currentTarget.style.background = 'linear-gradient(135deg, rgba(46, 173, 167, 0.15) 0%, rgba(255, 255, 255, 0.25) 100%)';
+                  }
+                }}
+              >
+                <AnimatePresence initial={false} mode="wait">
+                  {activeTab !== service.id ? (
+                    /* Collapsed View */
+                    <motion.div
+                      key="collapsed"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                    >
+                      {/* Glass overlay for collapsed state */}
+                      <div className="absolute inset-0 pointer-events-none">
+                        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white/20 to-transparent" />
+                        <div className="absolute inset-0 rounded-[24px] lg:rounded-[40px] bg-gradient-to-br from-white/10 via-transparent to-primary/20 opacity-50" />
+                      </div>
+
+                      <div className="flex flex-col items-center gap-10 relative z-10">
+                        <div className="p-4 rounded-2xl bg-primary/80 text-white backdrop-blur-sm border border-primary/40 group-hover:bg-white group-hover:text-primary transition-all duration-300 shadow-xl">
+                          <service.icon className="w-7 h-7" />
+                        </div>
+                        <span className="[writing-mode:vertical-lr] rotate-180 uppercase tracking-[0.4em] font-black text-primary drop-shadow-md transition-colors text-xs whitespace-nowrap group-hover:text-white">
+                          {service.title}
+                        </span>
+                      </div>
+                    </motion.div>
+                  ) : (
+                    /* Expanded View */
+                    <motion.div
+                      key="expanded"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+                      className="h-full w-full p-6 md:p-10 lg:p-12 xl:p-16 flex flex-col bg-[#0A1515] overflow-hidden" // Removed justify-between to allow natural flow
+                    >
+                      <div>
+                        {/* Title, Description & Image Container */}
+                        <div className="mb-8 md:mb-10 flex flex-col xl:flex-row items-center justify-between gap-8 md:gap-12 text-center xl:text-left">
+                          <div className="flex-1 w-full relative z-10">
+                            <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-lastica text-white uppercase tracking-tighter leading-[0.9] mb-4 md:mb-6 break-words">
+                              {service.title}
+                            </h3>
+                            <p className="text-white/70 text-base md:text-lg lg:text-xl max-w-2xl leading-relaxed font-medium mx-auto xl:mx-0">
+                              {service.description}
+                            </p>
+                          </div>
+
+                          <div className="relative shrink-0 w-full md:w-auto flex justify-center xl:justify-end mt-4 xl:mt-0 px-4 md:px-0">
+                            <div className="w-40 h-40 md:w-52 md:h-52 lg:w-56 lg:h-56 xl:w-72 xl:h-72 bg-[#0A1515] flex items-center justify-center overflow-hidden">
+                              {service.animationData ? (
+                                <Lottie
+                                  animationData={service.animationData}
+                                  loop={true}
+                                  className="w-full h-full"
+                                  rendererSettings={{
+                                    preserveAspectRatio: 'xMidYMid meet'
+                                  }}
+                                />
+                              ) : (
+                                <img src={service.image} alt={service.title} className="w-full h-full object-contain" />
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Sub-item Cards */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4 xl:gap-6 mt-auto relative z-10 [perspective:1000px]">
+                        {service.subItems.map((item, idx) => (
+                          <motion.div
+                            key={item.title}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            whileHover={{
+                              y: -5,
+                              transition: { duration: 0.2 }
+                            }}
+                            transition={{ delay: 0.3 + (idx * 0.1) }}
+                            className="group/card p-5 md:p-6 xl:p-8 rounded-[24px] xl:rounded-[10px] border border-white/30 hover:border-white/50 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center relative overflow-hidden h-full justify-between"
+                            style={{
+                              background: 'rgba(255, 255, 255, 0.25)',
+                              backdropFilter: 'blur(5px)',
+                              WebkitBackdropFilter: 'blur(5px)',
+                            }}
+                          >
+                            {/* Subtle glassmorphism overlay */}
+                            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                              {/* Top gradient shine */}
+                              <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-white/10 to-transparent" />
+
+                              {/* Subtle border glow */}
+                              <div className="absolute inset-0 rounded-[24px] xl:rounded-[10px] bg-gradient-to-br from-white/20 via-transparent to-primary/10 opacity-30" />
+                            </div>
+
+                            {/* Content with proper z-index */}
+                            <div className="relative z-10">
+                              <h4 className="text-white font-raleway font-bold text-lg md:text-xl mb-2 uppercase tracking-tight drop-shadow-sm">
+                                {item.title}
+                              </h4>
+                              <p className="text-white/90 font-raleway text-sm md:text-base mb-4 flex-grow leading-relaxed font-medium drop-shadow-sm">
+                                {item.description}
+                              </p>
+                            </div>
+
+                            <button className="relative z-10 text-xs md:text-sm font-raleway font-bold tracking-[1.5px] uppercase text-primary hover:text-white transition-colors py-2 drop-shadow-sm">
+                              {item.cta} &rarr;
+                            </button>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
+          </div>
+        ) : (
+          /* Mobile & Tablet: Sticky Scroll Reveal Stack */
+          <div className="relative w-full px-4 pb-20 flex flex-col gap-10">
+            {services.map((service, i) => (
+              <MobileRevealCard
+                key={service.id}
+                service={service}
+                index={i}
+                total={services.length}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
+  )
+}
+
+function MobileRevealCard({ service, index, total }: { service: Service, index: number, total: number }) {
+  const container = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ['start start', 'end end']
+  })
+
+  // Dynamic values for stacking effect
+  const targetScale = 1 - ((total - index) * 0.05);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, targetScale])
+  const opacity = useTransform(scrollYProgress, [0.8, 1], [1, 0.6])
+
+  // Dynamic top offset for stacking visibility
+  const topOffset = 100 + (index * 20);
+
+  return (
+    <div
+      ref={container}
+      className="h-[80vh] flex items-start justify-center sticky top-0"
+      style={{ top: topOffset }}
+    >
+      <motion.div
+        style={{
+          scale,
+          opacity,
+          transformOrigin: "top center"
+        }}
+        className="flex flex-col relative w-full rounded-[30px] border-2 border-primary/20 shadow-2xl overflow-hidden bg-white"
+      >
+        {/* Card Header */}
+        <div className="p-6 flex items-center justify-between border-b border-primary/10 bg-gradient-to-r from-primary/5 to-transparent">
+          <div className="flex items-center gap-4">
+            <div className="p-3 rounded-xl bg-primary text-white">
+              <service.icon className="w-6 h-6" />
+            </div>
+            <h3 className="text-xl font-bold font-raleway uppercase tracking-wide text-foreground">{service.title}</h3>
+          </div>
+          <span className="text-sm font-mono text-primary font-bold">0{index + 1}</span>
+        </div>
+
+        {/* Card Content */}
+        <div className="flex-1 p-6 flex flex-col bg-white">
+          <p className="text-muted-foreground text-sm font-medium leading-relaxed mb-6">
+            {service.description}
+          </p>
+
+          {/* Animation/Image */}
+          <div className="relative w-full h-48 md:h-64 rounded-2xl overflow-hidden bg-gradient-to-br from-primary/5 to-transparent mb-6 flex items-center justify-center border border-primary/10">
+            {service.animationData ? (
+              <Lottie
+                animationData={service.animationData}
+                loop={true}
+                className="w-full h-full p-6"
+                rendererSettings={{
+                  preserveAspectRatio: 'xMidYMid meet'
+                }}
+              />
+            ) : (
+              <img src={service.image} alt={service.title} className="w-full h-full object-contain p-8" />
+            )}
+          </div>
+
+          {/* Sub Items */}
+          <div className="grid grid-cols-1 gap-3">
+            {service.subItems.map((item, idx) => (
+              <div
+                key={idx}
+                className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-primary/5 to-transparent hover:from-primary/10 transition-all border border-primary/10 cursor-pointer group"
+              >
+                <div>
+                  <span className="text-sm font-bold font-raleway uppercase text-foreground block mb-1">{item.title}</span>
+                  <p className="text-xs text-muted-foreground leading-tight">{item.description}</p>
+                </div>
+                <span className="text-xs text-primary font-bold opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+    </div>
   )
 }

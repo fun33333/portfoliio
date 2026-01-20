@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -18,58 +20,133 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Lastica';
+  src: url('/fonts/Lastica.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lastica';
+  src: url('/fonts/Lastica.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Raleway';
+  src: url('/fonts/Raleway/Raleway-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Raleway';
+  src: url('/fonts/Raleway/Raleway-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Raleway';
+  src: url('/fonts/Raleway/Raleway-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Raleway';
+  src: url('/fonts/Raleway/Raleway-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
+
   /* Light theme */
   :root {
     /* Light Modern Theme */
-    --background: 0 0% 100%;    /* White */
-    --foreground: 180 33% 11%;  /* #172222 */
+    --background: 0 0% 100%;
+    /* White */
+    --foreground: 180 33% 11%;
+    /* #172222 */
 
-    --muted: 180 33% 96%;      /* Light muted cyan */
+    --muted: 180 33% 96%;
+    /* Light muted cyan */
     --muted-foreground: 180 33% 25%;
     --muted-foreground-light: 180 33% 45%;
     --muted-foreground-dark: 180 33% 15%;
 
-    --card: 0 0% 100%;         /* White */
+    --card: 0 0% 100%;
+    /* White */
     --card-foreground: 180 33% 11%;
 
-    --popover: 0 0% 100%;      /* White */
+    --popover: 0 0% 100%;
+    /* White */
     --popover-foreground: 180 33% 11%;
 
     /* Dark Section Backgrounds */
-    --dark-bg-primary: 180 45% 6%;      /* #0f1b1b - Deep teal-black */
-    --dark-bg-secondary: 180 40% 8%;    /* Slightly lighter for footer */
-    --dark-foreground: 180 20% 95%;     /* Light text for dark sections */
-    --dark-muted: 180 15% 70%;          /* Muted text on dark */
-    
-    /* Light Section Backgrounds */
-    --light-bg-pure: 0 0% 100%;         /* Pure white */
-    --light-bg-tinted: 180 60% 99%;     /* #f8fffe - Soft teal tint */
-    --light-foreground: 180 33% 11%;    /* Dark text for light sections */
-    
-    /* Modern Cyan Accents */
-    --primary: 177 58% 43%;          /* #2dafa7 */
-    --primary-foreground: 0 0% 100%; /* White */
-    --primary-dark: 177 58% 33%;     /* Darker teal */
-    --primary-light: 177 58% 53%;    /* Lighter teal */
+    --dark-bg-primary: 180 45% 6%;
+    /* #0f1b1b - Deep teal-black */
+    --dark-bg-secondary: 180 40% 8%;
+    /* Slightly lighter for footer */
+    --dark-foreground: 180 20% 95%;
+    /* Light text for dark sections */
+    --dark-muted: 180 15% 70%;
+    /* Muted text on dark */
 
-    --secondary: 180 33% 98%;        /* Very light cyan */
+    /* Light Section Backgrounds */
+    --light-bg-pure: 0 0% 100%;
+    /* Pure white */
+    --light-bg-tinted: 180 60% 99%;
+    /* #f8fffe - Soft teal tint */
+    --light-foreground: 180 33% 11%;
+    /* Dark text for light sections */
+
+    /* Modern Cyan Accents */
+    --primary: 177 58% 43%;
+    /* #2dafa7 */
+    --primary-foreground: 0 0% 100%;
+    /* White */
+    --primary-dark: 177 58% 33%;
+    /* Darker teal */
+    --primary-light: 177 58% 53%;
+    /* Lighter teal */
+
+    --secondary: 180 33% 98%;
+    /* Very light cyan */
     --secondary-foreground: 180 33% 11%;
 
-    --accent: 177 58% 43%;          /* #2dafa7 */
-    --accent-foreground: 0 0% 100%; /* White */
+    --accent: 177 58% 43%;
+    /* #2dafa7 */
+    --accent-foreground: 0 0% 100%;
+    /* White */
 
-    --border: 180 89% 95% / 0.15;    /* Based on e7fdfd */
-    --border-light: 180 20% 85%;     /* Light border */
-    --border-dark: 180 20% 20%;      /* Dark border */
+    --border: 180 89% 95% / 0.15;
+    /* Based on e7fdfd */
+    --border-light: 180 20% 85%;
+    /* Light border */
+    --border-dark: 180 20% 20%;
+    /* Dark border */
 
-    --ring: 177 58% 43%;      /* #2dafa7 */
+    --ring: 177 58% 43%;
+    /* #2dafa7 */
     --radius: 0.75rem;
 
     /* Tech accent colors */
-    --tech-green: 177 58% 43%;   /* #2dafa7 */
-    --tech-orange: 177 58% 53%;  /* Lighter primary */
-    --tech-purple: 177 58% 33%;  /* Darker primary */
+    --tech-green: 177 58% 43%;
+    /* #2dafa7 */
+    --tech-orange: 177 58% 53%;
+    /* Lighter primary */
+    --tech-purple: 177 58% 33%;
+    /* Darker primary */
   }
 }
 
@@ -77,20 +154,30 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
-    font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
-      sans-serif;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .heading-font {
+    font-family: 'Lastica', "Inter", sans-serif;
+    letter-spacing: -0.02em;
   }
 
   .font-mono {
-    font-family: "JetBrains Mono", "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-family: "Inter", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
 
   .font-tech {
-    font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
-      sans-serif;
-    font-weight: 500;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 700;
     letter-spacing: -0.02em;
   }
 
@@ -99,24 +186,32 @@
     font-weight: 700;
     letter-spacing: -0.02em;
   }
+
+  .font-raleway {
+    font-family: 'Raleway', sans-serif;
+  }
 }
 
 /* Enhanced animations */
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0px) rotate(0deg);
   }
+
   50% {
     transform: translateY(-10px) rotate(1deg);
   }
 }
 
 @keyframes pulse-glow {
+
   0%,
   100% {
     box-shadow: 0 0 5px hsl(var(--primary) / 0.3);
   }
+
   50% {
     box-shadow: 0 0 20px hsl(var(--primary) / 0.6);
   }
@@ -127,6 +222,7 @@
     transform: translateX(-100px);
     opacity: 0;
   }
+
   to {
     transform: translateX(0);
     opacity: 1;
@@ -138,6 +234,7 @@
     transform: translateX(100px);
     opacity: 0;
   }
+
   to {
     transform: translateX(0);
     opacity: 1;
@@ -149,6 +246,7 @@
     transform: scale(0.8);
     opacity: 0;
   }
+
   to {
     transform: scale(1);
     opacity: 1;
@@ -159,9 +257,11 @@
   0% {
     border-color: hsl(var(--primary) / 0.3);
   }
+
   50% {
     border-color: hsl(var(--primary) / 0.8);
   }
+
   100% {
     border-color: hsl(var(--primary) / 0.3);
   }
@@ -172,6 +272,7 @@
     opacity: 0;
     transform: scale(0.95);
   }
+
   100% {
     opacity: 1;
     transform: scale(1);
@@ -181,21 +282,27 @@
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
+
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
 }
+
 .animate-slide-in-left {
   animation: slide-in-left 0.6s ease-out;
 }
+
 .animate-slide-in-right {
   animation: slide-in-right 0.6s ease-out;
 }
+
 .animate-scale-in {
   animation: scale-in 0.5s ease-out;
 }
+
 .animate-tech-border {
   animation: tech-border 2s ease-in-out infinite;
 }
+
 .animate-iframe-load {
   animation: iframe-load 0.8s ease-out;
 }
@@ -210,7 +317,7 @@
 .card-hover:hover {
   transform: translateY(-4px);
   border-color: hsl(var(--primary) / 0.5);
-  box-shadow: 
+  box-shadow:
     0 4px 12px hsl(var(--primary) / 0.1),
     0 12px 24px hsl(var(--background) / 0.2);
 }
@@ -220,22 +327,18 @@
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
-  background: linear-gradient(
-    135deg, 
-    hsl(var(--primary)) 0%,
-    hsl(var(--primary-dark)) 100%
-  );
+  background: linear-gradient(135deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--primary-dark)) 100%);
   border: 1px solid hsl(var(--primary) / 0.2);
   color: hsl(var(--primary-foreground));
 }
 
 .btn-tech:hover {
   transform: translateY(-1px);
-  background: linear-gradient(
-    135deg,
-    hsl(var(--primary-light)) 0%,
-    hsl(var(--primary)) 100%
-  );
+  background: linear-gradient(135deg,
+      hsl(var(--primary-light)) 0%,
+      hsl(var(--primary)) 100%);
   border-color: hsl(var(--primary) / 0.4);
 }
 
@@ -258,17 +361,15 @@
 
 /* Section Patterns */
 .pattern-grid {
-  background-image: 
+  background-image:
     linear-gradient(to right, hsl(var(--primary) / 0.05) 1px, transparent 1px),
     linear-gradient(to bottom, hsl(var(--primary) / 0.05) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
 .pattern-dots {
-  background-image: radial-gradient(
-    hsl(var(--primary) / 0.1) 1px,
-    transparent 1px
-  );
+  background-image: radial-gradient(hsl(var(--primary) / 0.1) 1px,
+      transparent 1px);
   background-size: 16px 16px;
 }
 
@@ -299,7 +400,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px; /* Default padding for small screens */
+  padding: 16px;
+  /* Default padding for small screens */
 }
 
 .iframe-container {
@@ -315,7 +417,8 @@
 
 .iframe-header {
   background: #f5f5f5;
-  padding: 12px 16px; /* Default padding */
+  padding: 12px 16px;
+  /* Default padding */
   border-bottom: 1px solid #e0e0e0;
   display: flex;
   align-items: center;
@@ -336,9 +439,11 @@
 .iframe-control.close {
   background: #ff5f57;
 }
+
 .iframe-control.minimize {
   background: #ffbd2e;
 }
+
 .iframe-control.maximize {
   background: #28ca42;
 }
@@ -354,7 +459,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: calc(100% - 120px); /* Adjust max-width for controls */
+  max-width: calc(100% - 120px);
+  /* Adjust max-width for controls */
 }
 
 /* Responsive padding utilities */
@@ -376,13 +482,16 @@
 
 /* Responsive adjustments for iframe modal */
 @media (min-width: 640px) {
+
   /* sm breakpoint */
   .iframe-modal {
     padding: 20px;
   }
+
   .iframe-header {
     padding: 16px 24px;
   }
+
   .iframe-url {
     font-size: 14px;
     max-width: calc(100% - 150px);
@@ -390,10 +499,12 @@
 }
 
 @media (min-width: 768px) {
+
   /* md breakpoint */
   .iframe-modal {
     padding: 40px;
   }
+
   .iframe-url {
     font-size: 16px;
     max-width: calc(100% - 180px);
@@ -403,44 +514,80 @@
 /* neon grid background (hero/chat can reuse) */
 :root {
   --bg0: #172222;
-  --grid-cyan: rgba(45,175,167,0.06);
+  --grid-cyan: rgba(45, 175, 167, 0.06);
 }
-html, body { background: var(--bg0); }
+
+html,
+body {
+  background: var(--bg0);
+}
 
 /* Enhanced Radial Glow */
 body::before {
   content: "";
-  position: fixed; 
+  position: fixed;
   inset: -20%;
-  background: 
+  background:
     radial-gradient(60% 60% at 70% 0%, hsl(var(--primary) / 0.15), transparent 60%),
     radial-gradient(40% 40% at 0% 100%, hsl(var(--secondary) / 0.1), transparent 55%);
-  filter: blur(40px); 
-  pointer-events: none; 
+  filter: blur(40px);
+  pointer-events: none;
   z-index: -1;
   animation: drift 18s ease-in-out infinite alternate;
 }
+
 @keyframes grid-slide {
-  0% { background-position: 0 0; }
-  100% { background-position: 60px 60px; }
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 60px 60px;
+  }
 }
 
 @keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes spin-slow-reverse {
-  from { transform: rotate(360deg); }
-  to { transform: rotate(0deg); }
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
 }
 
-@keyframes drift { from { transform: translateY(-2%);} to { transform: translateY(2%);} }
+@keyframes drift {
+  from {
+    transform: translateY(-2%);
+  }
+
+  to {
+    transform: translateY(2%);
+  }
+}
 
 @keyframes gradient-slow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .animate-grid-slide {
@@ -461,44 +608,62 @@ body::before {
 }
 
 /* Enhanced Typing Animation */
-.typing-dots { 
-  display: inline-flex; 
-  gap: 4px; 
-  align-items: center; 
+.typing-dots {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
 }
+
 .typing-dots span {
-  width: 6px; 
-  height: 6px; 
-  border-radius: 9999px; 
-  background: hsl(var(--primary)); 
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: hsl(var(--primary));
   opacity: 0.6;
   animation: bounce 1.2s infinite ease-in-out;
 }
-.typing-dots span:nth-child(2){ 
-  animation-delay: 0.15s; 
+
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.15s;
   opacity: 0.4;
 }
-.typing-dots span:nth-child(3){ 
-  animation-delay: 0.3s; 
+
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.3s;
   opacity: 0.2;
 }
-@keyframes bounce { 0%,80%,100%{ transform: translateY(0);} 40%{ transform: translateY(-4px);} }
+
+@keyframes bounce {
+
+  0%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-4px);
+  }
+}
 
 /* Enhanced Scrollbar */
-.scrollbar-thin::-webkit-scrollbar { 
-  height: 8px; 
-  width: 8px; 
+.scrollbar-thin::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
 }
-.scrollbar-thin::-webkit-scrollbar-thumb { 
-  background: hsl(var(--primary) / 0.2); 
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.2);
   border-radius: 8px;
   border: 2px solid transparent;
   background-clip: padding-box;
 }
-.scrollbar-thin::-webkit-scrollbar-track { 
+
+.scrollbar-thin::-webkit-scrollbar-track {
   background: hsl(var(--background) / 0.5);
   border-radius: 8px;
 }
+
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--primary) / 0.3);
   background-clip: padding-box;
@@ -552,11 +717,9 @@ body::before {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    hsl(var(--primary) / 0.2),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      hsl(var(--primary) / 0.2),
+      transparent);
   pointer-events: none;
 }
