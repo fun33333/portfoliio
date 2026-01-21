@@ -9,7 +9,7 @@ interface Project {
   id: string;
   title: string;
   subtitle: string;
-  category: "Web Apps" | "Mobile Apps" | "AI / Automation" | "SaaS";
+  category: "Web Design" | "Logo Design" | "Branding Design";
   description: string;
   image: string;
   tech: string[];
@@ -19,23 +19,22 @@ interface Project {
 
 const projects: Project[] = [
   {
-    id: "fin-track",
-    title: "FinTrack",
-    subtitle: "Financial Intelligence Platform",
-    category: "SaaS",
-    description: "Real-time financial insights platform processing over $50M in monthly transactions for enterprise clients.",
-    image: "/placeholder.svg?height=600&width=800&text=Fintech+Dashboard+UI",
-    tech: ["React", "Node.js", "AWS", "PostgreSQL"],
+    id: "kiffu-restaurant",
+    title: "Kiffu Restaurant",
+    subtitle: "Premium Dining Experience",
+    category: "Web Design",
+    description: "A complete multi-page restaurant website with menu management and online reservations.",
+    image: "/images/restaurant3-opt.jpg",
+    tech: ["Next.js", "Tailwind", "Framer Motion"],
     link: "#",
-    stats: "+45% Efficiency",
   },
   {
     id: "sales-iq",
     title: "SalesIQ",
     subtitle: "AI-Powered Sales Analytics",
-    category: "AI / Automation",
+    category: "Logo Design",
     description: "Machine learning algorithms that predict customer behavior and automate lead scoring pipelines.",
-    image: "/placeholder.svg?height=600&width=800&text=AI+Analytics+Dashboard",
+    image: "/images/restaurant3-opt.jpg",
     tech: ["Python", "TensorFlow", "FastAPI", "Next.js"],
     link: "#",
     stats: "98% Accuracy",
@@ -44,9 +43,9 @@ const projects: Project[] = [
     id: "med-assist",
     title: "MedAssist",
     subtitle: "Healthcare Management System",
-    category: "Mobile Apps",
+    category: "Logo Design",
     description: "HIPAA-compliant mobile application for streaming patient management and telemedicine coordination.",
-    image: "/placeholder.svg?height=600&width=800&text=Healthcare+Mobile+App",
+    image: "/images/restaurant3-opt.jpg",
     tech: ["React Native", "Firebase", "Node.js", "WebRTC"],
     link: "#",
     stats: "20k+ Active Users",
@@ -55,15 +54,15 @@ const projects: Project[] = [
     id: "edustream",
     title: "EduStream",
     subtitle: "LMS for Modern Universities",
-    category: "Web Apps",
+    category: "Web Design",
     description: "Comprehensive learning management system reducing administrative workload by 70% automatically.",
-    image: "/placeholder.svg?height=600&width=800&text=Education+Platform+UI",
+    image: "/images/restaurant3-opt.jpg",
     tech: ["Next.js", "GraphQL", "Supabase", "Tailwind"],
     link: "#",
   },
 ];
 
-const categories = ["All", "Web Apps", "Mobile Apps", "AI / Automation", "SaaS"];
+const categories = ["All", "Web Design", "Logo Design", "Branding Design"];
 
 export function ProjectsSection() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -74,34 +73,33 @@ export function ProjectsSection() {
       : projects.filter((project) => project.category === activeCategory);
 
   return (
-    <section className="relative w-full py-24 md:py-32 px-4 overflow-hidden bg-[#030706]">
+    <section className="relative w-full py-24 md:py-32 px-4 overflow-hidden ">
       {/* Dynamic Background Elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-teal-500/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-emerald-600/5 rounded-full blur-[100px]" />
+      {/* <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#e91e63]/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-[#e91e63]/5 rounded-full blur-[100px]" />
         <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay" />
-      </div>
+      </div> */}
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16 space-y-4">
+        <div className="text-center mb-16 space-y-2">
+          <motion.span
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-[12px] font-bold tracking-[0.2em] text-[#e91e63] uppercase font-raleway"
+          >
+            Recent Projects
+          </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4"
+            className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4 font-lastica"
           >
-            Our Projects
+            Our latest <span className="font-extrabold">case studies</span>
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-lg text-gray-400 max-w-2xl mx-auto font-light"
-          >
-            Real-world solutions built for real businesses. scaling from startups to enterprise-level infrastructure.
-          </motion.p>
         </div>
 
         {/* Category Filters */}
@@ -110,24 +108,31 @@ export function ProjectsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-3 mb-16"
+          className="flex flex-wrap justify-center gap-8 mb-16"
         >
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 border backdrop-blur-sm ${activeCategory === category
-                ? "bg-teal-500/10 border-teal-500/50 text-teal-400 shadow-[0_0_20px_rgba(45,212,191,0.2)]"
-                : "bg-white/5 border-white/5 text-gray-400 hover:bg-white/10 hover:text-white hover:border-white/10"
+              className={`pb-4 text-sm font-semibold transition-all duration-500 ease-in-out relative font-raleway ${activeCategory === category
+                ? "text-white"
+                : "text-gray-400 hover:text-white"
                 }`}
             >
               {category}
+              {activeCategory === category && (
+                <motion.div
+                  layoutId="activeCategory"
+                  className="absolute bottom-0 left-0 right-0 h-[2px] bg-white"
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                />
+              )}
             </button>
           ))}
         </motion.div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 lg:gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-10">
           {filteredProjects.map((project, index) => (
             <motion.div
               key={project.id}
@@ -135,77 +140,31 @@ export function ProjectsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="group relative"
+              className="group relative card-item"
             >
               <div
-                className="relative h-full bg-[#0a1014]/80 backdrop-blur-xl border border-white/5 rounded-2xl overflow-hidden hover:border-teal-500/30 transition-all duration-500 hover:shadow-[0_0_40px_rgba(45,212,191,0.1)] hover:-translate-y-2"
+                className="relative h-[600px] w-full overflow-hidden transition-all duration-500 group-hover:shadow-[0_0_30px_rgba(255,255,255,0.1)]"
               >
-                {/* Browser Frame Visual */}
-                <div className="bg-[#05090c] border-b border-white/5 p-3 flex items-center gap-2">
-                  <div className="flex gap-1.5 ml-1">
-                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/20" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/20" />
-                  </div>
-                  <div className="mx-auto text-[10px] text-gray-600 font-mono bg-white/5 px-3 py-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-                    {project.category}
-                  </div>
-                </div>
-
                 {/* Project Thumbnail Area */}
-                <div className="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-gray-900 to-black group-hover:via-gray-900 transition-all">
+                <div className="relative card-item-img overflow-hidden bg-[#0a1014]">
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 opacity-80 group-hover:opacity-100"
+                    className="w-full h-full"
                   />
 
-                  {/* Overlay Gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a1014] via-transparent to-transparent opacity-90" />
-
-                  {/* Floating Stats Badge */}
-                  {project.stats && (
-                    <div className="absolute top-20 right-4 bg-black/40 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-lg">
-                      <span className="text-teal-400 text-xs font-bold">{project.stats}</span>
+                  {/* View More Button Overlay */}
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                    <div className="border border-white px-6 py-2 text-white text-sm font-medium bg-white/10 backdrop-blur-sm">
+                      View More
                     </div>
-                  )}
+                  </div>
                 </div>
 
-                {/* Content Area */}
-                <div className="p-6 md:p-8 relative -mt-12">
-                  <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-teal-400 transition-colors drop-shadow-md">
+                <div className="mt-4 text-center">
+                  <h3 className="text-white text-lg font-bold group-hover:text-white transition-colors font-raleway">
                     {project.title}
                   </h3>
-
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="text-xs font-medium text-teal-400/80 uppercase tracking-wider">{project.subtitle}</span>
-                  </div>
-
-                  <p className="text-gray-400 mb-6 text-sm leading-relaxed line-clamp-2 shadow-black drop-shadow-sm">
-                    {project.description}
-                  </p>
-
-                  {/* Tech Stack Tags - Moved below description */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-2.5 py-1 text-[11px] font-medium tracking-wide uppercase text-teal-300/90 bg-teal-950/50 border border-teal-500/20 rounded-md shadow-sm"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex items-center justify-between pt-4 border-t border-white/5">
-                    <a
-                      href={project.link}
-                      className="w-full inline-flex items-center justify-end gap-2 text-sm font-medium text-white group-hover:text-teal-400 transition-colors"
-                    >
-                      View Case Study
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                    </a>
-                  </div>
                 </div>
               </div>
             </motion.div>
@@ -219,10 +178,10 @@ export function ProjectsSection() {
           viewport={{ once: true }}
           className="mt-20 text-center"
         >
-          <p className="text-gray-400 mb-6">Ready to build something similar?</p>
+          <p className="text-gray-400 mb-6 font-raleway">Ready to build something similar?</p>
           <Button
             size="lg"
-            className="bg-teal-500 hover:bg-teal-400 text-black font-semibold rounded-full px-8 shadow-[0_0_20px_rgba(20,184,166,0.3)] hover:shadow-[0_0_30px_rgba(20,184,166,0.5)] transition-all"
+            className="bg-primary hover:bg-teal-400 text-white font-semibold font-raleway rounded-full px-8 shadow-[0_0_25px_rgba(45,175,167,0.4)] hover:shadow-[0_0_40px_rgba(45,175,167,0.6)] transition-all duration-300 hover:-translate-y-1"
           >
             Start Your Project
           </Button>

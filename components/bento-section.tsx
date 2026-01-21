@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { motion, AnimatePresence, useScroll, useTransform, MotionValue } from "framer-motion"
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, MotionValue, PanInfo } from "framer-motion"
 import Lottie from "lottie-react"
 import Lenis from 'lenis'
 import webDevAnimation from "../assets/Web Development.json"
@@ -27,6 +27,7 @@ import {
   Box
 } from "lucide-react"
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel"
+import { Card, CardContent } from "@/components/ui/card"
 
 
 
@@ -204,9 +205,115 @@ const services: Service[] = [
   }
 ]
 
+// Custom Hook for Card Dragging
+
+function SwipeCard({ service, index, activeIndex, onSwipe }: {
+  service: Service,
+  index: number,
+  activeIndex: number,
+  onSwipe: () => void
+}) {
+  const x = useMotionValue(0)
+  const rotate = useTransform(x, [-200, 200], [-25, 25])
+  const opacity = useTransform(x, [-200, -150, 0, 150, 200], [0, 1, 1, 1, 0])
+
+  // Only the top card is draggable
+  const isTop = index === activeIndex
+  const isSecond = index === activeIndex + 1
+  const isThird = index === activeIndex + 2
+
+  const handleDragEnd = (_: any, info: PanInfo) => {
+    if (Math.abs(info.offset.x) > 100) {
+      onSwipe()
+    }
+  }
+
+  // Animation variants for the stack
+  const variants = {
+    top: { x: 0, scale: 1, y: 0, zIndex: 10, opacity: 1 },
+    second: { x: 0, scale: 0.94, y: 15, zIndex: 9, opacity: 0.8 },
+    third: { x: 0, scale: 0.88, y: 30, zIndex: 8, opacity: 0.4 },
+    hidden: { x: 0, scale: 0.8, y: 45, zIndex: 5, opacity: 0 }
+  }
+
+  const status = isTop ? "top" : isSecond ? "second" : isThird ? "third" : "hidden"
+
+  return (
+    <motion.div
+      style={{ x, rotate, opacity, position: 'absolute', width: '100%' }}
+      drag={isTop ? "x" : false}
+      dragConstraints={{ left: 0, right: 0 }}
+      onDragEnd={handleDragEnd}
+      animate={status}
+      variants={variants}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      className="cursor-grab active:cursor-grabbing"
+    >
+      <div className="p-1 h-[680px]">
+        <Card className="h-full border border-white/20 rounded-[32px] overflow-hidden bg-[#0A1515] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.4)] flex flex-col">
+          <CardContent className="p-0 flex flex-col h-full overflow-hidden">
+            {/* Header */}
+            <div className="shrink-0 p-5 md:p-6 flex items-center justify-between border-b border-white/10 bg-gradient-to-r from-white/5 to-transparent">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-xl bg-primary text-white shadow-lg">
+                  <service.icon className="w-5 h-5 md:w-6 md:h-6" />
+                </div>
+                <h3 className="text-lg md:text-xl font-bold font-raleway uppercase tracking-tight text-white">
+                  {service.title}
+                </h3>
+              </div>
+              <span className="text-[10px] md:text-[12px] font-mono text-primary font-bold bg-primary/20 px-3 py-1 rounded-full ring-1 ring-primary/30">
+                0{index + 1}
+              </span>
+            </div>
+
+            {/* Content Body */}
+            <div className="p-5 md:p-6 flex flex-col flex-grow overflow-y-auto custom-scrollbar">
+              <p className="text-white/70 text-xs md:text-sm font-medium leading-relaxed mb-4 font-raleway">
+                {service.description}
+              </p>
+
+              <div className="shrink-0 relative w-full aspect-[16/10] md:aspect-[4/3] rounded-2xl overflow-hidden bg-white/5 mb-5 flex items-center justify-center border border-white/10">
+                {service.animationData ? (
+                  <Lottie
+                    animationData={service.animationData}
+                    loop={true}
+                    className="w-full h-full p-2"
+                  />
+                ) : (
+                  <img src={service.image} alt={service.title} className="w-full h-full object-contain p-4" />
+                )}
+              </div>
+
+              {/* Sub-items - Dark Theme Glassmorphism */}
+              <div className="grid grid-cols-1 gap-2 mt-auto">
+                {service.subItems.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-center justify-between p-3 rounded-xl bg-white/10 border border-white/10 backdrop-blur-md shadow-sm"
+                  >
+                    <div className="flex-1">
+                      <span className="text-[11px] md:text-[13px] font-bold font-raleway uppercase text-white block mb-0.5">{item.title}</span>
+                      <p className="text-[9px] md:text-[10px] text-white/50 tracking-wider font-bold uppercase">{item.description}</p>
+                    </div>
+                    <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary border border-primary/20">
+                      <span className="text-xs">→</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </motion.div>
+  )
+}
+
 export function BentoSection() {
   const [activeTab, setActiveTab] = useState(services[0].id)
   const [isDesktop, setIsDesktop] = useState(true)
+  const [mobileActiveIndex, setMobileActiveIndex] = useState(0)
 
   useEffect(() => {
     const checkDesktop = () => {
@@ -234,11 +341,11 @@ export function BentoSection() {
 
   return (
     <section
-      className="relative w-full font-tech overflow-hidden"
+      className="relative w-full font-tech overflow-visible"
       style={{ background: 'linear-gradient(273deg,rgba(118, 245, 224, 1) 3%, rgba(194, 237, 237, 1) 43%, rgba(255, 255, 255, 1) 58%)' }}
     >
       {/* Premium Shining Elements */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Subtle Internal Glows */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.1),transparent_40%)]" />
 
@@ -256,30 +363,30 @@ export function BentoSection() {
       </div>
 
       <div className="relative z-10 w-full max-w-[1600px] mx-auto">
-        {/* Header - Fixed */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-20 gap-8 px-4 md:px-12 lg:px-24 pt-16">
-          <div className="max-w-2xl">
+        {/* Header - Refined Responsiveness */}
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-12 md:mb-20 gap-10 lg:gap-20 px-4 md:px-12 lg:px-24 pt-16">
+          <div className="w-full lg:max-w-3xl">
             <motion.h4
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              className="text-primary font-mono text-[11px] tracking-[0.5em] uppercase mb-6 font-bold"
+              className="text-primary font-mono text-[10px] md:text-[11px] tracking-[0.5em] uppercase mb-4 md:mb-6 font-bold"
             >
               OUR SERVICES
             </motion.h4>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="text-3xl md:text-5xl lg:text-5xl font-lastica text-[#172222] leading-[0.9] uppercase tracking-tighter"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-lastica text-[#172222] leading-[1.1] md:leading-[1] uppercase tracking-tighter"
             >
-              What we offer <span className="text-primary">for you</span>
+              What we offer <br className="hidden sm:block" /> <span className="text-primary">for you</span>
             </motion.h2>
           </div>
-          <div className="max-w-md lg:max-w-xl pb-0">
+          <div className="w-full lg:max-w-xl pb-2">
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
-              className="text-[#172222]/60 font-inter lg:text-xl text-sm md:text-lg leading-relaxed font-medium"
+              className="text-[#172222]/70 font-inter text-sm md:text-lg lg:text-xl leading-relaxed font-medium font-raleway"
             >
               Discover growth with our customized IT solutions. As a trusted web design agency, global organizations rely on us for the best software, services, and brand success.
             </motion.p>
@@ -344,7 +451,7 @@ export function BentoSection() {
                         <div className="p-4 rounded-2xl bg-primary/80 text-white backdrop-blur-sm border border-primary/40 group-hover:bg-white group-hover:text-primary transition-all duration-300 shadow-xl">
                           <service.icon className="w-7 h-7" />
                         </div>
-                        <span className="[writing-mode:vertical-lr] rotate-180 uppercase tracking-[0.4em] font-black text-primary drop-shadow-md transition-colors text-xs whitespace-nowrap group-hover:text-white">
+                        <span className="[writing-mode:vertical-lr] rotate-180 uppercase tracking-[0.4em] font-black text-primary drop-shadow-md transition-colors text-xs whitespace-nowrap group-hover:text-white font-raleway">
                           {service.title}
                         </span>
                       </div>
@@ -366,7 +473,7 @@ export function BentoSection() {
                             <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-lastica text-white uppercase tracking-tighter leading-[0.9] mb-4 md:mb-6 break-words">
                               {service.title}
                             </h3>
-                            <p className="text-white/70 text-base md:text-lg lg:text-xl max-w-2xl leading-relaxed font-medium mx-auto xl:mx-0">
+                            <p className="text-white/70 text-base md:text-lg lg:text-xl max-w-2xl leading-relaxed font-medium mx-auto xl:mx-0 font-raleway">
                               {service.description}
                             </p>
                           </div>
@@ -441,102 +548,38 @@ export function BentoSection() {
             ))}
           </div>
         ) : (
-          /* Mobile & Tablet: Sticky Scroll Reveal Stack */
-          <div className="relative w-full px-4 pb-20 flex flex-col gap-10">
-            {services.map((service, i) => (
-              <MobileRevealCard
-                key={service.id}
-                service={service}
-                index={i}
-                total={services.length}
-              />
-            ))}
+          /* Mobile & Tablet: Stacking Swipe Cards */
+          <div className="relative w-full px-4 h-[750px] pb-40 flex justify-center items-start">
+            <div className="relative w-full max-w-[600px] h-[680px] flex justify-center">
+              {services.map((service, index) => (
+                <SwipeCard
+                  key={service.id}
+                  service={service}
+                  index={index}
+                  activeIndex={mobileActiveIndex}
+                  onSwipe={() => setMobileActiveIndex((prev) => (prev + 1) % services.length)}
+                />
+              ))}
+            </div>
+
+            {/* Visual Instruction Indicators - Decoupled from card viewport */}
+            <div className="absolute bottom-[-30px] left-0 right-0 flex flex-col items-center gap-4 z-20">
+              <div className="flex gap-3">
+                {services.map((_, i) => (
+                  <div
+                    key={i}
+                    className={`h-2.5 rounded-full transition-all duration-500 ${i === mobileActiveIndex ? "w-10 bg-primary shadow-[0_2_10_rgba(45,175,167,0.4)]" : "w-2.5 bg-primary/20"
+                      }`}
+                  />
+                ))}
+              </div>
+              <p className="text-[12px] font-bold text-primary uppercase tracking-[0.3em] animate-pulse">
+                Swipe cards to explore
+              </p>
+            </div>
           </div>
         )}
       </div>
     </section>
-  )
-}
-
-function MobileRevealCard({ service, index, total }: { service: Service, index: number, total: number }) {
-  const container = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: container,
-    offset: ['start start', 'end end']
-  })
-
-  // Dynamic values for stacking effect
-  const targetScale = 1 - ((total - index) * 0.05);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, targetScale])
-  const opacity = useTransform(scrollYProgress, [0.8, 1], [1, 0.6])
-
-  // Dynamic top offset for stacking visibility
-  const topOffset = 100 + (index * 20);
-
-  return (
-    <div
-      ref={container}
-      className="h-[80vh] flex items-start justify-center sticky top-0"
-      style={{ top: topOffset }}
-    >
-      <motion.div
-        style={{
-          scale,
-          opacity,
-          transformOrigin: "top center"
-        }}
-        className="flex flex-col relative w-full rounded-[30px] border-2 border-primary/20 shadow-2xl overflow-hidden bg-white"
-      >
-        {/* Card Header */}
-        <div className="p-6 flex items-center justify-between border-b border-primary/10 bg-gradient-to-r from-primary/5 to-transparent">
-          <div className="flex items-center gap-4">
-            <div className="p-3 rounded-xl bg-primary text-white">
-              <service.icon className="w-6 h-6" />
-            </div>
-            <h3 className="text-xl font-bold font-raleway uppercase tracking-wide text-foreground">{service.title}</h3>
-          </div>
-          <span className="text-sm font-mono text-primary font-bold">0{index + 1}</span>
-        </div>
-
-        {/* Card Content */}
-        <div className="flex-1 p-6 flex flex-col bg-white">
-          <p className="text-muted-foreground text-sm font-medium leading-relaxed mb-6">
-            {service.description}
-          </p>
-
-          {/* Animation/Image */}
-          <div className="relative w-full h-48 md:h-64 rounded-2xl overflow-hidden bg-gradient-to-br from-primary/5 to-transparent mb-6 flex items-center justify-center border border-primary/10">
-            {service.animationData ? (
-              <Lottie
-                animationData={service.animationData}
-                loop={true}
-                className="w-full h-full p-6"
-                rendererSettings={{
-                  preserveAspectRatio: 'xMidYMid meet'
-                }}
-              />
-            ) : (
-              <img src={service.image} alt={service.title} className="w-full h-full object-contain p-8" />
-            )}
-          </div>
-
-          {/* Sub Items */}
-          <div className="grid grid-cols-1 gap-3">
-            {service.subItems.map((item, idx) => (
-              <div
-                key={idx}
-                className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-primary/5 to-transparent hover:from-primary/10 transition-all border border-primary/10 cursor-pointer group"
-              >
-                <div>
-                  <span className="text-sm font-bold font-raleway uppercase text-foreground block mb-1">{item.title}</span>
-                  <p className="text-xs text-muted-foreground leading-tight">{item.description}</p>
-                </div>
-                <span className="text-xs text-primary font-bold opacity-0 group-hover:opacity-100 transition-opacity">→</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </motion.div>
-    </div>
   )
 }
