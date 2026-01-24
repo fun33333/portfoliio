@@ -341,7 +341,7 @@ export function BentoSection() {
 
   return (
     <section
-      className="relative w-full font-tech overflow-visible"
+      className="relative w-full font-tech overflow-visible p-10"
       style={{ background: 'linear-gradient(273deg,rgba(118, 245, 224, 1) 3%, rgba(194, 237, 237, 1) 43%, rgba(255, 255, 255, 1) 58%)' }}
     >
       {/* Premium Shining Elements */}
@@ -439,7 +439,7 @@ export function BentoSection() {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.3 }}
-                      className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                      className="absolute inset-0 flex flex-col items-center justify-start pt-32 pointer-events-none"
                     >
                       {/* Glass overlay for collapsed state */}
                       <div className="absolute inset-0 pointer-events-none">
@@ -448,7 +448,7 @@ export function BentoSection() {
                       </div>
 
                       <div className="flex flex-col items-center gap-10 relative z-10">
-                        <div className="p-4 rounded-2xl bg-primary/80 text-white backdrop-blur-sm border border-primary/40 group-hover:bg-white group-hover:text-primary transition-all duration-300 shadow-xl">
+                        <div className="p-4 rounded-2xl bg-primary/80 text-white backdrop-blur-sm border border-primary/40 group-hover:bg-white group-hover:text-primary transition-all duration-300 shadow-xl shrink-0">
                           <service.icon className="w-7 h-7" />
                         </div>
                         <span className="[writing-mode:vertical-lr] rotate-180 uppercase tracking-[0.4em] font-black text-primary drop-shadow-md transition-colors text-xs whitespace-nowrap group-hover:text-white font-raleway">
@@ -464,13 +464,13 @@ export function BentoSection() {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-                      className="h-full w-full p-6 md:p-10 lg:p-12 xl:p-16 flex flex-col bg-[#0A1515] overflow-hidden" // Removed justify-between to allow natural flow
+                      className="h-full w-full p-5 md:p-8 lg:p-10 flex flex-col bg-[#0A1515] overflow-hidden" // Reduced padding from p-6 md:p-10 lg:p-12 xl:p-16
                     >
                       <div>
                         {/* Title, Description & Image Container */}
-                        <div className="mb-8 md:mb-10 flex flex-col xl:flex-row items-center justify-between gap-8 md:gap-12 text-center xl:text-left">
+                        <div className="mb-4 md:mb-5 flex flex-col xl:flex-row items-center justify-between gap-4 md:gap-5 text-center xl:text-left">
                           <div className="flex-1 w-full relative z-10">
-                            <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-lastica text-white uppercase tracking-tighter leading-[0.9] mb-4 md:mb-6 break-words">
+                            <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-lastica text-white uppercase tracking-tighter leading-[0.9] mb-3 md:mb-4 break-words">
                               {service.title}
                             </h3>
                             <p className="text-white/70 text-base md:text-lg lg:text-xl max-w-2xl leading-relaxed font-medium mx-auto xl:mx-0 font-raleway">
@@ -478,7 +478,7 @@ export function BentoSection() {
                             </p>
                           </div>
 
-                          <div className="relative shrink-0 w-full md:w-auto flex justify-center xl:justify-end mt-4 xl:mt-0 px-4 md:px-0">
+                          <div className="relative shrink-0 w-full md:w-auto flex justify-center xl:justify-end mt-2 xl:mt-0 px-4 md:px-0">
                             <div className="w-40 h-40 md:w-52 md:h-52 lg:w-56 lg:h-56 xl:w-72 xl:h-72 bg-[#0A1515] flex items-center justify-center overflow-hidden">
                               {service.animationData ? (
                                 <Lottie
@@ -509,7 +509,7 @@ export function BentoSection() {
                               transition: { duration: 0.2 }
                             }}
                             transition={{ delay: 0.3 + (idx * 0.1) }}
-                            className="group/card p-5 md:p-6 xl:p-8 rounded-[24px] xl:rounded-[10px] border border-white/30 hover:border-white/50 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center relative overflow-hidden h-full justify-between"
+                            className="group/card p-4 md:p-5 xl:p-6 rounded-[20px] xl:rounded-[12px] border border-white/20 hover:border-white/40 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center relative overflow-hidden h-full justify-between"
                             style={{
                               background: 'rgba(255, 255, 255, 0.25)',
                               backdropFilter: 'blur(5px)',
