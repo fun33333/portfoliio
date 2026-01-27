@@ -61,7 +61,7 @@ export const HeroParallax = ({
         springConfig
     );
     const translateY = useSpring(
-        useTransform(scrollYProgress, [0, 0.2], [-700, 200]), // Reduced from 500 to 100 to bring cards closer to content
+        useTransform(scrollYProgress, [0, 0.2], [-700, 50]),
         springConfig
     );
     return (
@@ -79,7 +79,7 @@ export const HeroParallax = ({
                 }}
                 className=""
             >
-                <motion.div className="flex flex-row-reverse space-x-reverse space-x-20 mb-20">
+                <motion.div className="flex flex-row-reverse space-x-reverse space-x-20 -mb-10">
                     {firstRow.map((product) => (
                         <ProductCard
                             product={product}
@@ -88,7 +88,7 @@ export const HeroParallax = ({
                         />
                     ))}
                 </motion.div>
-                <motion.div className="flex flex-row  mb-20 space-x-20 ">
+                <motion.div className="flex flex-row  -mb-10 space-x-20 ">
                     {secondRow.map((product) => (
                         <ProductCard
                             product={product}

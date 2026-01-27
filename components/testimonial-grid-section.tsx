@@ -1,7 +1,9 @@
 "use client"
 
 import Image from "next/image"
-import { motion } from "framer-motion"
+import { motion, useScroll, useTransform } from "framer-motion"
+import { ArrowRight, Quote } from "lucide-react"
+import { useEffect, useState, useRef } from "react"
 
 const testimonials = [
   {
@@ -10,7 +12,7 @@ const testimonials = [
     name: "Annette Black",
     company: "Sony",
     avatar: "/images/avatars/annette-black.png",
-    type: "large-teal",
+    type: "large",
   },
   {
     quote:
@@ -18,7 +20,7 @@ const testimonials = [
     name: "Dianne Russell",
     company: "McDonald's",
     avatar: "/images/avatars/dianne-russell.png",
-    type: "small-dark",
+    type: "small",
   },
   {
     quote:
@@ -26,7 +28,7 @@ const testimonials = [
     name: "Cameron Williamson",
     company: "IBM",
     avatar: "/images/avatars/cameron-williamson.png",
-    type: "small-dark",
+    type: "small",
   },
   {
     quote:
@@ -34,7 +36,7 @@ const testimonials = [
     name: "Robert Fox",
     company: "MasterCard",
     avatar: "/images/avatars/robert-fox.png",
-    type: "small-dark",
+    type: "small",
   },
   {
     quote:
@@ -42,7 +44,7 @@ const testimonials = [
     name: "Darlene Robertson",
     company: "Ferrari",
     avatar: "/images/avatars/darlene-robertson.png",
-    type: "small-dark",
+    type: "small",
   },
   {
     quote:
@@ -50,7 +52,7 @@ const testimonials = [
     name: "Cody Fisher",
     company: "Apple",
     avatar: "/images/avatars/cody-fisher.png",
-    type: "small-dark",
+    type: "small",
   },
   {
     quote:
@@ -58,148 +60,222 @@ const testimonials = [
     name: "Albert Flores",
     company: "Louis Vuitton",
     avatar: "/images/avatars/albert-flores.png",
-    type: "large-light",
+    type: "large",
+  },
+  {
+    quote:
+      "The automated documentation feature is a lifesaver. It keeps our docs up to date with the code, so we never have to worry about stale information.",
+    name: "Jenny Wilson",
+    company: "Google",
+    avatar: "/images/avatars/jenny-wilson.png",
+    type: "small",
+  },
+  {
+    quote:
+      "I was skeptical at first, but the AI agents are incredibly smart. They handle the boilerplate so I can focus on the logic.",
+    name: "Kristin Watson",
+    company: "Facebook",
+    avatar: "/images/avatars/kristin-watson.png",
+    type: "small",
   },
 ]
 
-// TypeScript types add kar diye gaye hain taake linting error door ho jaayein.
-// TypeScript types have been added to fix the linting errors.
-
 interface TestimonialCardProps {
-  quote: string;
-  name: string;
-  company: string;
-  avatar: string;
-  type: string;
-  index: number;
+  quote: string
+  name: string
+  company: string
+  avatar: string
+  type: string
+  index: number
 }
 
-const TestimonialCard = ({
-  quote,
-  name,
-  company,
-  avatar,
-  type,
-  index,
-}: TestimonialCardProps) => {
-  const isLargeCard = type.startsWith("large");
-  const avatarSize = isLargeCard ? 64 : 48;
-  const avatarBorderRadius = isLargeCard ? "rounded-2xl" : "rounded-xl";
-  const padding = isLargeCard ? "p-8" : "p-6";
-
-  let cardClasses = `flex flex-col justify-between items-start overflow-hidden rounded-2xl shadow-[0px_2px_4px_rgba(0,0,0,0.08)] relative ${padding} card-hover`
-  let quoteClasses = ""
-  let nameClasses = ""
-  let companyClasses = ""
-  let backgroundElements = null
-  let cardHeight = ""
-  const cardWidth = "w-full"
-
-  // Responsive heights for cards - Dark theme optimized
-  if (type === "large-teal") {
-    cardClasses += " bg-primary"
-    quoteClasses += " text-primary-foreground text-xl md:text-2xl lg:text-3xl font-tech font-medium leading-7 md:leading-9"
-    nameClasses += " text-primary-foreground text-base md:text-lg font-tech font-normal leading-6"
-    companyClasses += " text-primary-foreground/60 text-sm md:text-base font-tech font-normal leading-6"
-    cardHeight = "h-[340px] sm:h-[400px] md:h-[502px]"
-    backgroundElements = (
-      <div
-        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat opacity-20"
-        style={{ backgroundImage: "url('/images/large-card-background.svg')", zIndex: 0 }}
-      />
-    )
-  } else if (type === "large-light") {
-    cardClasses += " bg-[#1a2f2f] border-primary/20"
-    quoteClasses += " text-dark-foreground text-xl md:text-2xl lg:text-3xl font-tech font-medium leading-7 md:leading-9"
-    nameClasses += " text-dark-foreground text-base md:text-lg font-tech font-normal leading-6"
-    companyClasses += " text-dark-muted text-sm md:text-base font-tech font-normal leading-6"
-    cardHeight = "h-[340px] sm:h-[400px] md:h-[502px]"
-    backgroundElements = (
-      <div
-        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat opacity-10"
-        style={{ backgroundImage: "url('/images/large-card-background.svg')", zIndex: 0 }}
-      />
-    )
-  } else {
-    cardClasses += " bg-[#1a2f2f] border-primary/20"
-    quoteClasses += " text-dark-muted text-sm md:text-base font-tech font-normal leading-6 md:leading-7"
-    nameClasses += " text-dark-foreground text-sm md:text-base font-tech font-normal leading-[22px]"
-    companyClasses += " text-dark-muted/70 text-xs md:text-sm font-tech font-normal leading-[22px]"
-    cardHeight = "h-[180px] sm:h-[220px] md:h-[280px]"
-  }
+const TestimonialCard = ({ quote, name, company, avatar, type, index }: TestimonialCardProps) => {
+  // Kinetic layout: cards are usually smaller/simpler, but we keep our premium design.
+  // We remove the fixed height constraints to let them flow in the column naturally
 
   return (
-    <motion.div
-      className={`${cardClasses} ${cardWidth} ${cardHeight} border border-white/10`}
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.08 }}
-      whileHover={{
-        y: -10,
-        scale: 1.02,
-        boxShadow: "0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(59, 130, 246, 0.2)",
-      }}
+    <div
+      className={`group relative flex flex-col justify-between overflow-hidden rounded-3xl p-6 md:p-8 transition-all duration-500 hover:shadow-[0_0_40px_rgba(59,130,246,0.15)] w-full mb-6`}
     >
-      {backgroundElements}
-      <div className={`relative z-10 font-normal break-words ${quoteClasses}`}>{quote}</div>
-      <div className="relative z-10 flex justify-start items-center gap-4 mt-4">
-        <Image
-          src={avatar || "/placeholder.svg"}
-          alt={`${name} avatar`}
-          width={avatarSize}
-          height={avatarSize}
-          className={`w-${avatarSize / 4} h-${avatarSize / 4} ${avatarBorderRadius} border-2 border-primary/20`}
-          style={{ border: "1px solid rgba(255, 255, 255, 0.08)" }}
-        />
-        <div className="flex flex-col justify-start items-start gap-1">
-          <div className={nameClasses}>{name}</div>
-          <div className={companyClasses}>{company}</div>
+      {/* Glass Background Layer - Updated to match Plan */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-md transition-all duration-500" />
+
+      {/* Border Gradient - Updated hover to primary/50 */}
+      <div className="absolute inset-0 rounded-3xl border border-white/10 transition-colors duration-500 group-hover:border-primary/50" />
+
+      {/* Decorative Quote Mark */}
+      <div className="absolute -right-4 -top-4 opacity-5 transition-opacity duration-500 group-hover:opacity-10">
+        <Quote size={80} />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 flex flex-col gap-4 md:gap-6">
+        <div className="flex items-center gap-1">
+          {[...Array(5)].map((_, i) => (
+            <div key={i} className="h-1 w-1 rounded-full bg-primary/40" />
+          ))}
+        </div>
+
+        <p className={`font-tech font-light leading-relaxed tracking-wide text-white/90 text-sm md:text-base`}>
+          "{quote}"
+        </p>
+      </div>
+
+      <div className="relative z-10 mt-6 flex items-center gap-4 border-t border-white/10 pt-4 md:pt-6">
+        <div className="relative h-10 w-10 md:h-12 md:w-12 overflow-hidden rounded-full border border-white/20 shadow-inner group-hover:border-primary/50 group-hover:shadow-[0_0_10px_rgba(59,130,246,0.3)] transition-all duration-500">
+          <Image
+            src={avatar || "/placeholder.svg"}
+            alt={`${name} avatar`}
+            fill
+            className="object-cover"
+          />
+        </div>
+        <div>
+          <h4 className="font-tech text-sm md:text-base font-semibold text-white tracking-wide">{name}</h4>
+          <p className="font-tech text-xs md:text-sm text-white/50">{company}</p>
         </div>
       </div>
-    </motion.div>
+    </div>
+  )
+}
+
+// Kinetic Column Component
+const KineticColumn = ({
+  items,
+  speed = 50,
+  direction = "up",
+  className = ""
+}: {
+  items: typeof testimonials,
+  speed?: number,
+  direction?: "up" | "down",
+  className?: string
+}) => {
+  // Duplicate items to ensure smooth loop
+  const columnItems = [...items, ...items, ...items]
+
+  return (
+    <div className={`relative flex-1 overflow-hidden h-[800px] ${className}`}>
+      <motion.div
+        initial={{ y: direction === "up" ? "0%" : "-50%" }}
+        animate={{ y: direction === "up" ? "-50%" : "0%" }}
+        transition={{
+          duration: speed,
+          repeat: Infinity,
+          ease: "linear"
+        }}
+        className="flex flex-col"
+      >
+        {columnItems.map((item, idx) => (
+          <TestimonialCard
+            key={`${item.name}-${idx}`}
+            {...item}
+            index={idx}
+          />
+        ))}
+      </motion.div>
+
+      {/* Gradient Masks for smooth fade in/out at top/bottom */}
+      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#0B0B0F] to-transparent z-20 pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0B0B0F] to-transparent z-20 pointer-events-none" />
+    </div>
   )
 }
 
 export function TestimonialGridSection() {
+  // Distribute testimonials into 3 columns
+  const col1 = testimonials.slice(0, 3)
+  const col2 = testimonials.slice(3, 6)
+  const col3 = testimonials.slice(6, 9)
+
   return (
-    <section className="w-full py-16 md:py-20 lg:py-24 px-4 md:px-6 lg:px-8 overflow-hidden flex flex-col justify-start">
-      <motion.div
-        className="self-stretch py-6 md:py-8 flex flex-col justify-center items-center gap-6 md:gap-8 text-center"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-      >
-            <motion.h2
-          className="text-dark-foreground text-3xl md:text-4xl lg:text-5xl font-tech font-semibold leading-tight mb-4"
-          whileInView={{ scale: [0.9, 1] }}
-          transition={{ duration: 0.6 }}
+    <section className="relative w-full overflow-hidden py-24 md:py-32 bg-[#0B0B0F] text-white">
+      {/* Section Background Theme Gradient - Matches "Success Stories" theme */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-purple-500/10 pointer-events-none" />
+
+      {/* Background Ambient Glows - Adjusted for dark theme */}
+      <div className="absolute left-[10%] top-[20%] h-[300px] w-[300px] rounded-full bg-primary/20 blur-[100px]" />
+      <div className="absolute right-[10%] bottom-[20%] h-[300px] w-[300px] rounded-full bg-purple-500/20 blur-[100px]" />
+
+      <div className="container relative mx-auto px-4 md:px-6">
+        {/* Header Section */}
+        <div className="mb-20 flex flex-col items-center text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="mb-4 inline-block rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm"
+          >
+            <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-sm font-semibold uppercase tracking-wider text-transparent">
+              Success Stories
+            </span>
+          </motion.div>
+
+          <motion.h2
+            className="max-w-3xl text-4xl font-bold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            Trusted by World-Class <br />
+            <span className="text-white/40">Engineering Teams</span>
+          </motion.h2>
+
+          <motion.p
+            className="mt-6 max-w-2xl text-lg text-white/60"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            Join thousands of developers who are shipping faster and with fewer bugs.
+            See what the community is saying about Quadgentics.
+          </motion.p>
+        </div>
+
+        {/* Kinetic Columns Grid */}
+        <div
+          className="mx-auto flex gap-6 md:gap-8 max-w-[1400px] h-[600px] md:h-[800px] overflow-hidden"
+          style={{ maskImage: "linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)" }}
         >
-          Client Success Stories
-        </motion.h2>
-        <p className="self-stretch text-dark-muted text-base md:text-lg font-tech font-medium leading-relaxed max-w-3xl">
-          {"Hear how businesses transform their digital presence with our innovative solutions,"} <br />{" "}
-          {"delivering exceptional results and driving growth"}
-        </p>
-      </motion.div>
-      <div className="w-full pt-0.5 pb-4 md:pb-6 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-[1100px] mx-auto">
-        {/* Column 1 */}
-        <div className="flex flex-col justify-start items-start gap-4">
-          <TestimonialCard {...testimonials[0]} index={0} />
-          <TestimonialCard {...testimonials[1]} index={1} />
+          {/* Desktop: 3 columns. Tablet: 2 columns. Mobile: 1 column logic usually handled by hidden classes or media queries */}
+
+          <div className="hidden lg:block flex-1">
+            <KineticColumn items={col1} speed={45} direction="up" />
+          </div>
+          <div className="hidden md:block flex-1">
+            {/* Middle column usually moves opposite or same but slower/faster */}
+            <KineticColumn items={col2} speed={55} direction="down" />
+          </div>
+          <div className="block flex-1">
+            {/* On mobile we just show one column, or we merge all items. For now let's show col1+col2+col3 mixed or just col3 for diversity if 3 cols */}
+            <KineticColumn items={[...col1, ...col2, ...col3]} speed={50} direction="up" className="md:hidden" />
+            <div className="hidden md:block h-full">
+              <KineticColumn items={col3} speed={48} direction="up" />
+            </div>
+          </div>
         </div>
-        {/* Column 2 */}
-        <div className="flex flex-col justify-start items-start gap-4">
-          <TestimonialCard {...testimonials[2]} index={2} />
-          <TestimonialCard {...testimonials[3]} index={3} />
-          <TestimonialCard {...testimonials[4]} index={4} />
-        </div>
-        {/* Column 3 */}
-        <div className="flex flex-col justify-start items-start gap-4">
-          <TestimonialCard {...testimonials[5]} index={5} />
-          <TestimonialCard {...testimonials[6]} index={6} />
-        </div>
+
+        {/* Bottom CTA with Premium Button */}
+        <motion.div
+          className="mt-20 flex justify-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+        >
+          <button className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-white px-8 py-4 text-black transition-all hover:scale-105 hover:bg-white/90 hover:shadow-[0_0_40px_rgba(255,255,255,0.3)]">
+            <span className="relative z-10 text-base font-semibold tracking-wide">
+              Read More Success Stories
+            </span>
+            <ArrowRight className="relative z-10 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+
+            {/* Subtle Gradient Glow inside button on hover */}
+            <div className="absolute inset-0 -z-0 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+          </button>
+        </motion.div>
+
       </div>
     </section>
   )
