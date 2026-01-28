@@ -90,49 +90,50 @@ interface TestimonialCardProps {
 }
 
 const TestimonialCard = ({ quote, name, company, avatar, type, index }: TestimonialCardProps) => {
-  // Kinetic layout: cards are usually smaller/simpler, but we keep our premium design.
-  // We remove the fixed height constraints to let them flow in the column naturally
-
   return (
     <div
-      className={`group relative flex flex-col justify-between overflow-hidden rounded-3xl p-6 md:p-8 transition-all duration-500 hover:shadow-[0_0_40px_rgba(59,130,246,0.15)] w-full mb-6`}
+      className={`group relative flex flex-col justify-between overflow-hidden rounded-[32px] p-6 md:p-8 transition-all duration-700 hover:shadow-[0_20px_50px_-15px_rgba(45,175,167,0.3)] w-full mb-8`}
     >
-      {/* Glass Background Layer - Updated to match Plan */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-md transition-all duration-500" />
+      {/* Glass Background Layer */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl transition-all duration-500 group-hover:from-white/[0.12]" />
 
-      {/* Border Gradient - Updated hover to primary/50 */}
-      <div className="absolute inset-0 rounded-3xl border border-white/10 transition-colors duration-500 group-hover:border-primary/50" />
+      {/* Border Gradient */}
+      <div className="absolute inset-0 rounded-[32px] border border-white/10 transition-colors duration-500 group-hover:border-primary/40" />
 
       {/* Decorative Quote Mark */}
-      <div className="absolute -right-4 -top-4 opacity-5 transition-opacity duration-500 group-hover:opacity-10">
-        <Quote size={80} />
+      <div className="absolute -right-2 -top-2 opacity-[0.03] transition-all duration-700 group-hover:opacity-10 group-hover:scale-110 group-hover:-rotate-12 text-primary">
+        <Quote size={120} />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col gap-4 md:gap-6">
-        <div className="flex items-center gap-1">
+      <div className="relative z-10 flex flex-col gap-5">
+        <div className="flex items-center gap-1.5">
           {[...Array(5)].map((_, i) => (
-            <div key={i} className="h-1 w-1 rounded-full bg-primary/40" />
+            <motion.div
+              key={i}
+              initial={{ scale: 1 }}
+              whileHover={{ scale: 1.5 }}
+              className="h-1.5 w-1.5 rounded-full bg-primary/60"
+            />
           ))}
         </div>
 
-        <p className={`font-tech font-light leading-relaxed tracking-wide text-white/90 text-sm md:text-base`}>
+        <p className="font-raleway font-medium leading-relaxed tracking-wide text-white/90 text-sm md:text-[15px] italic">
           "{quote}"
         </p>
       </div>
 
-      <div className="relative z-10 mt-6 flex items-center gap-4 border-t border-white/10 pt-4 md:pt-6">
-        <div className="relative h-10 w-10 md:h-12 md:w-12 overflow-hidden rounded-full border border-white/20 shadow-inner group-hover:border-primary/50 group-hover:shadow-[0_0_10px_rgba(59,130,246,0.3)] transition-all duration-500">
-          <Image
+      <div className="relative z-10 mt-8 flex items-center gap-4 border-t border-white/10 pt-6">
+        <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-2xl border border-white/20 shadow-xl group-hover:border-primary/50 group-hover:shadow-[0_0_20px_rgba(45,175,167,0.4)] transition-all duration-500">
+          <img
             src={avatar || "/placeholder.svg"}
             alt={`${name} avatar`}
-            fill
-            className="object-cover"
+            className="h-full w-full object-cover"
           />
         </div>
-        <div>
-          <h4 className="font-tech text-sm md:text-base font-semibold text-white tracking-wide">{name}</h4>
-          <p className="font-tech text-xs md:text-sm text-white/50">{company}</p>
+        <div className="overflow-hidden">
+          <h4 className="font-raleway text-sm md:text-base font-bold text-white tracking-tight truncate">{name}</h4>
+          <p className="font-mono text-[10px] uppercase tracking-widest text-primary/70 mt-0.5">{company}</p>
         </div>
       </div>
     </div>
@@ -151,20 +152,20 @@ const KineticColumn = ({
   direction?: "up" | "down",
   className?: string
 }) => {
-  // Duplicate items to ensure smooth loop
+  // Triple items for infinite loop stability
   const columnItems = [...items, ...items, ...items]
 
   return (
-    <div className={`relative flex-1 overflow-hidden h-[800px] ${className}`}>
+    <div className={`relative flex-1 overflow-visible ${className}`}>
       <motion.div
-        initial={{ y: direction === "up" ? "0%" : "-50%" }}
-        animate={{ y: direction === "up" ? "-50%" : "0%" }}
+        initial={{ y: direction === "up" ? "0%" : "-66.66%" }}
+        animate={{ y: direction === "up" ? "-66.66%" : "0%" }}
         transition={{
           duration: speed,
           repeat: Infinity,
           ease: "linear"
         }}
-        className="flex flex-col"
+        className="flex flex-col px-2"
       >
         {columnItems.map((item, idx) => (
           <TestimonialCard
@@ -174,10 +175,6 @@ const KineticColumn = ({
           />
         ))}
       </motion.div>
-
-      {/* Gradient Masks for smooth fade in/out at top/bottom */}
-      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#0B0B0F] to-transparent z-20 pointer-events-none" />
-      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0B0B0F] to-transparent z-20 pointer-events-none" />
     </div>
   )
 }
@@ -189,94 +186,112 @@ export function TestimonialGridSection() {
   const col3 = testimonials.slice(6, 9)
 
   return (
-    <section className="relative w-full overflow-hidden py-24 md:py-32 bg-[#0B0B0F] text-white">
-      {/* Section Background Theme Gradient - Matches "Success Stories" theme */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-purple-500/10 pointer-events-none" />
+    <section className="relative w-full overflow-hidden py-24 md:py-32 bg-[#0B0B0F]">
+      {/* Premium Background Elements */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* Subtle Internal Glows */}
+        {/* <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(45,175,167,0.08),transparent_70%)]" /> */}
 
-      {/* Background Ambient Glows - Adjusted for dark theme */}
-      <div className="absolute left-[10%] top-[20%] h-[300px] w-[300px] rounded-full bg-primary/20 blur-[100px]" />
-      <div className="absolute right-[10%] bottom-[20%] h-[300px] w-[300px] rounded-full bg-purple-500/20 blur-[100px]" />
+        {/* Dynamic Shining Highlight */}
+        <motion.div
+          animate={{
+            x: ["-100%", "200%"],
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent skew-x-12 opacity-50"
+        />
 
-      <div className="container relative mx-auto px-4 md:px-6">
+        {/* Subtle Grid Pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: 'linear-gradient(to right, #2EADA7 1px, transparent 1px), linear-gradient(to bottom, #2EADA7 1px, transparent 1px)',
+            backgroundSize: '80px 80px'
+          }}
+        />
+      </div>
+
+      <div className="container relative z-10 mx-auto px-4 md:px-6">
         {/* Header Section */}
-        <div className="mb-20 flex flex-col items-center text-center">
+        <div className="mb-24 flex flex-col items-center text-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-4 inline-block rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm"
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 backdrop-blur-md"
           >
-            <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-sm font-semibold uppercase tracking-wider text-transparent">
+            <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+            <span className="text-[10px] md:text-[11px] font-mono font-bold uppercase tracking-[0.3em] text-primary">
               Success Stories
             </span>
           </motion.div>
 
           <motion.h2
-            className="max-w-3xl text-4xl font-bold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl"
-            initial={{ opacity: 0, y: 20 }}
+            className="max-w-4xl text-3xl font-bold leading-6 tracking-tight text-white md:text-4xl lg:text-5xl font-lastica uppercase"
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            Trusted by World-Class <br />
-            <span className="text-white/40">Engineering Teams</span>
+            Trusted by <span className="text-primary italic">Top-Tier</span> <br />
+            <span className="text-white/40 font-mono">Engineering Teams</span>
           </motion.h2>
 
           <motion.p
-            className="mt-6 max-w-2xl text-lg text-white/60"
+            className="mt-8 max-w-2xl text-base md:text-lg text-white/50 font-raleway font-medium leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
           >
             Join thousands of developers who are shipping faster and with fewer bugs.
-            See what the community is saying about Quadgentics.
+            Experience the next generation of AI-powered development.
           </motion.p>
         </div>
 
         {/* Kinetic Columns Grid */}
         <div
-          className="mx-auto flex gap-6 md:gap-8 max-w-[1400px] h-[600px] md:h-[800px] overflow-hidden"
-          style={{ maskImage: "linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)" }}
+          className="relative mx-auto flex gap-4 md:gap-8 max-w-[1400px] h-[700px] md:h-[900px] overflow-hidden"
         >
-          {/* Desktop: 3 columns. Tablet: 2 columns. Mobile: 1 column logic usually handled by hidden classes or media queries */}
+          {/* Gradient Masks */}
+          <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#0B0B0F] via-[#0B0B0F]/80 to-transparent z-20 pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0B0B0F] via-[#0B0B0F]/80 to-transparent z-20 pointer-events-none" />
 
+          {/* Columns */}
           <div className="hidden lg:block flex-1">
-            <KineticColumn items={col1} speed={45} direction="up" />
+            <KineticColumn items={col1} speed={60} direction="up" />
           </div>
           <div className="hidden md:block flex-1">
-            {/* Middle column usually moves opposite or same but slower/faster */}
-            <KineticColumn items={col2} speed={55} direction="down" />
+            <KineticColumn items={col2} speed={75} direction="down" />
           </div>
           <div className="block flex-1">
-            {/* On mobile we just show one column, or we merge all items. For now let's show col1+col2+col3 mixed or just col3 for diversity if 3 cols */}
-            <KineticColumn items={[...col1, ...col2, ...col3]} speed={50} direction="up" className="md:hidden" />
+            <KineticColumn items={[...col1, ...col2, ...col3]} speed={65} direction="up" className="md:hidden" />
             <div className="hidden md:block h-full">
-              <KineticColumn items={col3} speed={48} direction="up" />
+              <KineticColumn items={col3} speed={68} direction="up" />
             </div>
           </div>
         </div>
 
         {/* Bottom CTA with Premium Button */}
         <motion.div
-          className="mt-20 flex justify-center"
-          initial={{ opacity: 0, y: 20 }}
+          className="mt-24 flex justify-center"
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
         >
-          <button className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-white px-8 py-4 text-black transition-all hover:scale-105 hover:bg-white/90 hover:shadow-[0_0_40px_rgba(255,255,255,0.3)]">
-            <span className="relative z-10 text-base font-semibold tracking-wide">
-              Read More Success Stories
+          <button className="group relative isolation-auto inline-flex items-center gap-4 overflow-hidden rounded-full bg-white px-10 py-5 text-black transition-all hover:scale-105">
+            <span className="relative z-10 text-sm md:text-base font-bold uppercase tracking-wider">
+              Explore All Stories
             </span>
-            <ArrowRight className="relative z-10 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+            <ArrowRight className="relative z-10 h-5 w-5 transition-transform duration-500 group-hover:translate-x-2" />
 
-            {/* Subtle Gradient Glow inside button on hover */}
-            <div className="absolute inset-0 -z-0 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            {/* Animated Shine Effect */}
+            {/* <div className="absolute inset-0 -z-10 translate-x-[-100%] bg-gradient-to-r from-transparent via-primary/20 to-transparent transition-transform duration-1000 group-hover:translate-x-[100%]" /> */}
           </button>
         </motion.div>
-
       </div>
     </section>
   )
 }
+

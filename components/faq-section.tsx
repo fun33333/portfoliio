@@ -2,8 +2,8 @@
 
 import type React from "react"
 import { useState } from "react"
-import { ChevronDown } from "lucide-react"
-import { motion } from "framer-motion"
+import { ChevronDown, ArrowRight } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
 
 const faqData = [
   {
@@ -47,93 +47,154 @@ interface FAQItemProps {
 }
 
 const FAQItem = ({ question, answer, isOpen, onToggle, index }: FAQItemProps) => {
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault()
-    onToggle()
-  }
   return (
     <motion.div
-      className={`w-full glass-card shadow-[0px_2px_4px_rgba(0,0,0,0.16)] overflow-hidden rounded-xl outline outline-1 outline-border outline-offset-[-1px] transition-all duration-500 ease-out cursor-pointer group`}
-      onClick={handleClick}
-      initial={{ opacity: 0, y: 30 }}
+      className={`group w-full overflow-hidden rounded-2xl transition-all duration-500 cursor-pointer mb-4`}
+      onClick={onToggle}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.08 }}
-      whileHover={{
-        y: -5,
-        boxShadow: "0 15px 30px rgba(0, 0, 0, 0.2), 0 0 15px rgba(59, 130, 246, 0.1)",
-      }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      <div className="w-full px-6 py-4 pr-5 flex justify-between items-center gap-5 text-left transition-all duration-300 ease-out">
-        <div className="flex-1 text-foreground text-lg font-tech font-medium leading-6 break-words group-hover:text-primary transition-colors duration-300">
-          {question}
-        </div>
-        <div className="flex justify-center items-center">
-          <ChevronDown
-            className={`w-6 h-6 text-muted-foreground-dark transition-all duration-500 ease-out ${isOpen ? "rotate-180 scale-110 text-primary" : "rotate-0 scale-100"}`}
-          />
-        </div>
-      </div>
       <div
-        className={`overflow-hidden transition-all duration-500 ease-out ${isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}
-        style={{
-          transitionProperty: "max-height, opacity, padding",
-          transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-        }}
+        className={`relative p-8 transition-all duration-500 flex flex-col ${isOpen ? "bg-primary/5 border-primary/30 shadow-[0_20px_40px_-15px_rgba(45,175,167,0.1)]" : "bg-white border-[#172222]/5 hover:border-primary/30 hover:shadow-lg"
+          } border rounded-2xl backdrop-blur-md`}
       >
-        <div
-          className={`px-6 transition-all duration-500 ease-out ${isOpen ? "pb-4 pt-2 translate-y-0" : "pb-0 pt-0 -translate-y-2"}`}
-        >
-          <div className="text-foreground/80 text-base font-tech font-normal leading-6 break-words">{answer}</div>
+        <div className="flex justify-between items-center gap-6">
+          <span className={`text-base md:text-lg font-raleway font-bold transition-colors duration-300 ${isOpen ? "text-primary" : "text-[#172222]"
+            }`}>
+            {question}
+          </span>
+          <div className={`shrink-0 w-10 h-10 rounded-2xl flex items-center justify-center transition-all duration-500 ${isOpen ? "bg-primary text-white rotate-180 shadow-lg shadow-primary/20" : "bg-[#F8FFFE] text-[#172222]/40 border border-[#172222]/5"
+            }`}>
+            <ChevronDown size={20} />
+          </div>
         </div>
+
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0, marginTop: 0 }}
+              animate={{ height: "auto", opacity: 1, marginTop: 24 }}
+              exit={{ height: 0, opacity: 0, marginTop: 0 }}
+              transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+              className="overflow-hidden"
+            >
+              <div className="text-[#172222]/60 font-raleway font-medium text-sm md:text-base leading-relaxed pb-2 border-t border-primary/10 pt-4">
+                {answer}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Subtle glow effect on hover */}
+        <div className="absolute inset-0 -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_var(--mouse-x,50%)_var(--mouse-y,50%),rgba(45,175,167,0.05),transparent_50%)]" />
       </div>
     </motion.div>
   )
 }
 
 export function FAQSection() {
-  const [openItems, setOpenItems] = useState<Set<number>>(new Set())
+  const [openIndex, setOpenIndex] = useState<number | null>(0)
+
   const toggleItem = (index: number) => {
-    const newOpenItems = new Set(openItems)
-    if (newOpenItems.has(index)) {
-      newOpenItems.delete(index)
-    } else {
-      newOpenItems.add(index)
-    }
-    setOpenItems(newOpenItems)
+    setOpenIndex(openIndex === index ? null : index)
   }
+
   return (
-    <section className="w-full py-16 md:py-20 lg:py-24 px-4 md:px-6 lg:px-8 relative flex flex-col justify-center items-center">
-      <div className="w-[300px] h-[500px] absolute top-[150px] left-1/2 -translate-x-1/2 origin-top-left rotate-[-33.39deg] bg-primary/10 blur-[100px] z-0" />
-      <motion.div
-          className="text-center mb-12 md:mb-16 space-y-6 md:space-y-8"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+    <section className="relative w-full py-24 md:py-32 overflow-hidden bg-white">
+      {/* Premium Background Elements */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* Subtle Internal Glows */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(45,175,167,0.1),transparent_70%)]" />
+
+        {/* Dynamic Shining Highlight */}
+        <motion.div
+          animate={{
+            x: ["-100%", "200%"],
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent skew-x-12 opacity-30"
+        />
+
+        {/* Subtle Grid Pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: 'linear-gradient(to right, #2EADA7 1px, transparent 1px), linear-gradient(to bottom, #2EADA7 1px, transparent 1px)',
+            backgroundSize: '80px 80px'
+          }}
+        />
+      </div>
+
+      <div className="container relative z-10 mx-auto px-4 md:px-6">
+        {/* Standardized Header Section */}
+        <div className="flex flex-col items-center text-center mb-16 md:mb-24">
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 backdrop-blur-md"
+          >
+            <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+            <span className="text-[10px] md:text-[11px] font-mono font-bold uppercase tracking-[0.3em] text-primary">
+              FREQUENTLY ASKED
+            </span>
+          </motion.div>
+
+          <motion.h2
+            className="max-w-4xl text-3xl font-bold leading-[1.1] tracking-tighter text-[#172222] md:text-5xl lg:text-6xl font-lastica uppercase"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            HAVE <span className="text-primary italic">QUESTIONS?</span> <br />
+            <span className="text-[#172222]/30">WE HAVE ANSWERS</span>
+          </motion.h2>
+
+          <motion.p
+            className="mt-8 max-w-2xl text-base md:text-lg text-[#172222]/60 font-raleway font-medium leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+          >
+            Everything you need to know about our services and how we can help your business
+            grow in the digital landscape.
+          </motion.p>
+        </div>
+
+        <div className="max-w-4xl mx-auto">
+          {faqData.map((faq, index) => (
+            <FAQItem
+              key={index}
+              {...faq}
+              isOpen={openIndex === index}
+              onToggle={() => toggleItem(index)}
+              index={index}
+            />
+          ))}
+        </div>
+
+        {/* Support CTA */}
+        <motion.div
+          className="mt-20 text-center"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ delay: 0.4 }}
         >
-            <motion.h2
-          className="w-full max-w-[600px] mx-auto text-foreground text-3xl md:text-4xl lg:text-5xl font-tech font-semibold leading-tight mb-4"
-          whileInView={{ scale: [0.9, 1] }}
-          transition={{ duration: 0.6 }}
-        >
-          Frequently Asked Questions
-        </motion.h2>
-          <p className="text-base md:text-lg text-muted-foreground font-tech max-w-3xl mx-auto leading-relaxed">
-          Everything you need to know about Quadgentics and how it can transform your development workflow
+          <p className="text-[#172222]/50 font-raleway font-medium mb-6">
+            Still have questions? We're here to help.
           </p>
+          <button className="group relative inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-[0.2em] text-primary hover:text-primary-dark transition-colors">
+            Contact Support Team
+            <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+          </button>
         </motion.div>
-      <div className="w-full max-w-[800px] pt-0.5 pb-10 flex flex-col justify-start items-start gap-4 relative z-10">
-        {faqData.map((faq, index) => (
-          <FAQItem
-            key={index}
-            {...faq}
-            isOpen={openItems.has(index)}
-            onToggle={() => toggleItem(index)}
-            index={index}
-          />
-        ))}
       </div>
     </section>
   )
 }
+

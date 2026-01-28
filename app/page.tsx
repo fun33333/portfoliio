@@ -60,7 +60,7 @@ export default function LandingPage() {
           delay={0.2}
           variant="fadeUp"
         >
-          <div className="max-w-[1320px] mx-auto">
+          <div className=" mx-auto">
             <ProjectsSection />
           </div>
         </AnimatedSection>
@@ -71,7 +71,7 @@ export default function LandingPage() {
           delay={0.2}
           variant="fadeUp"
         >
-          <div className="max-w-[1320px] mx-auto">
+          <div className=" mx-auto">
             <TeamSection />
           </div>
         </AnimatedSection>
@@ -81,7 +81,7 @@ export default function LandingPage() {
           delay={0.2}
           variant="scale"
         >
-          <div className="max-w-[1320px] mx-auto">
+          <div className="mx-auto">
             <LargeTestimonial />
           </div>
         </AnimatedSection>
@@ -97,11 +97,11 @@ export default function LandingPage() {
 
         <AnimatedSection
           id="testimonials-section"
-          className="relative z-10 section-dark-primary section-transition"
+          className="relative z-10 section-light-pure section-transition"
           delay={0.2}
           variant="fadeUp"
         >
-          <div className="max-w-[1320px] mx-auto">
+          <div className=" mx-auto">
             <TestimonialGridSection />
           </div>
         </AnimatedSection>
@@ -112,7 +112,7 @@ export default function LandingPage() {
           delay={0.2}
           variant="slideRight"
         >
-          <div className="max-w-[1320px] mx-auto">
+          <div className=" mx-auto">
             <FAQSection />
           </div>
         </AnimatedSection>
@@ -122,18 +122,18 @@ export default function LandingPage() {
           delay={0.2}
           variant="scale"
         >
-          <div className="max-w-[1320px] mx-auto">
+          <div className=" mx-auto">
             <CTASection />
           </div>
         </AnimatedSection>
 
         <AnimatedSection
           id="contact-section"
-          className="relative z-10 section-dark-secondary section-transition"
+          className="relative z-10 bg-[#0A1515]"
           delay={0.2}
           variant="fadeIn"
         >
-          <div className="max-w-[1320px] mx-auto">
+          <div className=" mx-auto">
             <FooterSection />
           </div>
         </AnimatedSection>

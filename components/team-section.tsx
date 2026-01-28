@@ -48,35 +48,69 @@ const teamMembers = [
 
 export function TeamSection() {
   return (
-    <section className="w-full section-padding container-padding relative overflow-hidden">
-      {/* Background tech pattern */}
-      <div className="absolute inset-0 tech-grid opacity-15"></div>
+    <section className="relative w-full py-24 md:py-32 overflow-hidden bg-white">
+      {/* Premium Background Elements */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* Subtle Internal Glows */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(45,175,167,0.08),transparent_70%)]" />
 
-      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Dynamic Shining Highlight */}
         <motion.div
-          className="text-center mb-20 content-spacing"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <motion.h2
-            className="text-4xl md:text-5xl lg:text-6xl font-tech font-bold text-foreground mb-8"
-            whileInView={{ scale: [0.9, 1] }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="text-primary font-mono">&lt;</span>
-            Meet Our Team
-            <span className="text-primary font-mono">/&gt;</span>
-          </motion.h2>
-          <p className="text-lg md:text-xl text-muted-foreground font-tech max-w-4xl mx-auto leading-relaxed">
-            Four passionate friends who came together to create innovative digital solutions that make a difference.
-            <br />
-            <span className="text-primary font-mono text-base">Young • Talented • Creative • Dedicated</span>
-          </p>
-        </motion.div>
+          animate={{
+            x: ["-100%", "200%"],
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent skew-x-12 opacity-30"
+        />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid-gap">
+        {/* Subtle Grid Pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: 'linear-gradient(to right, #2EADA7 1px, transparent 1px), linear-gradient(to bottom, #2EADA7 1px, transparent 1px)',
+            backgroundSize: '80px 80px'
+          }}
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10 px-4 md:px-6">
+        <div className="flex flex-col items-center text-center mb-16 md:mb-24">
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 backdrop-blur-md"
+          >
+            <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+            <span className="text-[10px] md:text-[11px] font-mono font-bold uppercase tracking-[0.3em] text-primary">
+              OUR VISIONARIES
+            </span>
+          </motion.div>
+
+          <motion.h2
+            className="max-w-5xl text-4xl font-bold leading-[1.1] tracking-tighter text-[#172222] md:text-6xl lg:text-7xl font-lastica uppercase"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            MEET OUR <span className="text-primary italic">ARCHITECTS</span> <br />
+            <span className="text-[#172222]/30">DISRUPTING STATUS QUO</span>
+          </motion.h2>
+
+          <motion.p
+            className="mt-8 max-w-4xl text-lg md:text-xl text-[#172222]/60 font-raleway font-medium leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+          >
+            A collective of four disruptive minds dedicated to engineering the next generation of digital infrastructure.
+            Blending creativity with elite technical prowess to solve the unsolvable.
+          </motion.p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {teamMembers.map((member, index) => (
             <motion.div
               key={member.name}
@@ -86,153 +120,85 @@ export function TeamSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              {/* Main card */}
+              {/* Main Card */}
               <motion.div
-                className="glass-card p-8 rounded-2xl border border-white/10 text-center relative overflow-hidden card-hover"
-                whileHover={{
-                  y: -20,
-                  scale: 1.05,
-                  boxShadow: "0 40px 80px rgba(0, 0, 0, 0.3), 0 0 50px rgba(59, 130, 246, 0.2)",
-                }}
-                transition={{ duration: 0.3 }}
+                className="relative h-full p-8 rounded-[32px] overflow-hidden transition-all duration-700 hover:shadow-[0_30px_60px_-15px_rgba(45,175,167,0.3)] bg-white border border-[#172222]/5"
+                whileHover={{ y: -15 }}
               >
-                {/* Tech corners */}
-                <div className="absolute top-4 left-4 w-5 h-5 border-l-2 border-t-2 border-primary/40 group-hover:border-primary transition-colors duration-300"></div>
-                <div className="absolute top-4 right-4 w-5 h-5 border-r-2 border-t-2 border-primary/40 group-hover:border-primary transition-colors duration-300"></div>
-                <div className="absolute bottom-4 left-4 w-5 h-5 border-l-2 border-b-2 border-primary/40 group-hover:border-primary transition-colors duration-300"></div>
-                <div className="absolute bottom-4 right-4 w-5 h-5 border-r-2 border-b-2 border-primary/40 group-hover:border-primary transition-colors duration-300"></div>
+                {/* Internal Glow on Hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
-                {/* Profile section */}
-                <div className="relative mb-8">
+                {/* Profile Section */}
+                <div className="relative mb-8 text-center">
                   <motion.div
-                    className="w-28 h-28 mx-auto rounded-2xl overflow-hidden bg-primary/10 border-2 border-primary/20 group-hover:border-primary/60 transition-all duration-300 relative"
-                    whileHover={{ rotate: 5 }}
+                    className="w-32 h-32 mx-auto rounded-[32px] overflow-hidden border-2 border-[#172222]/5 group-hover:border-primary/50 transition-all duration-500 relative bg-[#F8FFFE] p-1"
                   >
                     <img
                       src={member.image || "/placeholder.svg"}
                       alt={member.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover rounded-[28px]"
                     />
-                    <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </motion.div>
 
-                  {/* Floating icon */}
+                  {/* Specialty Badge */}
                   <motion.div
-                    className="absolute -top-3 -right-3 w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg"
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                    className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#172222] text-white rounded-full flex items-center gap-2 shadow-lg border border-white/10"
+                    whileHover={{ scale: 1.1 }}
                   >
-                    <member.icon className="w-5 h-5 text-primary-foreground" />
+                    <member.icon size={12} className="text-primary" />
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider">{member.speciality}</span>
                   </motion.div>
                 </div>
 
-                {/* Info */}
-                <motion.h3
-                  className="text-xl font-tech font-bold text-foreground mb-2"
-                  whileHover={{ x: 5 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {member.name}
-                </motion.h3>
-                <p className="text-primary font-tech font-semibold text-sm mb-2">{member.role}</p>
-                <p className="text-muted-foreground font-mono text-xs mb-6 opacity-80">// {member.speciality}</p>
-                <p className="text-sm text-muted-foreground font-tech leading-relaxed mb-8">{member.description}</p>
+                {/* Member Info */}
+                <div className="text-center mt-6">
+                  <h3 className="text-xl font-lastica font-bold text-[#172222] uppercase tracking-tighter mb-1">
+                    {member.name}
+                  </h3>
+                  <p className="text-primary font-mono text-[11px] font-bold uppercase tracking-[0.2em] mb-4">
+                    {member.role}
+                  </p>
+                  <p className="text-sm text-[#172222]/60 font-raleway font-medium leading-relaxed mb-8 h-20">
+                    {member.description}
+                  </p>
+                </div>
 
-                {/* Skills */}
-                <div className="flex flex-wrap gap-2 mb-8 justify-center">
-                  {member.skills.map((skill, skillIndex) => (
-                    <motion.span
+                {/* Skills Visualized */}
+                <div className="flex flex-wrap gap-2 mb-10 justify-center">
+                  {member.skills.slice(0, 3).map((skill) => (
+                    <span
                       key={skill}
-                      className="px-3 py-1 bg-primary/10 text-primary text-xs font-mono rounded-lg border border-primary/20"
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.2 }}
+                      className="px-3 py-1 bg-[#F8FFFE] text-[#172222]/70 text-[10px] font-mono font-bold rounded-lg border border-[#172222]/5 group-hover:border-primary/30 transition-colors"
                     >
                       {skill}
-                    </motion.span>
+                    </span>
                   ))}
                 </div>
 
-                {/* Social links */}
-                <div className="flex justify-center gap-4">
+                {/* Social Actions */}
+                <div className="flex justify-center gap-4 relative z-10">
                   {[
                     { icon: Github, href: member.social.github },
                     { icon: Linkedin, href: member.social.linkedin },
                     { icon: Twitter, href: member.social.twitter },
-                  ].map(({ icon: Icon, href }, socialIndex) => (
+                  ].map(({ icon: Icon, href }, socialIdx) => (
                     <motion.a
-                      key={socialIndex}
+                      key={socialIdx}
                       href={href}
-                      className="w-10 h-10 bg-primary/10 hover:bg-primary/20 rounded-xl flex items-center justify-center text-primary hover:text-primary transition-all duration-300 border border-primary/20 hover:border-primary/40"
-                      whileHover={{ scale: 1.2, rotate: 10 }}
+                      className="w-10 h-10 rounded-2xl bg-[#F8FFFE] flex items-center justify-center text-[#172222]/40 hover:text-primary transition-all duration-300 border border-[#172222]/5 hover:border-primary/30"
+                      whileHover={{ scale: 1.15, rotate: 5 }}
                       whileTap={{ scale: 0.9 }}
                     >
                       <Icon className="w-5 h-5" />
                     </motion.a>
                   ))}
                 </div>
-
-                {/* Hover glow */}
-                <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"></div>
               </motion.div>
-
-              {/* Floating elements */}
-              <motion.div
-                className="absolute -top-2 -left-2 w-3 h-3 bg-primary rounded-full opacity-60"
-                animate={{
-                  scale: [1, 1.5, 1],
-                  opacity: [0.6, 1, 0.6],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Number.POSITIVE_INFINITY,
-                  delay: index * 0.2,
-                }}
-              />
-              <motion.div
-                className="absolute -bottom-2 -right-2 w-2 h-2 bg-primary rounded-full opacity-40"
-                animate={{
-                  scale: [1, 2, 1],
-                  opacity: [0.4, 0.8, 0.4],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Number.POSITIVE_INFINITY,
-                  delay: index * 0.3,
-                }}
-              />
             </motion.div>
           ))}
         </div>
-
-        {/* Team stats */}
-        {/* <motion.div
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 grid-gap"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          {[
-            { label: "Projects Completed", value: "50+", icon: "🚀" },
-            { label: "Happy Clients", value: "30+", icon: "😊" },
-            { label: "Years Experience", value: "5+", icon: "⭐" },
-            { label: "Technologies", value: "20+", icon: "⚡" },
-          ].map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              className="text-center glass-card p-6 rounded-xl border border-white/10 card-hover"
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 15px 40px rgba(59, 130, 246, 0.2)",
-              }}
-            >
-              <div className="text-3xl mb-3">{stat.icon}</div>
-              <div className="text-3xl font-tech font-bold text-primary mb-2">{stat.value}</div>
-              <div className="text-sm text-muted-foreground font-tech">{stat.label}</div>
-            </motion.div>
-          ))}
-        </motion.div> */}
       </div>
     </section>
   )
 }
+
