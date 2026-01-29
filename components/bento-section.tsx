@@ -28,6 +28,7 @@ import {
 } from "lucide-react"
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel"
 import { Card, CardContent } from "@/components/ui/card"
+import { TechBorder } from "@/components/ui/tech-border"
 
 
 
@@ -344,6 +345,7 @@ export function BentoSection() {
       className="relative w-full font-tech overflow-visible p-10"
       style={{ background: 'linear-gradient(273deg,rgba(118, 245, 224, 1) 3%, rgba(194, 237, 237, 1) 43%, rgba(255, 255, 255, 1) 58%)' }}
     >
+      <TechBorder />
       {/* Premium Shining Elements */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Subtle Internal Glows */}

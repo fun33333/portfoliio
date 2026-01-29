@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Github, Linkedin, Twitter, Code, Palette, Server, Cpu } from "lucide-react"
+import { TechBorder } from "./ui/tech-border"
 
 const teamMembers = [
   {
@@ -49,6 +50,7 @@ const teamMembers = [
 export function TeamSection() {
   return (
     <section className="relative w-full py-24 md:py-32 overflow-hidden bg-white">
+      <TechBorder />
       {/* Premium Background Elements */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         {/* Subtle Internal Glows */}

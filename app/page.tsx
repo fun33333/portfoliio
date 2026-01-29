@@ -108,7 +108,7 @@ export default function LandingPage() {
 
         <AnimatedSection
           id="faq-section"
-          className="relative z-10 section-light-tinted section-transition"
+          className="relative z-10 section-dark-secondary section-transition"
           delay={0.2}
           variant="slideRight"
         >
@@ -118,7 +118,7 @@ export default function LandingPage() {
         </AnimatedSection>
 
         <AnimatedSection
-          className="relative z-10 section-light-pure section-transition"
+          className="relative z-10 section-dark-primary section-transition"
           delay={0.2}
           variant="scale"
         >

@@ -4,6 +4,7 @@ import type React from "react"
 import { useState } from "react"
 import { ChevronDown, ArrowRight } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+import { TechBorder } from "./ui/tech-border"
 
 const faqData = [
   {
@@ -47,25 +48,37 @@ interface FAQItemProps {
 }
 
 const FAQItem = ({ question, answer, isOpen, onToggle, index }: FAQItemProps) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    e.currentTarget.style.setProperty("--mouse-x", `${x}px`)
+    e.currentTarget.style.setProperty("--mouse-y", `${y}px`)
+  }
+
   return (
     <motion.div
       className={`group w-full overflow-hidden rounded-2xl transition-all duration-500 cursor-pointer mb-4`}
       onClick={onToggle}
+      onMouseMove={handleMouseMove}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -8 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
       <div
-        className={`relative p-8 transition-all duration-500 flex flex-col ${isOpen ? "bg-primary/5 border-primary/30 shadow-[0_20px_40px_-15px_rgba(45,175,167,0.1)]" : "bg-white border-[#172222]/5 hover:border-primary/30 hover:shadow-lg"
+        className={`relative p-8 transition-all duration-500 flex flex-col ${isOpen
+          ? "bg-[#172222] border-[#172222] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.4)]"
+          : "bg-[#172222]/5 border-[#172222]/5 hover:bg-[#172222] hover:border-[#172222] hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)]"
           } border rounded-2xl backdrop-blur-md`}
       >
         <div className="flex justify-between items-center gap-6">
-          <span className={`text-base md:text-lg font-raleway font-bold transition-colors duration-300 ${isOpen ? "text-primary" : "text-[#172222]"
+          <span className={`text-base md:text-lg font-raleway font-bold transition-colors duration-500 ${isOpen ? "text-white" : "text-[#172222]/80 group-hover:text-white"
             }`}>
             {question}
           </span>
-          <div className={`shrink-0 w-10 h-10 rounded-2xl flex items-center justify-center transition-all duration-500 ${isOpen ? "bg-primary text-white rotate-180 shadow-lg shadow-primary/20" : "bg-[#F8FFFE] text-[#172222]/40 border border-[#172222]/5"
+          <div className={`shrink-0 w-10 h-10 rounded-2xl flex items-center justify-center transition-all duration-500 ${isOpen ? "bg-primary text-white rotate-180 shadow-lg shadow-primary/20" : "bg-[#172222]/10 text-[#172222]/40 border border-[#172222]/10 group-hover:bg-primary group-hover:text-white group-hover:border-primary"
             }`}>
             <ChevronDown size={20} />
           </div>
@@ -80,7 +93,7 @@ const FAQItem = ({ question, answer, isOpen, onToggle, index }: FAQItemProps) =>
               transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
               className="overflow-hidden"
             >
-              <div className="text-[#172222]/60 font-raleway font-medium text-sm md:text-base leading-relaxed pb-2 border-t border-primary/10 pt-4">
+              <div className="text-white/70 font-raleway font-medium text-sm md:text-base leading-relaxed pb-2 border-t border-white/10 pt-4">
                 {answer}
               </div>
             </motion.div>
@@ -88,7 +101,7 @@ const FAQItem = ({ question, answer, isOpen, onToggle, index }: FAQItemProps) =>
         </AnimatePresence>
 
         {/* Subtle glow effect on hover */}
-        <div className="absolute inset-0 -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_var(--mouse-x,50%)_var(--mouse-y,50%),rgba(45,175,167,0.05),transparent_50%)]" />
+        <div className="absolute inset-0 -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_var(--mouse-x,50%)_var(--mouse-y,50%),rgba(45,175,167,0.08),transparent_50%)]" />
       </div>
     </motion.div>
   )
@@ -103,10 +116,12 @@ export function FAQSection() {
 
   return (
     <section className="relative w-full py-24 md:py-32 overflow-hidden bg-white">
+      <TechBorder className="top-0 left-0" />
+      <TechBorder className="bottom-0 right-0 rotate-180" />
       {/* Premium Background Elements */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         {/* Subtle Internal Glows */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(45,175,167,0.1),transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(45,175,167,0.15),transparent_70%)]" />
 
         {/* Dynamic Shining Highlight */}
         <motion.div
@@ -114,12 +129,12 @@ export function FAQSection() {
             x: ["-100%", "200%"],
           }}
           transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent skew-x-12 opacity-30"
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent skew-x-12 opacity-30"
         />
 
         {/* Subtle Grid Pattern */}
         <div
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0 opacity-[0.05]"
           style={{
             backgroundImage: 'linear-gradient(to right, #2EADA7 1px, transparent 1px), linear-gradient(to bottom, #2EADA7 1px, transparent 1px)',
             backgroundSize: '80px 80px'
@@ -134,23 +149,23 @@ export function FAQSection() {
             initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 backdrop-blur-md"
+            className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 backdrop-blur-md"
           >
             <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
             <span className="text-[10px] md:text-[11px] font-mono font-bold uppercase tracking-[0.3em] text-primary">
-              FREQUENTLY ASKED
+              + FREQUENTLY ASKED
             </span>
           </motion.div>
 
           <motion.h2
-            className="max-w-4xl text-3xl font-bold leading-[1.1] tracking-tighter text-[#172222] md:text-5xl lg:text-6xl font-lastica uppercase"
+            className="max-w-4xl text-3xl font-bold leading-[1.1] tracking-tighter text-[#172222] md:text-5xl lg:text-6xl font-lastica uppercasemax-w-4xl text-3xl font-bold leading-6 tracking-tight  md:text-4xl lg:text-5xl font-lastica uppercase"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             HAVE <span className="text-primary italic">QUESTIONS?</span> <br />
-            <span className="text-[#172222]/30">WE HAVE ANSWERS</span>
+            <span className="text-[#172222]/20 font-mono">WE HAVE ANSWERS</span>
           </motion.h2>
 
           <motion.p
@@ -185,10 +200,10 @@ export function FAQSection() {
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
         >
-          <p className="text-[#172222]/50 font-raleway font-medium mb-6">
+          <p className="text-[#172222]/40 font-raleway font-medium mb-6">
             Still have questions? We're here to help.
           </p>
-          <button className="group relative inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-[0.2em] text-primary hover:text-primary-dark transition-colors">
+          <button className="group relative inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-[0.2em] text-primary hover:text-primary-light transition-colors">
             Contact Support Team
             <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
           </button>
