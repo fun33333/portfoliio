@@ -186,7 +186,7 @@ export function TestimonialGridSection() {
   const col3 = testimonials.slice(6, 9)
 
   return (
-    <section className="relative w-full overflow-hidden py-24 md:py-32 bg-[#0B0B0F]">
+    <section className="relative w-full overflow-hidden py-24 md:py-32 bg-[#081616]">
       {/* Premium Background Elements */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         {/* Subtle Internal Glows */}
@@ -198,7 +198,7 @@ export function TestimonialGridSection() {
             x: ["-100%", "200%"],
           }}
           transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent skew-x-12 opacity-50"
+          className="absolute inset-0  skew-x-12 opacity-50"
         />
 
         {/* Subtle Grid Pattern */}
@@ -253,9 +253,9 @@ export function TestimonialGridSection() {
         <div
           className="relative mx-auto flex gap-4 md:gap-8 max-w-[1400px] h-[700px] md:h-[900px] overflow-hidden"
         >
-          {/* Gradient Masks */}
+          {/* Gradient Masks
           <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#0B0B0F] via-[#0B0B0F]/80 to-transparent z-20 pointer-events-none" />
-          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0B0B0F] via-[#0B0B0F]/80 to-transparent z-20 pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0B0B0F] via-[#0B0B0F]/80 to-transparent z-20 pointer-events-none" /> */}
 
           {/* Columns */}
           <div className="hidden lg:block flex-1">

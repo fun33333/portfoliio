@@ -165,7 +165,7 @@ export function FAQSection() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             HAVE <span className="text-primary italic">QUESTIONS?</span> <br />
-            <span className="text-[#172222]/20 font-mono">WE HAVE ANSWERS</span>
+            <span className="text-[#081616]/80 font-mono">WE HAVE ANSWERS</span>
           </motion.h2>
 
           <motion.p
@@ -200,10 +200,10 @@ export function FAQSection() {
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
         >
-          <p className="text-[#172222]/40 font-raleway font-medium mb-6">
+          <p className="text-[#172222] font-raleway font-medium mb-4">
             Still have questions? We're here to help.
           </p>
-          <button className="group relative inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-[0.2em] text-primary hover:text-primary-light transition-colors">
+          <button className="group relative text-2xl inline-flex items-center gap-2 font-mono font-bold uppercase tracking-[0.2em] text-primary hover:text-primary-light transition-colors">
             Contact Support Team
             <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
           </button>
