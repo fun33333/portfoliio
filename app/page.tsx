@@ -13,7 +13,8 @@ import { CTASection } from "@/components/cta-section";
 import { FooterSection } from "@/components/footer-section";
 import { AnimatedSection } from "@/components/animated-section";
 import { VideoBackground } from "@/components/video-background";
-import { TeamSection } from "@/components/team-section";
+import { CounterSection } from "@/components/counter-section";
+import { AboutSection } from "@/components/about-section";
 import { motion } from "framer-motion";
 
 // bitBYTE8
@@ -45,6 +46,8 @@ export default function LandingPage() {
         <main className="mx-auto relative">
           <HeroSection />
         </main>
+
+        {/* Services Section - LIGHT */}
         <AnimatedSection
           id="services-section"
           className="relative z-10 section-light-pure section-transition"
@@ -54,6 +57,7 @@ export default function LandingPage() {
           <BentoSection />
         </AnimatedSection>
 
+        {/* Projects Section - DARK */}
         <AnimatedSection
           id="projects-section"
           className="relative z-10 section-dark-primary section-transition"
@@ -65,17 +69,29 @@ export default function LandingPage() {
           </div>
         </AnimatedSection>
 
+        {/* Counter Section - LIGHT */}
+        <AnimatedSection
+          id="counter-section"
+          className="relative z-10 section-light-pure section-transition"
+          delay={0.2}
+          variant="scale"
+        >
+          <CounterSection />
+        </AnimatedSection>
+
+        {/* About Section - DARK */}
         <AnimatedSection
           id="about-section"
-          className="relative z-10 section-light-pure section-transition"
+          className="relative z-10 section-dark-primary section-transition"
           delay={0.2}
           variant="fadeUp"
         >
           <div className=" mx-auto">
-            <TeamSection />
+            <AboutSection />
           </div>
         </AnimatedSection>
 
+        {/* Large Testimonial - LIGHT */}
         <AnimatedSection
           className="relative z-10 section-light-tinted section-transition"
           delay={0.2}
@@ -86,18 +102,10 @@ export default function LandingPage() {
           </div>
         </AnimatedSection>
 
-        {/* <AnimatedSection
-          id="pricing-section"
-          className="relative z-10 max-w-[1320px] mx-auto"
-          delay={0.2}
-          variant="slideLeft"
-        >
-          <PricingSection />
-        </AnimatedSection> */}
-
+        {/* Testimonials Grid - DARK */}
         <AnimatedSection
           id="testimonials-section"
-          className="relative z-10 section-light-pure section-transition"
+          className="relative z-10 section-dark-secondary section-transition"
           delay={0.2}
           variant="fadeUp"
         >
@@ -106,9 +114,10 @@ export default function LandingPage() {
           </div>
         </AnimatedSection>
 
+        {/* FAQ Section - LIGHT */}
         <AnimatedSection
           id="faq-section"
-          className="relative z-10 section-dark-secondary section-transition"
+          className="relative z-10 section-light-pure section-transition"
           delay={0.2}
           variant="slideRight"
         >
@@ -117,6 +126,7 @@ export default function LandingPage() {
           </div>
         </AnimatedSection>
 
+        {/* CTA Section - DARK */}
         <AnimatedSection
           className="relative z-10 section-dark-primary section-transition"
           delay={0.2}
@@ -127,6 +137,7 @@ export default function LandingPage() {
           </div>
         </AnimatedSection>
 
+        {/* Footer - DARK */}
         <AnimatedSection
           id="contact-section"
           className="relative z-10 bg-[#0A1515]"

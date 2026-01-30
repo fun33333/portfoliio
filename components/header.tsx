@@ -37,11 +37,12 @@ export function Header() {
   }, []);
 
   const navItems = [
-    { name: "Home", href: "#home" },
-    { name: "Services", href: "#services-section" },
-    { name: "Projects", href: "#projects-section" },
-    { name: "About", href: "#about-section" },
-    { name: "Contact", href: "#contact-section" },
+    { name: "Home", href: "/", isPage: true },
+    { name: "Services", href: "/services", isPage: true },
+    { name: "Projects", href: "/projects", isPage: true },
+    { name: "Pricing", href: "/pricing", isPage: true },
+    { name: "About", href: "/about", isPage: true },
+    { name: "Contact", href: "/contact", isPage: true },
   ];
 
   const handleScroll = (
@@ -109,10 +110,14 @@ export function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                onClick={(e) => handleScroll(e, item.href)}
+                onClick={(e) => {
+                  if (!item.isPage && item.href.startsWith('#')) {
+                    handleScroll(e, item.href);
+                  }
+                }}
                 className={`relative px-4 py-2 rounded-lg transition-all duration-300 group ${scrolled
-                    ? "text-foreground hover:text-primary"
-                    : "text-secondary hover:text-white"
+                  ? "text-foreground hover:text-primary"
+                  : "text-secondary hover:text-white"
                   }`}
               >
                 <span className="relative z-10">{item.name}</span>
@@ -120,11 +125,11 @@ export function Header() {
               </Link>
             ))}
             <div className="ml-4">
-              <Link href="#contact-section">
+              <Link href="/contact">
                 <Button
                   className={`relative overflow-hidden group ${scrolled
-                      ? "bg-primary hover:bg-primary/90 text-white"
-                      : "bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm"
+                    ? "bg-primary hover:bg-primary/90 text-white"
+                    : "bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm"
                     }`}
                 >
                   <span className="relative z-10 px-4">Get Started</span>
@@ -173,7 +178,9 @@ export function Header() {
                       key={item.name}
                       href={item.href}
                       onClick={(e) => {
-                        handleScroll(e, item.href);
+                        if (!item.isPage && item.href.startsWith('#')) {
+                          handleScroll(e, item.href);
+                        }
                         setMobileMenuOpen(false);
                       }}
                       className="text-2xl font-semibold text-foreground hover:text-primary transition-colors"
@@ -182,7 +189,7 @@ export function Header() {
                     </Link>
                   ))}
                   <Link
-                    href="#contact-section"
+                    href="/contact"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <Button className="mt-8 bg-primary hover:bg-primary/90 text-white px-8">
