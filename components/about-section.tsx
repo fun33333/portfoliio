@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { ArrowRight, Sparkles, Target, Users, Zap } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 const highlights = [
     {
@@ -119,48 +120,15 @@ export function AboutSection() {
                         transition={{ duration: 0.6, delay: 0.2 }}
                         className="relative"
                     >
-                        <div className="relative aspect-square rounded-3xl overflow-hidden bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 p-8 md:p-12">
-                            {/* Decorative Elements */}
-                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(46,173,167,0.2),transparent_70%)]" />
-
-                            {/* Center Icon */}
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                <motion.div
-                                    animate={{
-                                        scale: [1, 1.1, 1],
-                                        rotate: [0, 5, -5, 0]
-                                    }}
-                                    transition={{
-                                        duration: 5,
-                                        repeat: Infinity,
-                                        ease: "easeInOut"
-                                    }}
-                                    className="w-32 h-32 md:w-48 md:h-48 rounded-full bg-primary/20 border-4 border-primary/30 flex items-center justify-center backdrop-blur-sm"
-                                >
-                                    <Sparkles className="w-16 h-16 md:w-24 md:h-24 text-primary" />
-                                </motion.div>
-                            </div>
-
-                            {/* Floating Elements */}
-                            {[...Array(6)].map((_, i) => (
-                                <motion.div
-                                    key={i}
-                                    animate={{
-                                        y: [0, -20, 0],
-                                        opacity: [0.3, 0.6, 0.3]
-                                    }}
-                                    transition={{
-                                        duration: 3 + i * 0.5,
-                                        repeat: Infinity,
-                                        delay: i * 0.3
-                                    }}
-                                    className="absolute w-3 h-3 rounded-full bg-primary/40"
-                                    style={{
-                                        left: `${20 + i * 15}%`,
-                                        top: `${10 + (i % 3) * 30}%`
-                                    }}
-                                />
-                            ))}
+                        <div className="relative aspect-square  overflow-hidden">
+                            <Image
+                                src="/images/about-sec.png"
+                                alt="About Quadgentics"
+                                fill
+                                className="object-cover hover:scale-105 transition-transform duration-700"
+                            />
+                            {/* Overlay Gradient */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#0A1515] via-transparent to-transparent opacity-60" />
                         </div>
                     </motion.div>
                 </div>

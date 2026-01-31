@@ -51,28 +51,24 @@ const stats = [
     value: 195,
     suffix: "+",
     label: "Happy Clients",
-    color: "#E91E8C"
   },
   {
     icon: Box,
     value: 204,
     suffix: "k+",
     label: "Projects Completed",
-    color: "#E91E8C"
   },
   {
     icon: Box,
     value: 41,
     suffix: "+",
     label: "Business Partners",
-    color: "#E91E8C"
   },
   {
     icon: Box,
     value: 29,
     suffix: "%",
     label: "Satisfaction Guaranteed",
-    color: "#E91E8C"
   }
 ]
 
@@ -102,7 +98,7 @@ export function CounterSection() {
           <h4 className="text-primary font-mono text-[10px] md:text-[11px] tracking-[0.5em] uppercase mb-4 font-bold">
             OUR ACHIEVEMENTS
           </h4>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-lastica text-[#172222] leading-[1.1] uppercase tracking-tighter">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-lastica text-foreground leading-[1.1] uppercase tracking-tighter">
             Numbers that <span className="text-primary">speak for us</span>
           </h2>
         </motion.div>
@@ -119,10 +115,10 @@ export function CounterSection() {
               className="relative group"
             >
               {/* Card */}
-              <div className="relative bg-gradient-to-br from-[#1a0a2e] via-[#0f0520] to-[#0a0315] rounded-3xl p-8 md:p-10 overflow-hidden border border-white/10 hover:border-primary/30 transition-all duration-500">
+              <div className="relative  bg-gradient-to-br from-[#0a1515] via-[#0f1b1b] to-[#050a0a] rounded-3xl p-8 md:p-10 overflow-hidden border border-white/5 hover:border-primary/30 transition-all duration-500 shadow-xl group-hover:shadow-primary/5">
                 {/* Glow Effect */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
+
                 {/* Icon */}
                 <motion.div
                   initial={{ scale: 0 }}
@@ -139,8 +135,7 @@ export function CounterSection() {
                 {/* Number */}
                 <div className="relative mb-3">
                   <h3
-                    className="text-5xl md:text-6xl lg:text-7xl font-lastica font-bold tracking-tight"
-                    style={{ color: stat.color }}
+                    className="text-5xl md:text-6xl lg:text-6xl  font-bold tracking-tight text-primary font-tech"
                   >
                     <Counter end={stat.value} suffix={stat.suffix} prefix={stat.suffix === "%" ? "" : "+"} />
                   </h3>

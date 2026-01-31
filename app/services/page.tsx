@@ -89,7 +89,7 @@ const serviceDetails = [
 
 export default function ServicesPage() {
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen">
             {/* Hero Banner */}
             <PageHeroBanner
                 title="Our Services"

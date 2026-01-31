@@ -147,6 +147,8 @@
     /* Lighter primary */
     --tech-purple: 177 58% 33%;
     /* Darker primary */
+    --accent-teal: 170 87% 71%;
+    /* #76f5e0 */
   }
 }
 
@@ -738,5 +740,16 @@ body::before {
 }
 
 .card-item:hover img {
+  object-position: bottom;
+}
+
+.Imag {
+  height: 600px;
+  object-position: top;
+  object-fit: cover;
+  transition: all 4s;
+}
+
+.Imag:hover {
   object-position: bottom;
 }

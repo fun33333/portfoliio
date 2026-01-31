@@ -340,6 +340,21 @@ export function BentoSection() {
     }
   }, [])
 
+  // Auto-rotate tabs every 3 seconds
+  useEffect(() => {
+    if (!isDesktop) return;
+
+    const interval = setInterval(() => {
+      setActiveTab((current) => {
+        const currentIndex = services.findIndex((s) => s.id === current);
+        const nextIndex = (currentIndex + 1) % services.length;
+        return services[nextIndex].id;
+      });
+    }, 5000); // 5 seconds interval
+
+    return () => clearInterval(interval);
+  }, [activeTab, isDesktop]);
+
   return (
     <section
       className="relative w-full font-tech overflow-visible p-10"
@@ -396,158 +411,124 @@ export function BentoSection() {
         </div>
 
         {isDesktop ? (
-          /* Desktop: Horizontal Accordion */
-          <div className="flex flex-col lg:flex-row w-full h-auto lg:h-[700px] gap-3 px-4 md:px-12 lg:px-24 pb-16">
-            {services.map((service) => (
-              <motion.div
-                key={service.id}
-                layout
-                initial={false}
-                animate={{
-                  flex: activeTab === service.id ? 12 : 1,
-                }}
-                transition={{
-                  duration: 0.4,
-                  ease: [0.4, 0, 0.2, 1]
-                }}
-                onClick={() => setActiveTab(service.id)}
-                className={`relative group cursor-pointer overflow-hidden rounded-[24px] lg:rounded-[40px] transition-all duration-500 w-full lg:w-auto ${activeTab === service.id
-                  ? "bg-white/90 backdrop-blur-xl border-2 border-primary/20 shadow-[0_50px_100px_-20px_rgba(45,175,167,0.25)]"
-                  : "border-2 border-primary/30 hover:border-primary shadow-lg hover:shadow-2xl"
-                  }`}
-                style={activeTab !== service.id ? {
-                  background: 'linear-gradient(135deg, rgba(46, 173, 167, 0.15) 0%, rgba(255, 255, 255, 0.25) 100%)',
-                  backdropFilter: 'blur(10px)',
-                  WebkitBackdropFilter: 'blur(10px)',
-                  transition: 'all 0.3s ease',
-                } : undefined}
-                onMouseEnter={(e) => {
-                  if (activeTab !== service.id) {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, rgba(46, 173, 167, 0.85) 0%, rgba(46, 173, 167, 0.65) 100%)';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (activeTab !== service.id) {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, rgba(46, 173, 167, 0.15) 0%, rgba(255, 255, 255, 0.25) 100%)';
-                  }
-                }}
-              >
-                <AnimatePresence initial={false} mode="wait">
-                  {activeTab !== service.id ? (
-                    /* Collapsed View */
-                    <motion.div
-                      key="collapsed"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="absolute inset-0 flex flex-col items-center justify-start pt-32 pointer-events-none"
-                    >
-                      {/* Glass overlay for collapsed state */}
-                      <div className="absolute inset-0 pointer-events-none">
-                        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white/20 to-transparent" />
-                        <div className="absolute inset-0 rounded-[24px] lg:rounded-[40px] bg-gradient-to-br from-white/10 via-transparent to-primary/20 opacity-50" />
+          /* Desktop: Vertical Header Accordion (The "Contact Page" style requested) */
+          <div className="flex w-full h-[800px] overflow-hidden rounded-[10px] border border-white/10 bg-[#0A1515] shadow-2xl">
+            {services.map((service, index) => {
+              const isActive = activeTab === service.id;
+              return (
+                <motion.div
+                  key={service.id}
+                  layout
+                  initial={false}
+                  animate={{
+                    flex: isActive ? 16 : 1,
+                    backgroundColor: isActive ? "#0A1515" : "hsl(var(--accent-teal))",
+                  }}
+                  whileHover={{
+                    backgroundColor: isActive ? "#0A1515" : "#112222", // Dark hover state for inactive tabs
+                  }}
+                  transition={{
+                    duration: 0.5,
+                    ease: [0.32, 0.72, 0.35, 1.02]
+                  }}
+                  onClick={() => setActiveTab(service.id)}
+                  className={`relative h-full flex-shrink-0 cursor-pointer overflow-hidden border-r border-[#0A1515]/20 last:border-0 group ${isActive ? "z-10" : "transition-all"}`}
+                >
+                  {/* Collapsed Vertical Header */}
+                  <div
+                    className={`absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-300 ${isActive ? "opacity-0 pointer-events-none" : "opacity-100"}`}
+                  >
+                    <div className="h-full w-full flex flex-col items-center justify-center gap-4 py-4">
+                      {/* Icon at top */}
+                      <div className="p-2 bg-black/10 rounded-xl text-[#172222]">
+                        <service.icon className="w-5 h-5" />
                       </div>
 
-                      <div className="flex flex-col items-center gap-10 relative z-10">
-                        <div className="p-4 rounded-2xl bg-primary/80 text-white backdrop-blur-sm border border-primary/40 group-hover:bg-white group-hover:text-primary transition-all duration-300 shadow-xl shrink-0">
-                          <service.icon className="w-7 h-7" />
-                        </div>
-                        <span className="[writing-mode:vertical-lr] rotate-180 uppercase tracking-[0.4em] font-black text-primary drop-shadow-md transition-colors text-xs whitespace-nowrap group-hover:text-white font-raleway">
-                          {service.title}
-                        </span>
-                      </div>
-                    </motion.div>
-                  ) : (
-                    /* Expanded View */
-                    <motion.div
-                      key="expanded"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-                      className="h-full w-full p-5 md:p-8 lg:p-10 flex flex-col bg-[#0A1515] overflow-hidden" // Reduced padding from p-6 md:p-10 lg:p-12 xl:p-16
-                    >
-                      <div>
-                        {/* Title, Description & Image Container */}
-                        <div className="mb-4 md:mb-5 flex flex-col xl:flex-row items-center justify-between gap-4 md:gap-5 text-center xl:text-left">
-                          <div className="flex-1 w-full relative z-10">
-                            <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-lastica text-white uppercase tracking-tighter leading-[0.9] mb-3 md:mb-4 break-words">
+                      {/* Vertical Title */}
+                      <h2 className="flex-1 [writing-mode:vertical-rl] -rotate-180 text-xl font-mono text-[#172222] uppercase tracking-widest flex items-center justify-center whitespace-nowrap font-bold group-hover:text-white transition-colors duration-300">
+                        {service.title}
+                      </h2>
+
+                      {/* Number at bottom */}
+                      <span className="font-mono text-[#172222]/70 text-xs font-bold">
+                        0{index + 1}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Expanded Content */}
+                  <AnimatePresence>
+                    {isActive && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.4, delay: 0.2 }}
+                        className="absolute inset-0 w-full h-full bg-[#0A1515] flex flex-col"
+                      >
+                        {/* Header Bar */}
+                        <div className="flex items-center justify-between p-8 border-b border-white/10 bg-white/5">
+                          <div className="flex items-center gap-4">
+                            <div className="p-3 bg-primary/10 rounded-xl border border-primary/20 text-primary">
+                              <service.icon className="w-6 h-6" />
+                            </div>
+                            <h3 className="text-3xl font-lastica text-white uppercase tracking-tighter">
                               {service.title}
                             </h3>
-                            <p className="text-white/70 text-base md:text-lg lg:text-xl max-w-2xl leading-relaxed font-medium mx-auto xl:mx-0 font-raleway">
+                          </div>
+                          <span className="text-primary font-mono text-xl font-bold bg-primary/10 px-4 py-2 rounded-lg border border-primary/20">
+                            0{index + 1}
+                          </span>
+                        </div>
+
+                        {/* Main Content Area */}
+                        <div className="flex-1 p-8 grid grid-cols-12 gap-8 overflow-hidden">
+                          {/* Left: Description & Sub-items */}
+                          <div className="col-span-7 flex flex-col gap-8 overflow-y-auto pr-4 custom-scrollbar">
+                            <p className="text-white/70 text-lg font-raleway font-medium leading-relaxed">
                               {service.description}
                             </p>
+
+                            <div className="grid gap-4">
+                              {service.subItems.map((item, idx) => (
+                                <motion.div
+                                  key={idx}
+                                  initial={{ opacity: 0, x: -20 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{ delay: 0.3 + (idx * 0.1) }}
+                                  className="group/item flex items-center justify-between p-12 rounded-2xl border border-white/10 bg-[#0f1b1b] hover:border-primary/40 transition-all cursor-default shadow-lg"
+                                >
+                                  <div>
+                                    <h4 className="text-white font-bold font-raleway uppercase text-2xl mb-1 tracking-wide">{item.title}</h4>
+                                    <p className="text-white/50 text-xs font-medium uppercase tracking-wider">{item.description}</p>
+                                  </div>
+                                  <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 group-hover/item:border-primary group-hover/item:text-primary transition-colors bg-white/5">
+                                    <span className="text-lg">→</span>
+                                  </div>
+                                </motion.div>
+                              ))}
+                            </div>
                           </div>
 
-                          <div className="relative shrink-0 w-full md:w-auto flex justify-center xl:justify-end mt-2 xl:mt-0 px-4 md:px-0">
-                            <div className="w-40 h-40 md:w-52 md:h-52 lg:w-56 lg:h-56 xl:w-72 xl:h-72 bg-[#0A1515] flex items-center justify-center overflow-hidden">
-                              {service.animationData ? (
-                                <Lottie
-                                  animationData={service.animationData}
-                                  loop={true}
-                                  className="w-full h-full"
-                                  rendererSettings={{
-                                    preserveAspectRatio: 'xMidYMid meet'
-                                  }}
-                                />
-                              ) : (
-                                <img src={service.image} alt={service.title} className="w-full h-full object-contain" />
-                              )}
-                            </div>
+                          {/* Right: Illustration */}
+                          <div className="col-span-5 relative rounded-2xl overflow-hidden bg-white/5 border border-white/10 flex items-center justify-center">
+                            {service.animationData ? (
+                              <Lottie
+                                animationData={service.animationData}
+                                loop={true}
+                                className="w-full h-full p-8"
+                              />
+                            ) : (
+                              <img src={service.image} alt={service.title} className="w-full h-full object-contain p-8" />
+                            )}
                           </div>
                         </div>
-                      </div>
-
-                      {/* Sub-item Cards */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4 xl:gap-6 mt-auto relative z-10 [perspective:1000px]">
-                        {service.subItems.map((item, idx) => (
-                          <motion.div
-                            key={item.title}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            whileHover={{
-                              y: -5,
-                              transition: { duration: 0.2 }
-                            }}
-                            transition={{ delay: 0.3 + (idx * 0.1) }}
-                            className="group/card p-4 md:p-5 xl:p-6 rounded-[20px] xl:rounded-[12px] border border-white/20 hover:border-white/40 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center relative overflow-hidden h-full justify-between"
-                            style={{
-                              background: 'rgba(255, 255, 255, 0.25)',
-                              backdropFilter: 'blur(5px)',
-                              WebkitBackdropFilter: 'blur(5px)',
-                            }}
-                          >
-                            {/* Subtle glassmorphism overlay */}
-                            <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                              {/* Top gradient shine */}
-                              <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-white/10 to-transparent" />
-
-                              {/* Subtle border glow */}
-                              <div className="absolute inset-0 rounded-[24px] xl:rounded-[10px] bg-gradient-to-br from-white/20 via-transparent to-primary/10 opacity-30" />
-                            </div>
-
-                            {/* Content with proper z-index */}
-                            <div className="relative z-10">
-                              <h4 className="text-white font-raleway font-bold text-lg md:text-xl mb-2 uppercase tracking-tight drop-shadow-sm">
-                                {item.title}
-                              </h4>
-                              <p className="text-white/90 font-raleway text-sm md:text-base mb-4 flex-grow leading-relaxed font-medium drop-shadow-sm">
-                                {item.description}
-                              </p>
-                            </div>
-
-                            <button className="relative z-10 text-xs md:text-sm font-raleway font-bold tracking-[1.5px] uppercase text-primary hover:text-white transition-colors py-2 drop-shadow-sm">
-                              {item.cta} &rarr;
-                            </button>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })}
           </div>
         ) : (
           /* Mobile & Tablet: Stacking Swipe Cards */

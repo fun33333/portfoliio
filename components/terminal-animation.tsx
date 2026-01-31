@@ -24,7 +24,7 @@ export function TerminalAnimation() {
     "});",
     "",
     "quadgentics.deploy().then(() => {",
-    "  console.log('🚀 Ready to innovate!');",
+    "  console.log('Ready to innovate!');",
     "});",
   ]
 

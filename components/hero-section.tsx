@@ -88,7 +88,7 @@ export function HeroSection() {
 
                 <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-7xl xl:text-[50px] font-lastica leading-[0.9] tracking-tight font-black uppercase">
                   <div className="text-primary">We Build</div>
-                  <div className="text-white font-tech">
+                  <div className="text-white font-mono">
                     {displayedText}
                     {!isComplete && (
                       <span className="inline-block w-[3px] h-[0.8em] bg-primary ml-1 animate-pulse" />
@@ -147,7 +147,7 @@ export function HeroSection() {
               </div>
 
               {/* Stats Cards */}
-              <motion.div
+              {/* <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.8 }}
@@ -180,7 +180,7 @@ export function HeroSection() {
                     </div>
                   </motion.div>
                 ))}
-              </motion.div>
+              </motion.div> */}
 
               {/* Trusted By Section */}
               <motion.div
