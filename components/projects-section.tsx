@@ -38,7 +38,7 @@ export function ProjectsSection() {
   );
 
   return (
-    <div className="max-w-7xl mx-auto px-4 md:px-8">
+    <div className="max-w-7xl mx-auto px-4 py-20 md:px-8">
       {/* Filter Tabs */}
       <div className="flex flex-wrap justify-center gap-4 mb-16">
         {categories.map((category) => (
@@ -46,8 +46,8 @@ export function ProjectsSection() {
             key={category.id}
             onClick={() => setActiveCategory(category.id)}
             className={`px-8 py-3 rounded-full text-sm font-bold tracking-widest uppercase transition-all duration-300 border ${activeCategory === category.id
-                ? "bg-primary text-black border-primary shadow-[0_0_20px_rgba(45,175,167,0.4)]"
-                : "bg-transparent text-white/60 border-white/10 hover:border-primary/50 hover:text-primary"
+              ? "bg-primary text-black border-primary shadow-[0_0_20px_rgba(45,175,167,0.4)]"
+              : "bg-transparent text-white/60 border-white/10 hover:border-primary/50 hover:text-primary"
               }`}
           >
             {category.label}

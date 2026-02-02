@@ -40,7 +40,7 @@ export function Header() {
     { name: "Home", href: "/", isPage: true },
     { name: "Services", href: "/services", isPage: true },
     { name: "Projects", href: "/projects", isPage: true },
-    { name: "Pricing", href: "/pricing", isPage: true },
+    { name: "Packages", href: "/pricing", isPage: true },
     { name: "About", href: "/about", isPage: true },
     { name: "Contact", href: "/contact", isPage: true },
   ];
