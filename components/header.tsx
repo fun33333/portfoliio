@@ -105,7 +105,7 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-1">
             {navItems.map((item) => (
               <Link
                 key={item.name}
@@ -115,13 +115,34 @@ export function Header() {
                     handleScroll(e, item.href);
                   }
                 }}
-                className={`relative px-4 py-2 rounded-lg transition-all duration-300 group ${scrolled
-                  ? "text-foreground hover:text-primary"
-                  : "text-secondary hover:text-white"
+                className={`relative px-4 py-2 transition-all duration-300 group overflow-hidden ${scrolled
+                  ? "text-foreground"
+                  : "text-white/80 hover:text-white"
                   }`}
               >
                 <span className="relative z-10">{item.name}</span>
-                <span className="absolute inset-0 rounded-lg bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                {/* Rainbow Gradient Underline */}
+                <motion.span
+                  className="absolute bottom-0 left-0 w-full h-[3px] z-0"
+                  initial={{ x: "-100%" }}
+                  whileHover={{ x: "0%" }}
+                  transition={{
+                    x: { duration: 0.4, ease: "easeOut" },
+                    backgroundPosition: {
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }
+                  }}
+                  style={{
+                    background: "linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff)",
+                    backgroundSize: "200% 100%",
+                  }}
+                  animate={{
+                    backgroundPosition: ["0% 0%", "200% 0%"],
+                  }}
+                />
               </Link>
             ))}
             <div className="ml-4">
@@ -141,61 +162,89 @@ export function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden relative z-50 w-10 h-10 flex items-center justify-center"
+            className="lg:hidden relative z-[100] w-10 h-10 flex flex-col items-center justify-center gap-1.5 focus:outline-none"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            <div className="relative w-6 h-5">
-              <span
-                className={`absolute w-6 h-0.5 transition-all duration-300 ${scrolled ? "bg-foreground" : "bg-white"
-                  } ${mobileMenuOpen ? "rotate-45 top-2" : "rotate-0 top-0"}`}
-              />
-              <span
-                className={`absolute w-6 h-0.5 top-2 transition-all duration-300 ${scrolled ? "bg-foreground" : "bg-white"
-                  } ${mobileMenuOpen ? "opacity-0" : "opacity-100"}`}
-              />
-              <span
-                className={`absolute w-6 h-0.5 transition-all duration-300 ${scrolled ? "bg-foreground" : "bg-white"
-                  } ${mobileMenuOpen ? "-rotate-45 top-2" : "rotate-0 top-4"}`}
-              />
-            </div>
+            <motion.span
+              animate={mobileMenuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+              className={`w-6 h-0.5 transition-colors duration-300 ${scrolled || mobileMenuOpen ? "bg-foreground" : "bg-white"
+                }`}
+            />
+            <motion.span
+              animate={mobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+              className={`w-6 h-0.5 transition-colors duration-300 ${scrolled || mobileMenuOpen ? "bg-foreground" : "bg-white"
+                }`}
+            />
+            <motion.span
+              animate={mobileMenuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+              className={`w-6 h-0.5 transition-colors duration-300 ${scrolled || mobileMenuOpen ? "bg-foreground" : "bg-white"
+                }`}
+            />
           </button>
 
-          {/* Mobile Menu */}
+          {/* Mobile Menu Overlay */}
           <AnimatePresence>
             {mobileMenuOpen && (
               <motion.div
-                initial={{ opacity: 0, x: "100%" }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: "100%" }}
-                transition={{ type: "tween", duration: 0.3 }}
-                className="fixed inset-0 z-40 md:hidden"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-[90] lg:hidden bg-background/95 backdrop-blur-2xl"
               >
-                <div className="absolute inset-0 bg-background/95 backdrop-blur-xl" />
-                <nav className="relative h-full flex flex-col items-center justify-center space-y-8">
-                  {navItems.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      onClick={(e) => {
-                        if (!item.isPage && item.href.startsWith('#')) {
-                          handleScroll(e, item.href);
-                        }
-                        setMobileMenuOpen(false);
-                      }}
-                      className="text-2xl font-semibold text-foreground hover:text-primary transition-colors"
+                <div className="absolute inset-0 bg-grid-white/[0.02]" />
+                <nav className="relative h-full flex flex-col items-center justify-center px-6">
+                  <div className="flex flex-col items-center space-y-6 w-full">
+                    {navItems.map((item, index) => (
+                      <motion.div
+                        key={item.name}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 * index }}
+                      >
+                        <Link
+                          href={item.href}
+                          onClick={(e) => {
+                            if (!item.isPage && item.href.startsWith('#')) {
+                              handleScroll(e, item.href);
+                            }
+                            setMobileMenuOpen(false);
+                          }}
+                          className="text-3xl font-lastica uppercase tracking-tight text-foreground hover:text-primary transition-colors text-center block"
+                        >
+                          {item.name}
+                        </Link>
+                      </motion.div>
+                    ))}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 * navItems.length }}
+                      className="pt-8 w-full max-w-[280px]"
                     >
-                      {item.name}
-                    </Link>
-                  ))}
-                  <Link
-                    href="/contact"
-                    onClick={() => setMobileMenuOpen(false)}
+                      <Link
+                        href="/contact"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="w-full"
+                      >
+                        <Button className="w-full bg-primary hover:bg-primary/90 text-white text-lg py-7 rounded-2xl shadow-xl shadow-primary/20">
+                          Get Started
+                        </Button>
+                      </Link>
+                    </motion.div>
+                  </div>
+
+                  {/* Mobile Footer Info */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.8 }}
+                    className="absolute bottom-10 left-0 right-0 text-center"
                   >
-                    <Button className="mt-8 bg-primary hover:bg-primary/90 text-white px-8">
-                      Get Started
-                    </Button>
-                  </Link>
+                    <p className="text-muted-foreground text-sm font-mono tracking-widest uppercase">
+                      Quadgentics &copy; 2024
+                    </p>
+                  </motion.div>
                 </nav>
               </motion.div>
             )}

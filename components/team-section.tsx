@@ -90,14 +90,14 @@ export function TeamSection() {
           </motion.div>
 
           <motion.h2
-            className="max-w-5xl text-4xl font-bold leading-[1.1] tracking-tighter text-[#172222] md:text-6xl lg:text-7xl font-lastica uppercase"
+            className="text-4xl md:text-5xl lg:text-7xl font-lastica text-[#172222] leading-[1.1] mb-8 uppercase"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             MEET OUR <span className="text-primary italic">ARCHITECTS</span> <br />
-            <span className="text-[#172222]/30">DISRUPTING STATUS QUO</span>
+            <span className="text-primary/60 font-mono block text-3xl md:text-5xl mt-2">DISRUPTING STATUS QUO</span>
           </motion.h2>
 
           <motion.p

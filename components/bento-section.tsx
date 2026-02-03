@@ -44,6 +44,8 @@ type Service = {
   icon: any
   image: string
   description: string
+  headline: string
+  subHeadline: string
   subItems: ServiceSubItem[]
   animationData?: any
   color: string
@@ -56,6 +58,8 @@ const services: Service[] = [
     icon: Cpu,
     image: "/illustrations/ai-automation.png",
     description: "Smart workflows and intelligent bots to automate repetitive tasks and save your team valuable time.",
+    headline: "Automate Your Business Work With AI",
+    subHeadline: "Save time, reduce errors, and improve customer experience.",
     color: "#BBACAF",
     subItems: [
       {
@@ -82,6 +86,8 @@ const services: Service[] = [
     icon: Monitor,
     image: "/illustrations/web-design.png",
     description: "Developing eye-catching, high-performance websites that strengthen your digital presence and convert visitors into customers.",
+    headline: "Build Your Digital Presence With Premium Web Apps",
+    subHeadline: "High-performance, scalable systems that convert visitors into clients.",
     color: "#977F6D",
     subItems: [
       {
@@ -108,6 +114,8 @@ const services: Service[] = [
     icon: Palette,
     image: "/illustrations/branding.png",
     description: "Crafting unique visual identities that tell your story and resonate with your target audience.",
+    headline: "Craft A Unique Visual Identity For Your Brand",
+    subHeadline: "Logos, brand guides, and creative visuals that tell your story.",
     color: "#C2491D",
     subItems: [
       {
@@ -134,6 +142,8 @@ const services: Service[] = [
     icon: Workflow,
     image: "/illustrations/devops.png",
     description: "Streamline your development lifecycle with automated pipelines and cloud infrastructure management.",
+    headline: "Streamline Your Product Lifecycle With SaaS Cloud",
+    subHeadline: "Automated pipelines and secure cloud infrastructure for modern apps.",
     color: "#B62429",
     subItems: [
       {
@@ -160,6 +170,8 @@ const services: Service[] = [
     icon: Layers,
     image: "/illustrations/custom-solutions.png",
     description: "Tailor-made software solutions designed to solve your specific business challenges and drive innovation.",
+    headline: "Tailor-Made Software Built For Innovation",
+    subHeadline: "Solving specific business challenges with proprietary custom tech.",
     color: "#88A28D",
     subItems: [
       {
@@ -185,6 +197,8 @@ const services: Service[] = [
     icon: MessageSquare,
     image: "/illustrations/digital-marketing.png", // Reusing for now as placeholder for support
     description: "Round-the-clock technical assistance and maintenance to ensure your systems are always running smoothly.",
+    headline: "Reliable Support To Keep Your Systems Running",
+    subHeadline: "Immediate technical assistance and proactive maintenance 24/7.",
     color: "#050505",
     subItems: [
       {
@@ -357,181 +371,198 @@ export function BentoSection() {
 
   return (
     <section
-      className="relative w-full font-tech overflow-visible p-10"
-      style={{ background: 'linear-gradient(273deg,rgba(118, 245, 224, 1) 3%, rgba(194, 237, 237, 1) 43%, rgba(255, 255, 255, 1) 58%)' }}
+      className="relative w-full overflow-hidden py-16 md:py-32"
+      style={{ backgroundColor: '#FFFFFF' }}
     >
       <TechBorder />
-      {/* Premium Shining Elements */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Subtle Internal Glows */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.1),transparent_40%)]" />
 
-        {/* Dynamic Shining Highlight */}
-        <motion.div
-          animate={{
-            x: ["-100%", "200%"],
-            transition: { duration: 15, repeat: Infinity, ease: "linear" }
+      {/* Subtle Background Elements */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-x-0 top-0 h-[500px] bg-gradient-to-b from-[#F8FAFA] to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(15,36,35,0.02),transparent_70%)]" />
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: 'linear-gradient(to right, #0F2423 1px, transparent 1px), linear-gradient(to bottom, #0F2423 1px, transparent 1px)',
+            backgroundSize: '100px 100px'
           }}
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12"
         />
-
-        {/* Subtle Grid Pattern */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(to right, #2EADA7 1px, transparent 1px), linear-gradient(to bottom, #2EADA7 1px, transparent 1px)', backgroundSize: '70px 70px' }} />
       </div>
 
-      <div className="relative z-10 w-full max-w-[1600px] mx-auto">
-        {/* Header - Refined Responsiveness */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-12 md:mb-20 gap-10 lg:gap-20 px-4 md:px-12 lg:px-24 pt-16">
-          <div className="w-full lg:max-w-3xl">
-            <motion.h4
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              className="text-primary font-mono text-[10px] md:text-[11px] tracking-[0.5em] uppercase mb-4 md:mb-6 font-bold"
-            >
-              OUR SERVICES
-            </motion.h4>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-lastica text-[#172222] leading-[1.1] md:leading-[1] uppercase tracking-tighter"
-            >
-              What we offer <br className="hidden sm:block" /> <span className="text-primary">for you</span>
-            </motion.h2>
-          </div>
-          <div className="w-full lg:max-w-xl pb-2">
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="text-[#172222]/70 font-inter text-sm md:text-lg lg:text-xl leading-relaxed font-medium font-raleway"
-            >
-              Discover growth with our customized IT solutions. As a trusted web design agency, global organizations rely on us for the best software, services, and brand success.
-            </motion.p>
-          </div>
+      <div className="relative z-10 w-full max-w-[1700px] mx-auto px-4 md:px-12 lg:px-24">
+        {/* Main Section Heading */}
+        <div className="mb-20 md:mb-32 pt-10">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            className="flex items-center gap-4 mb-6"
+          >
+            <div className="h-[1px] w-12 bg-primary" />
+            <span className="text-[#0F2423]/40 font-mono text-xs md:text-sm uppercase tracking-[0.5em] font-bold">
+              Core Expertise
+            </span>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="flex flex-col md:flex-row md:items-end justify-between gap-8"
+          >
+            <h2 className="text-7xl md:text-9xl font-raleway font-bold text-[#0F2423] tracking-tighter leading-[0.8]">
+              SERVICES<span className="text-primary font-light">.</span>
+            </h2>
+
+            <p className="max-w-[400px] text-[#0F2423]/50 font-raleway text-lg md:text-xl font-medium leading-relaxed mb-4">
+              Pushing the boundaries of what's possible with cutting-edge technology and innovative design.
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Dynamic Header Section */}
+        <div className="mb-16 md:mb-24 min-h-[250px]">
+          <AnimatePresence mode="wait">
+            {services.map((service, index) => (
+              activeTab === service.id && (
+                <motion.div
+                  key={service.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <div className="flex items-center gap-3 mb-8">
+                    <div className="p-2 rounded-lg bg-[#0F2423]/5 border border-[#0F2423]/10">
+                      <service.icon className="w-5 h-5 text-[#0F2423]" />
+                    </div>
+                    <h1 className="text-xl md:text-2xl font-lastica text-[#0F2423] uppercase tracking-wider">
+                      {service.title}
+                    </h1>
+                    <div className="ml-auto font-mono text-[#0F2423]/10 text-2xl font-bold">0{index + 1}</div>
+                  </div>
+
+                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-raleway font-light text-[#0F2423] mb-6 leading-tight">
+                    {service.headline.split(' ').map((word, i) => (
+                      <span key={i} className={i === 1 || i === 2 ? "font-bold" : ""}>{word} </span>
+                    ))}
+                  </h2>
+                  <p className="text-[#0F2423]/60 text-lg md:text-2xl font-raleway max-w-3xl font-medium">
+                    {service.subHeadline}
+                  </p>
+                </motion.div>
+              )
+            ))}
+          </AnimatePresence>
         </div>
 
         {isDesktop ? (
-          /* Desktop: Vertical Header Accordion (The "Contact Page" style requested) */
-          <div className="flex w-full h-[800px] overflow-hidden rounded-[10px] border border-white/10 bg-[#0A1515] shadow-2xl">
-            {services.map((service, index) => {
-              const isActive = activeTab === service.id;
-              return (
-                <motion.div
-                  key={service.id}
-                  layout
-                  initial={false}
-                  animate={{
-                    flex: isActive ? 16 : 1,
-                    backgroundColor: isActive ? "#0A1515" : "hsl(var(--accent-teal))",
-                  }}
-                  whileHover={{
-                    backgroundColor: isActive ? "#0A1515" : "#112222", // Dark hover state for inactive tabs
-                  }}
-                  transition={{
-                    duration: 0.5,
-                    ease: [0.32, 0.72, 0.35, 1.02]
-                  }}
-                  onClick={() => setActiveTab(service.id)}
-                  className={`relative h-full flex-shrink-0 cursor-pointer overflow-hidden border-r border-[#0A1515]/20 last:border-0 group ${isActive ? "z-10" : "transition-all"}`}
-                >
-                  {/* Collapsed Vertical Header */}
-                  <div
-                    className={`absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-300 ${isActive ? "opacity-0 pointer-events-none" : "opacity-100"}`}
-                  >
-                    <div className="h-full w-full flex flex-col items-center justify-center gap-4 py-4">
-                      {/* Icon at top */}
-                      <div className="p-2 bg-black/10 rounded-xl text-[#172222]">
-                        <service.icon className="w-5 h-5" />
-                      </div>
-
-                      {/* Vertical Title */}
-                      <h2 className="flex-1 [writing-mode:vertical-rl] -rotate-180 text-xl font-mono text-[#172222] uppercase tracking-widest flex items-center justify-center whitespace-nowrap font-bold group-hover:text-white transition-colors duration-300">
-                        {service.title}
-                      </h2>
-
-                      {/* Number at bottom */}
-                      <span className="font-mono text-[#172222]/70 text-xs font-bold">
-                        0{index + 1}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Expanded Content */}
-                  <AnimatePresence>
-                    {isActive && (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.4, delay: 0.2 }}
-                        className="absolute inset-0 w-full h-full bg-[#0A1515] flex flex-col"
-                      >
-                        {/* Header Bar */}
-                        <div className="flex items-center justify-between p-8 border-b border-white/10 bg-white/5">
-                          <div className="flex items-center gap-4">
-                            <div className="p-3 bg-primary/10 rounded-xl border border-primary/20 text-primary">
-                              <service.icon className="w-6 h-6" />
-                            </div>
-                            <h3 className="text-3xl font-lastica text-white uppercase tracking-tighter">
-                              {service.title}
-                            </h3>
-                          </div>
-                          <span className="text-primary font-mono text-xl font-bold bg-primary/10 px-4 py-2 rounded-lg border border-primary/20">
-                            0{index + 1}
-                          </span>
-                        </div>
-
-                        {/* Main Content Area */}
-                        <div className="flex-1 p-8 grid grid-cols-12 gap-8 overflow-hidden">
-                          {/* Left: Description & Sub-items */}
-                          <div className="col-span-7 flex flex-col gap-8 overflow-y-auto pr-4 custom-scrollbar">
-                            <p className="text-white/70 text-lg font-raleway font-medium leading-relaxed">
-                              {service.description}
-                            </p>
-
-                            <div className="grid gap-4">
-                              {service.subItems.map((item, idx) => (
-                                <motion.div
-                                  key={idx}
-                                  initial={{ opacity: 0, x: -20 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: 0.3 + (idx * 0.1) }}
-                                  className="group/item flex items-center justify-between p-12 rounded-2xl border border-white/10 bg-[#0f1b1b] hover:border-primary/40 transition-all cursor-default shadow-lg"
-                                >
-                                  <div>
-                                    <h4 className="text-white font-bold font-raleway uppercase text-2xl mb-1 tracking-wide">{item.title}</h4>
-                                    <p className="text-white/50 text-xs font-medium uppercase tracking-wider">{item.description}</p>
-                                  </div>
-                                  <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/50 group-hover/item:border-primary group-hover/item:text-primary transition-colors bg-white/5">
-                                    <span className="text-lg">→</span>
-                                  </div>
-                                </motion.div>
-                              ))}
-                            </div>
-                          </div>
-
-                          {/* Right: Illustration */}
-                          <div className="col-span-5 relative rounded-2xl overflow-hidden bg-white/5 border border-white/10 flex items-center justify-center">
+          <div className="bg-white border border-[#0F2423]/5 rounded-[48px] overflow-hidden h-[850px] shadow-[0_40px_80px_-15px_rgba(15,36,35,0.08)] flex">
+            {/* Expanded Content Area */}
+            <div className="flex-1 relative bg-[#FBFCFC]">
+              <AnimatePresence mode="wait">
+                {services.map((service) => (
+                  activeTab === service.id && (
+                    <motion.div
+                      key={service.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.5 }}
+                      className="absolute inset-0 flex flex-col p-6 md:p-10 gap-6"
+                    >
+                      {/* Top Illustration Area - Compact version */}
+                      <div className="w-full flex flex-col items-center justify-center relative min-h-[300px] shrink-0">
+                        <div className="relative w-full max-w-[650px] aspect-[16/9] md:aspect-[25/9]  bg-white  flex items-center justify-center p-6 group overflow-hidden shadow-sm">
+                          <div className="relative z-10 w-full h-full transition-all duration-700 group-hover:scale-105">
                             {service.animationData ? (
-                              <Lottie
-                                animationData={service.animationData}
-                                loop={true}
-                                className="w-full h-full p-8"
-                              />
+                              <Lottie animationData={service.animationData} loop={true} className="w-full h-full" />
                             ) : (
-                              <img src={service.image} alt={service.title} className="w-full h-full object-contain p-8" />
+                              <img src={service.image} alt={service.title} className="w-full h-full object-contain filter drop-shadow-2xl" />
                             )}
                           </div>
+                          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(15,36,35,0.03),transparent_70%)]" />
                         </div>
-                      </motion.div>
+
+                        {/* Status Message */}
+                        <div className="mt-4 flex items-center gap-3 px-5 py-2 rounded-full bg-[#0F2423]/5 border border-[#0F2423]/5 border-dashed">
+                          <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                          <p className="text-[#0F2423]/50 font-mono text-[11px] uppercase tracking-widest font-bold">Exploring {service.title}</p>
+                        </div>
+                      </div>
+
+                      {/* Bottom Service Cards Area - Horizontal Compact layout */}
+                      <div className="w-full flex flex-col gap-4">
+                        {service.subItems.map((item, idx) => (
+                          <motion.div
+                            key={idx}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: idx * 0.1 }}
+                            className="group relative flex items-center p-5 md:p-6 rounded-[32px] border border-[#0F2423]/5 bg-white shadow-sm hover:shadow-[0_15px_30px_-10px_rgba(15,36,35,0.06)] hover:scale-[1.01] transition-all duration-500 overflow-hidden"
+                          >
+                            {/* Left: Icon */}
+                            <div className="shrink-0 w-14 h-14 rounded-2xl bg-[#0F2423]/5 border border-[#0F2423]/5 flex items-center justify-center transition-all duration-500 group-hover:bg-primary/10">
+                              <service.icon className="w-7 h-7 text-[#0F2423] group-hover:text-primary transition-colors" />
+                            </div>
+
+                            {/* Center: Content */}
+                            <div className="ml-6 flex-1 min-w-0">
+                              <h3 className="text-xl font-bold text-[#0F2423] font-raleway tracking-tight mb-0.5 truncate">
+                                {item.title}
+                              </h3>
+                              <p className="text-[#0F2423]/40 text-sm font-raleway font-medium truncate">
+                                {item.description}
+                              </p>
+                            </div>
+
+                            {/* Right: CTA Button */}
+                            <motion.button
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              className="shrink-0 ml-6 px-7 py-3 rounded-full bg-[#0F2423] text-white font-mono text-[10px] font-bold uppercase tracking-widest shadow-lg shadow-[#0F2423]/10 hover:bg-primary hover:text-white transition-all duration-300 flex items-center gap-2"
+                            >
+                              <span>See How It Works</span>
+                              <span className="text-base">→</span>
+                            </motion.button>
+
+                            {/* Subtle Reveal Glow */}
+                            <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )
+                ))}
+              </AnimatePresence>
+            </div>
+
+            {/* Pillar Navigation */}
+            <div className="w-[400px] md:w-[500px] border-l border-[#0F2423]/5 flex bg-white overflow-hidden">
+              {services.map((service, index) => {
+                const isActive = activeTab === service.id;
+                return (
+                  <motion.div
+                    key={service.id}
+                    onClick={() => setActiveTab(service.id)}
+                    className={`flex-1 border-r border-[#0F2423]/5 last:border-0 relative cursor-pointer group transition-all duration-500 ${isActive ? 'bg-[#0F2423]' : 'hover:bg-[#F8FAFA]'}`}
+                  >
+                    <div className="absolute inset-0 flex flex-col items-center justify-between py-16 transition-all duration-500">
+                      <div className={`p-3 rounded-2xl transition-all duration-500 scale-110 ${isActive ? 'bg-white text-[#0F2423]' : 'bg-[#0F2423]/5 text-[#0F2423]/40 group-hover:text-[#0F2423] group-hover:bg-[#0F2423]/10'}`}>
+                        <service.icon className="w-6 h-6" />
+                      </div>
+                      <h3 className={`[writing-mode:vertical-rl] -rotate-180 text-lg font-mono uppercase tracking-[0.4em] font-bold transition-all duration-500 whitespace-nowrap ${isActive ? 'text-white' : 'text-[#0F2423]/30 group-hover:text-[#0F2423]'}`}>
+                        {service.title}
+                      </h3>
+                      <span className={`font-mono text-xs font-bold tracking-tighter transition-colors duration-500 ${isActive ? 'text-white/40' : 'text-[#0F2423]/20'}`}>0{index + 1}</span>
+                    </div>
+                    {isActive && (
+                      <motion.div layoutId="activePillarWhite" className="absolute inset-y-0 left-0 w-1 bg-primary" transition={{ type: "spring", stiffness: 300, damping: 30 }} />
                     )}
-                  </AnimatePresence>
-                </motion.div>
-              );
-            })}
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
         ) : (
-          /* Mobile & Tablet: Stacking Swipe Cards */
           <div className="relative w-full px-4 h-[750px] pb-40 flex justify-center items-start">
             <div className="relative w-full max-w-[600px] h-[680px] flex justify-center">
               {services.map((service, index) => (
@@ -543,22 +574,6 @@ export function BentoSection() {
                   onSwipe={() => setMobileActiveIndex((prev) => (prev + 1) % services.length)}
                 />
               ))}
-            </div>
-
-            {/* Visual Instruction Indicators - Decoupled from card viewport */}
-            <div className="absolute bottom-[-30px] left-0 right-0 flex flex-col items-center gap-4 z-20">
-              <div className="flex gap-3">
-                {services.map((_, i) => (
-                  <div
-                    key={i}
-                    className={`h-2.5 rounded-full transition-all duration-500 ${i === mobileActiveIndex ? "w-10 bg-primary shadow-[0_2_10_rgba(45,175,167,0.4)]" : "w-2.5 bg-primary/20"
-                      }`}
-                  />
-                ))}
-              </div>
-              <p className="text-[12px] font-bold text-primary uppercase tracking-[0.3em] animate-pulse">
-                Swipe cards to explore
-              </p>
             </div>
           </div>
         )}

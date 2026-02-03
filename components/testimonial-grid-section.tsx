@@ -220,21 +220,48 @@ export function TestimonialGridSection() {
             viewport={{ once: true }}
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 backdrop-blur-md"
           >
+            <style>{`
+              @keyframes spotlight-swing {
+                0% { clip-path: ellipse(40px 40px at -5% 50%); }
+                50% { clip-path: ellipse(40px 40px at 50% 50%); }
+                100% { clip-path: ellipse(40px 40px at 105% 50%); }
+              }
+              .spotlight-text {
+                position: relative;
+                color: rgba(45, 175, 167, 0.2) !important;
+                display: inline-block;
+              }
+              .spotlight-text::before {
+                content: attr(data-text);
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(90deg, #f70000, #f89200, #f8f501, #038f00, #0168f8, #a200f7);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent !important;
+                animation: spotlight-swing 4s infinite alternate ease-in-out;
+                pointer-events: none;
+                white-space: nowrap;
+              }
+            `}</style>
             <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
-            <span className="text-[10px] md:text-[11px] font-mono font-bold uppercase tracking-[0.3em] text-primary">
+            <span
+              className="spotlight-text text-[10px] md:text-[11px] font-mono font-bold uppercase tracking-[0.3em]"
+              data-text="Success Stories"
+            >
               Success Stories
             </span>
           </motion.div>
 
           <motion.h2
-            className="max-w-4xl text-3xl font-bold leading-6 tracking-tight text-white md:text-4xl lg:text-5xl font-lastica uppercase"
+            className="text-4xl md:text-5xl lg:text-7xl font-lastica text-white leading-[1.1] mb-8 uppercase"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            Trusted by <span className="text-primary italic">Top-Tier</span> <br />
-            <span className="text-white/40 font-mono">Engineering Teams</span>
+            TRUSTED BY <span className="text-primary italic">TOP-TIER</span> <br />
+            <span className="text-primary/60 font-mono block text-3xl md:text-5xl mt-2">ENGINEERING TEAMS</span>
           </motion.h2>
 
           <motion.p

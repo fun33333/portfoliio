@@ -87,8 +87,9 @@ export default function ContactPage() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                         >
-                            <h2 className="text-4xl sm:text-5xl md:text-6xl font-lastica text-[#172222] leading-[1.1] uppercase tracking-tighter mb-8">
-                                Let's <span className="text-primary">Connect</span>
+                            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-lastica text-[#172222] leading-[1.1] mb-8 uppercase">
+                                LET'S <span className="text-primary italic">CONNECT</span> <br />
+                                <span className="text-primary/60 font-mono block text-3xl md:text-5xl mt-2">WITH US</span>
                             </h2>
                             <p className="text-[#172222]/70 text-lg font-raleway mb-12 leading-relaxed">
                                 Whether you have a question, want to start a project, or just want to say hi,
@@ -242,8 +243,9 @@ export default function ContactPage() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-4xl sm:text-5xl md:text-6xl font-lastica text-white leading-[1.1] uppercase tracking-tighter mb-8">
-                            Office <span className="text-primary">Hours</span>
+                        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-lastica text-white leading-[1.1] mb-8 uppercase">
+                            OUR OFFICE <br />
+                            <span className="text-primary/60 font-mono block text-3xl md:text-5xl mt-2 italic shadow-primary/20">HOURS</span>
                         </h2>
                         <div className="inline-block bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 md:p-12">
                             <div className="grid md:grid-cols-2 gap-8 text-left">

@@ -38,7 +38,71 @@ export function ProjectsSection() {
   );
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-20 md:px-8">
+    <div className="max-w-7xl mx-auto px-4 py-24 md:px-8">
+      {/* Standardized Header Section */}
+      <div className="flex flex-col items-center text-center mb-16 md:mb-24">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 backdrop-blur-md"
+        >
+          <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+          <span className="text-[10px] md:text-[11px] font-mono font-bold uppercase tracking-[0.3em] text-primary">
+            CASE STUDIES
+          </span>
+        </motion.div>
+
+        <motion.h2
+          className="text-4xl md:text-5xl lg:text-7xl font-lastica text-white leading-[1.1] mb-8 uppercase"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <style>{`
+            @keyframes swing-header {
+              0% { clip-path: ellipse(120px 120px at -2.54% -9.25%); }
+              50% { clip-path: ellipse(120px 120px at 49.66% 64.36%); }
+              100% { clip-path: ellipse(120px 120px at 102.62% -1.61%); }
+            }
+            .spotlight-header {
+              position: relative;
+              color: rgba(255, 255, 255, 0.05) !important;
+            }
+            .spotlight-header::before {
+              content: attr(data-text);
+              position: absolute;
+              inset: 0;
+              background: linear-gradient(90deg, #f70000, #f89200, #f8f501, #038f00, #0168f8, #a200f7);
+              -webkit-background-clip: text;
+              background-clip: text;
+              color: transparent !important;
+              animation: swing-header 5s infinite alternate ease-in-out;
+              pointer-events: none;
+            }
+          `}</style>
+          CRAFTING <span className="text-primary italic">DIGITAL</span> <br />
+          <span
+            className="spotlight-header font-mono block text-3xl md:text-5xl mt-2"
+            data-text="SUCCESS STORIES"
+          >
+            SUCCESS STORIES
+          </span>
+        </motion.h2>
+
+        <motion.p
+          className=" max-w-2xl text-base md:text-lg text-white/60 font-raleway font-medium leading-relaxed"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2, duration: 0.8 }}
+        >
+          Explore our portfolio of high-performance applications and stunning designs
+          that have helped businesses scale and stand out.
+        </motion.p>
+      </div>
+
       {/* Filter Tabs */}
       <div className="flex flex-wrap justify-center gap-4 mb-16">
         {categories.map((category) => (

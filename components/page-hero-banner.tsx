@@ -81,7 +81,7 @@ export function PageHeroBanner({
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.4 }}
-                            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-lastica text-white leading-[0.95] uppercase tracking-tighter mb-6 md:mb-8"
+                            className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-lastica text-white leading-[0.95] uppercase tracking-tighter mb-6 md:mb-8"
                         >
                             {title}
                         </motion.h1>
@@ -161,8 +161,6 @@ export function PageHeroBanner({
                 </div>
             </div>
 
-            {/* Bottom Wave Divider */}
-            <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent" />
         </section>
     )
 }

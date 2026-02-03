@@ -113,8 +113,9 @@ export default function ServicesPage() {
                         viewport={{ once: true }}
                         className="text-center mb-16"
                     >
-                        <h2 className="text-4xl sm:text-5xl md:text-6xl font-lastica text-white leading-[1.1] uppercase tracking-tighter mb-6">
-                            Service <span className="text-primary">Details</span>
+                        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-lastica text-white leading-[1.1] mb-8 uppercase">
+                            DETAILED <span className="text-primary italic">SERVICE</span> <br />
+                            <span className="text-primary/60 font-mono block text-3xl md:text-5xl mt-2 italic shadow-primary/20">SPECIFICATIONS</span>
                         </h2>
                         <p className="text-white/70 text-lg md:text-xl font-raleway max-w-3xl mx-auto">
                             Explore our comprehensive range of services designed to meet all your digital needs

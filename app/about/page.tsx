@@ -66,7 +66,7 @@ export default function AboutPage() {
                 title="About Us"
                 subtitle="OUR STORY"
                 description="We're Quadgentics, a passionate team of developers, designers, and innovators dedicated to building the future of digital products."
-                imagePath="/images/project_banner.png"
+                imagePath="/images/about-img-banner.png"
                 ctaText="Join Our Team"
                 ctaLink="/contact"
                 badge="Est. 2020"
@@ -84,8 +84,9 @@ export default function AboutPage() {
                             <h4 className="text-primary font-mono text-[10px] md:text-[11px] tracking-[0.5em] uppercase mb-4 md:mb-6 font-bold">
                                 WHO WE ARE
                             </h4>
-                            <h2 className="text-4xl sm:text-5xl md:text-6xl font-lastica text-[#172222] leading-[1.1] uppercase tracking-tighter mb-6">
-                                Building digital <span className="text-primary">excellence</span>
+                            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-lastica text-[#172222] leading-[1.1] mb-8 uppercase">
+                                BUILDING <span className="text-primary italic">DIGITAL</span> <br />
+                                <span className="text-primary/60 font-mono block text-3xl md:text-5xl mt-2">EXCELLENCE</span>
                             </h2>
                             <p className="text-[#172222]/70 text-base md:text-lg leading-relaxed font-raleway mb-6">
                                 Quadgentics started with a simple mission: to help startups and businesses build
@@ -128,8 +129,9 @@ export default function AboutPage() {
                         viewport={{ once: true }}
                         className="text-center mb-16"
                     >
-                        <h2 className="text-4xl sm:text-5xl md:text-6xl font-lastica text-white leading-[1.1] uppercase tracking-tighter mb-6">
-                            Our <span className="text-primary">Values</span>
+                        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-lastica text-white leading-[1.1] mb-8 uppercase">
+                            OUR CORE <br />
+                            <span className="text-primary/60 font-mono block text-3xl md:text-5xl mt-2">VALUES</span>
                         </h2>
                         <p className="text-white/70 text-lg md:text-xl font-raleway max-w-3xl mx-auto">
                             The principles that guide everything we do
@@ -170,8 +172,9 @@ export default function AboutPage() {
                         viewport={{ once: true }}
                         className="text-center mb-16"
                     >
-                        <h2 className="text-4xl sm:text-5xl md:text-6xl font-lastica text-[#172222] leading-[1.1] uppercase tracking-tighter mb-6">
-                            Our <span className="text-primary">Journey</span>
+                        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-lastica text-[#172222] leading-[1.1] mb-8 uppercase">
+                            OUR COMPANY <br />
+                            <span className="text-primary/60 font-mono block text-3xl md:text-5xl mt-2">JOURNEY</span>
                         </h2>
                     </motion.div>
 

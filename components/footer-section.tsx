@@ -37,9 +37,9 @@ export function FooterSection() {
               </span>
             </div>
 
-            <h2 className="text-white text-4xl md:text-5xl lg:text-6xl font-lastica uppercase leading-[1.1] tracking-tighter mb-8">
+            <h2 className="text-white text-4xl md:text-5xl lg:text-6xl font-lastica uppercase leading-[1.1] mb-8">
               READY TO <span className="text-primary italic">TRANSFORM</span> <br />
-              <span className="text-white/20">YOUR BUSINESS?</span>
+              <span className="text-primary/60 font-mono block text-3xl md:text-5xl mt-2">YOUR BUSINESS?</span>
             </h2>
 
             <p className="text-white/60 text-lg font-raleway font-medium leading-relaxed max-w-xl mb-10">

@@ -98,8 +98,9 @@ export function CounterSection() {
           <h4 className="text-primary font-mono text-[10px] md:text-[11px] tracking-[0.5em] uppercase mb-4 font-bold">
             OUR ACHIEVEMENTS
           </h4>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-lastica text-foreground leading-[1.1] uppercase tracking-tighter">
-            Numbers that <span className="text-primary">speak for us</span>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-lastica text-foreground leading-[1.1] uppercase mb-8">
+            NUMBERS THAT <span className="text-primary italic">SPEAK</span> <br />
+            <span className="text-primary/60 font-mono block text-3xl md:text-5xl mt-2">FOR OUR SUCCESS</span>
           </h2>
         </motion.div>
 

@@ -158,14 +158,14 @@ export function FAQSection() {
           </motion.div>
 
           <motion.h2
-            className="max-w-4xl text-3xl font-bold leading-[1.1] tracking-tighter text-[#172222] md:text-5xl lg:text-6xl font-lastica uppercasemax-w-4xl text-3xl font-bold leading-6 tracking-tight  md:text-4xl lg:text-5xl font-lastica uppercase"
+            className="text-4xl md:text-5xl lg:text-7xl font-lastica text-[#172222] leading-[1.1] mb-8 uppercase"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             HAVE <span className="text-primary italic">QUESTIONS?</span> <br />
-            <span className="text-[#081616]/80 font-mono">WE HAVE ANSWERS</span>
+            <span className="text-primary/60 font-mono block text-3xl md:text-5xl mt-2">WE HAVE ANSWERS</span>
           </motion.h2>
 
           <motion.p
