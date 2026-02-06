@@ -60,28 +60,6 @@ export function ProjectsSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <style>{`
-            @keyframes swing-header {
-              0% { clip-path: ellipse(120px 120px at -2.54% -9.25%); }
-              50% { clip-path: ellipse(120px 120px at 49.66% 64.36%); }
-              100% { clip-path: ellipse(120px 120px at 102.62% -1.61%); }
-            }
-            .spotlight-header {
-              position: relative;
-              color: rgba(255, 255, 255, 0.05) !important;
-            }
-            .spotlight-header::before {
-              content: attr(data-text);
-              position: absolute;
-              inset: 0;
-              background: linear-gradient(90deg, #f70000, #f89200, #f8f501, #038f00, #0168f8, #a200f7);
-              -webkit-background-clip: text;
-              background-clip: text;
-              color: transparent !important;
-              animation: swing-header 5s infinite alternate ease-in-out;
-              pointer-events: none;
-            }
-          `}</style>
           CRAFTING <span className="text-primary italic">DIGITAL</span> <br />
           <span
             className="spotlight-header font-mono block text-3xl md:text-5xl mt-2"

@@ -55,7 +55,12 @@ export function AboutSection() {
                         </h4>
                         <h2 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-lastica text-white leading-[1.1] uppercase mb-6">
                             WE BUILD THE <br />
-                            <span className="text-primary/60 font-mono block text-3xl md:text-5xl mt-2 italic shadow-primary/20">FUTURE</span>
+                            <span
+                                className="spotlight-header text-primary/60 font-mono block text-3xl md:text-5xl mt-2 italic shadow-primary/20"
+                                data-text="FUTURE"
+                            >
+                                FUTURE
+                            </span>
                         </h2>
                         <p className="text-white/70 text-base md:text-lg lg:text-xl leading-relaxed font-raleway font-medium mb-8">
                             Quadgentics is a modern software house dedicated to helping startups and businesses

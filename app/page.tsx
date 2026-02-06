@@ -55,7 +55,7 @@ export default function LandingPage() {
           playsInline
           className="w-full h-full object-cover"
         >
-          <source src="/Technology startup (1).mp4" type="video/mp4" />
+          <source src="/Technology.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-full animate-pulse"></div>
       </motion.div>

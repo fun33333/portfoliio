@@ -79,7 +79,7 @@ export function Header() {
         <div className="flex items-center justify-between">
           {/* Logo Section - Two Logos as per reference */}
           {/* Logo Section - Two Logos as per reference */}
-          <Link href="/" className="flex items-center gap-4 group  ">
+          <Link href="/" className="flex items-center gap-4 group transition-transform duration-300 hover:scale-105 active:scale-95">
             {/* Q Icon Logo */}
             <div className="relative h-12 w-12">
               <Image
@@ -115,41 +115,28 @@ export function Header() {
                     handleScroll(e, item.href);
                   }
                 }}
-                className={`relative px-4 py-2 transition-all duration-300 group overflow-hidden ${scrolled
+                className={`relative px-4 py-2 transition-all duration-300 group ${scrolled
                   ? "text-foreground"
-                  : "text-white/80 hover:text-white"
+                  : "text-white/80"
                   }`}
               >
-                <span className="relative z-10">{item.name}</span>
+                <h2 className="navbar-header-span">{item.name}</h2>
 
-                {/* Rainbow Gradient Underline */}
+                {/* Elegant Underline Hover Effect */}
                 <motion.span
-                  className="absolute bottom-0 left-0 w-full h-[3px] z-0"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: "0%" }}
-                  transition={{
-                    x: { duration: 0.4, ease: "easeOut" },
-                    backgroundPosition: {
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }
-                  }}
-                  style={{
-                    background: "linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff)",
-                    backgroundSize: "200% 100%",
-                  }}
-                  animate={{
-                    backgroundPosition: ["0% 0%", "200% 0%"],
-                  }}
+                  className="absolute bottom-1 left-0 w-full h-[2px] bg-primary origin-center"
+                  initial={{ scaleX: 0 }}
+                  whileHover={{ scaleX: 1 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
                 />
+
               </Link>
             ))}
             <div className="ml-4">
               <Link href="/contact">
                 <Button
-                  className={`relative overflow-hidden group ${scrolled
-                    ? "bg-primary hover:bg-primary/90 text-white"
+                  className={`relative overflow-hidden group transition-transform duration-300 hover:scale-105 active:scale-95 ${scrolled
+                    ? "bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20"
                     : "bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm"
                     }`}
                 >
@@ -210,9 +197,14 @@ export function Header() {
                             }
                             setMobileMenuOpen(false);
                           }}
-                          className="text-3xl font-lastica uppercase tracking-tight text-foreground hover:text-primary transition-colors text-center block"
+                          className="text-3xl font-lastica uppercase tracking-tight text-foreground transition-all duration-300 text-center block group"
                         >
-                          {item.name}
+                          <motion.span
+                            whileHover={{ scale: 1.1, color: "var(--primary)" }}
+                            className="inline-block transition-colors"
+                          >
+                            {item.name}
+                          </motion.span>
                         </Link>
                       </motion.div>
                     ))}

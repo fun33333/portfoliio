@@ -60,7 +60,7 @@ const services: Service[] = [
     description: "Smart workflows and intelligent bots to automate repetitive tasks and save your team valuable time.",
     headline: "Automate Your Business Work With AI",
     subHeadline: "Save time, reduce errors, and improve customer experience.",
-    color: "#BBACAF",
+    color: "#2dafa7", // Primary Teal
     subItems: [
       {
         title: "WhatsApp Bots",
@@ -88,7 +88,7 @@ const services: Service[] = [
     description: "Developing eye-catching, high-performance websites that strengthen your digital presence and convert visitors into customers.",
     headline: "Build Your Digital Presence With Premium Web Apps",
     subHeadline: "High-performance, scalable systems that convert visitors into clients.",
-    color: "#977F6D",
+    color: "#258c85", // Darker Teal
     subItems: [
       {
         title: "Frontend Development",
@@ -116,7 +116,7 @@ const services: Service[] = [
     description: "Crafting unique visual identities that tell your story and resonate with your target audience.",
     headline: "Craft A Unique Visual Identity For Your Brand",
     subHeadline: "Logos, brand guides, and creative visuals that tell your story.",
-    color: "#C2491D",
+    color: "#76f5e0", // Accent Teal (from globals.css --accent-teal)
     subItems: [
       {
         title: "Logo Design",
@@ -144,7 +144,7 @@ const services: Service[] = [
     description: "Streamline your development lifecycle with automated pipelines and cloud infrastructure management.",
     headline: "Streamline Your Product Lifecycle With SaaS Cloud",
     subHeadline: "Automated pipelines and secure cloud infrastructure for modern apps.",
-    color: "#B62429",
+    color: "#1d736d", // Deep Teal
     subItems: [
       {
         title: "CI/CD Pipelines",
@@ -172,7 +172,7 @@ const services: Service[] = [
     description: "Tailor-made software solutions designed to solve your specific business challenges and drive innovation.",
     headline: "Tailor-Made Software Built For Innovation",
     subHeadline: "Solving specific business challenges with proprietary custom tech.",
-    color: "#88A28D",
+    color: "#3bd9d0", // Light Teal
     subItems: [
       {
         title: "Software Consulting",
@@ -199,7 +199,7 @@ const services: Service[] = [
     description: "Round-the-clock technical assistance and maintenance to ensure your systems are always running smoothly.",
     headline: "Reliable Support To Keep Your Systems Running",
     subHeadline: "Immediate technical assistance and proactive maintenance 24/7.",
-    color: "#050505",
+    color: "#0f1b1b", // Deepest Teal/Black
     subItems: [
       {
         title: "Help Desk",
@@ -408,8 +408,9 @@ export function BentoSection() {
             whileInView={{ opacity: 1, y: 0 }}
             className="flex flex-col md:flex-row md:items-end justify-between gap-8"
           >
-            <h2 className="text-7xl md:text-9xl font-raleway font-bold text-[#0F2423] tracking-tighter leading-[0.8]">
-              SERVICES<span className="text-primary font-light">.</span>
+            <h2 className="text-7xl md:text-9xl font-raleway font-bold text-[#0F2423] tracking-tighter leading-[0.8] flex flex-col items-start">
+              <span>SERVICES</span>
+              <span className="spotlight-header font-light text-primary mt-2" data-text=".">.</span>
             </h2>
 
             <p className="max-w-[400px] text-[#0F2423]/50 font-raleway text-lg md:text-xl font-medium leading-relaxed mb-4">
@@ -431,8 +432,8 @@ export function BentoSection() {
                   transition={{ duration: 0.5 }}
                 >
                   <div className="flex items-center gap-3 mb-8">
-                    <div className="p-2 rounded-lg bg-[#0F2423]/5 border border-[#0F2423]/10">
-                      <service.icon className="w-5 h-5 text-[#0F2423]" />
+                    <div className="p-2 rounded-lg bg-[#0F2423]/5 border border-[#0F2423]/10" style={{ borderColor: `${service.color}20`, backgroundColor: `${service.color}10` }}>
+                      <service.icon className="w-5 h-5" style={{ color: service.color }} />
                     </div>
                     <h1 className="text-xl md:text-2xl font-lastica text-[#0F2423] uppercase tracking-wider">
                       {service.title}
@@ -442,7 +443,7 @@ export function BentoSection() {
 
                   <h2 className="text-4xl md:text-5xl lg:text-6xl font-raleway font-light text-[#0F2423] mb-6 leading-tight">
                     {service.headline.split(' ').map((word, i) => (
-                      <span key={i} className={i === 1 || i === 2 ? "font-bold" : ""}>{word} </span>
+                      <span key={i} className={i === 1 || i === 2 ? "font-bold" : ""} style={i === 1 || i === 2 ? { color: service.color } : {}}>{word} </span>
                     ))}
                   </h2>
                   <p className="text-[#0F2423]/60 text-lg md:text-2xl font-raleway max-w-3xl font-medium">
@@ -455,7 +456,7 @@ export function BentoSection() {
         </div>
 
         {isDesktop ? (
-          <div className="bg-white border border-[#0F2423]/5 rounded-[48px] overflow-hidden h-[850px] shadow-[0_40px_80px_-15px_rgba(15,36,35,0.08)] flex">
+          <div className="bg-white border border-[#0F2423]/10 rounded-[10px] overflow-hidden h-[850px] shadow-[0_40px_80px_-15px_rgba(15,36,35,0.08)] flex">
             {/* Expanded Content Area */}
             <div className="flex-1 relative bg-[#FBFCFC]">
               <AnimatePresence mode="wait">
@@ -536,26 +537,50 @@ export function BentoSection() {
             </div>
 
             {/* Pillar Navigation */}
-            <div className="w-[400px] md:w-[500px] border-l border-[#0F2423]/5 flex bg-white overflow-hidden">
+            <div className="w-[400px] md:w-[500px] border-l border-[#0F2423]/15 flex bg-white overflow-hidden">
               {services.map((service, index) => {
                 const isActive = activeTab === service.id;
                 return (
                   <motion.div
                     key={service.id}
                     onClick={() => setActiveTab(service.id)}
-                    className={`flex-1 border-r border-[#0F2423]/5 last:border-0 relative cursor-pointer group transition-all duration-500 ${isActive ? 'bg-[#0F2423]' : 'hover:bg-[#F8FAFA]'}`}
+                    whileHover={{ flex: isActive ? 1 : 1.15 }}
+                    className={`flex-1 border-r border-[#0F2423]/15 relative cursor-pointer group transition-all duration-500 ${isActive ? 'shadow-[inset_0_0_40px_rgba(0,0,0,0.2)]' : 'hover:bg-[#F8FAFA] hover:shadow-[inset_0_0_20px_rgba(0,0,0,0.02)]'}`}
+                    style={{ backgroundColor: isActive ? service.color : 'transparent' }}
                   >
+                    {/* Visual Segment Divider */}
+                    <div className={`absolute top-0 right-0 w-[1px] h-full bg-gradient-to-b from-transparent via-[#0F2423]/25 to-transparent ${isActive ? 'opacity-0' : 'opacity-100'}`} />
+
                     <div className="absolute inset-0 flex flex-col items-center justify-between py-16 transition-all duration-500">
-                      <div className={`p-3 rounded-2xl transition-all duration-500 scale-110 ${isActive ? 'bg-white text-[#0F2423]' : 'bg-[#0F2423]/5 text-[#0F2423]/40 group-hover:text-[#0F2423] group-hover:bg-[#0F2423]/10'}`}>
+                      <div className={`p-3 rounded-2xl transition-all duration-500 shadow-sm ${isActive ? 'bg-white scale-110 shadow-xl' : 'bg-[#0F2423]/5 text-[#0F2423]/40 group-hover:text-[#0F2423] group-hover:bg-[#0F2423]/10'}`} style={isActive ? { color: service.color } : {}}>
                         <service.icon className="w-6 h-6" />
                       </div>
-                      <h3 className={`[writing-mode:vertical-rl] -rotate-180 text-lg font-mono uppercase tracking-[0.4em] font-bold transition-all duration-500 whitespace-nowrap ${isActive ? 'text-white' : 'text-[#0F2423]/30 group-hover:text-[#0F2423]'}`}>
-                        {service.title}
-                      </h3>
+
+                      <div className="flex flex-col items-center gap-8">
+                        <h3 className={`[writing-mode:vertical-rl] -rotate-180 text-lg font-mono uppercase tracking-[0.4em] font-bold transition-all duration-500 whitespace-nowrap ${isActive ? 'text-white' : 'text-[#0F2423]/30 group-hover:text-[#0F2423]'}`}>
+                          {service.title}
+                        </h3>
+
+                        {/* Interactive Dot */}
+                        <div className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${isActive ? 'bg-white scale-150 shadow-[0_0_10px_rgba(255,255,255,0.8)]' : 'bg-[#0F2423]/10 group-hover:bg-[#0F2423]/30'}`} />
+                      </div>
+
                       <span className={`font-mono text-xs font-bold tracking-tighter transition-colors duration-500 ${isActive ? 'text-white/40' : 'text-[#0F2423]/20'}`}>0{index + 1}</span>
                     </div>
+
                     {isActive && (
-                      <motion.div layoutId="activePillarWhite" className="absolute inset-y-0 left-0 w-1 bg-primary" transition={{ type: "spring", stiffness: 300, damping: 30 }} />
+                      <>
+                        <motion.div
+                          layoutId="activePillarBar"
+                          className="absolute inset-y-0 left-0 w-1.5 bg-white/30"
+                          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                        />
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent pointer-events-none"
+                        />
+                      </>
                     )}
                   </motion.div>
                 );
