@@ -3,18 +3,20 @@ export type Block =
   | { type: 'text'; content: string }
   | { type: 'image'; url: string; alt?: string }
   | { type: 'iframe'; url: string; title?: string; description?: string }
-  | { type: 'reference'; title: string; url: string };
+  | { type: 'reference'; title: string; url: string }
+  | { type: 'card-grid'; items: { title: string; description: string; link: string }[] }
+  | { type: 'list'; items: string[] };
 
 export function formatContent(raw: string): Block[] {
   if (!raw) return [];
 
   // Strip markdown JSON fences if model returned ```json ... ```
-// at top of formatContent()
-const cleaned = raw
-  .replace(/```(?:json)?/g, '')
-  .replace(/<!DOCTYPE[\s\S]*<\/html>/i, '')
-  .trim();
-  
+  // at top of formatContent()
+  const cleaned = raw
+    .replace(/```(?:json)?/g, '')
+    .replace(/<!DOCTYPE[\s\S]*<\/html>/i, '')
+    .trim();
+
   try {
     const parsed = JSON.parse(cleaned);
     if (Array.isArray(parsed)) {

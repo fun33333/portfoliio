@@ -20,7 +20,9 @@ import { motion } from "framer-motion";
 // bitBYTE8
 
 import { useEffect } from "react";
+import Link from "next/link";
 import Lenis from "lenis";
+import { ChatWidget } from "@/components/chat/chat-widget";
 
 export default function LandingPage() {
   useEffect(() => {
@@ -42,23 +44,7 @@ export default function LandingPage() {
     <div className="min-h-screen relative overflow-hidden pb-0">
       {/* Sticky Video Background */}
       {/* Robot Icon - Bottom Right */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, delay: 1.2 }}
-        className="fixed bottom-8 right-28 w-24 h-24 rounded-full overflow-hidden shadow-primary z-50"
-      >
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover"
-        >
-          <source src="/Technology.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-full animate-pulse"></div>
-      </motion.div>
+      <ChatWidget />
       {/* Scrollable Content */}
       <div className="relative z-10">
         <main className="mx-auto relative">

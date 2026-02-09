@@ -64,16 +64,16 @@ export function HeroSection() {
 
       {/* Main Content */}
       <div className="flex-1 flex items-center relative z-10">
-        <div className="px-4 md:px-24 py-16 w-full">
-          <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center pt-10">
+        <div className="px-6 md:px-24 py-12 md:py-16 w-full">
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center pt-20 md:pt-10">
             {/* Left Column: Main Content */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.2 }}
-              className="space-y-8"
+              className="space-y-6 md:space-y-8"
             >
-              <div className="space-y-6">
+              <div className="space-y-4 md:space-y-6">
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -86,9 +86,9 @@ export function HeroSection() {
                   </span>
                 </motion.div>
 
-                <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-7xl xl:text-[50px] font-lastica leading-[0.9] tracking-tight font-black uppercase">
+                <h1 className="text-4xl sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl font-lastica leading-[1.1] md:leading-[0.9] tracking-tight font-black uppercase">
                   <div className="text-primary">We Build</div>
-                  <div className="text-white font-mono">
+                  <div className="text-white font-mono break-words">
                     {displayedText}
                     {!isComplete && (
                       <span className="inline-block w-[3px] h-[0.8em] bg-primary ml-1 animate-pulse" />
@@ -102,7 +102,7 @@ export function HeroSection() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
-                  className="flex flex-wrap gap-2 text-primary font-mono text-sm md:text-base font-bold"
+                  className="flex flex-wrap gap-x-3 gap-y-2 text-primary font-mono text-xs md:text-base font-bold"
                 >
                   <span>AI</span>
                   <span className="text-white/30">•</span>
@@ -115,18 +115,18 @@ export function HeroSection() {
                   <span>Automation</span>
                 </motion.div>
 
-                <p className="text-base md:text-lg lg:text-xl text-white/60 font-raleway font-medium leading-relaxed max-w-2xl">
+                <p className="text-sm md:text-lg lg:text-xl text-white/60 font-raleway font-medium leading-relaxed max-w-2xl">
                   We design and develop high-performance digital products using modern technologies and scalable architectures.
                 </p>
               </div>
 
               {/* CTA Buttons */}
-              <div className="flex flex-wrap gap-4">
-                <Link href="/contact">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-4 items-center sm:items-start">
+                <Link href="/contact" className="w-full sm:w-auto">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="group relative isolation-auto inline-flex items-center gap-3 overflow-hidden rounded-full bg-primary px-8 py-4 text-white transition-all shadow-xl hover:shadow-[0_0_30px_rgba(45,175,167,0.4)]"
+                    className="group relative isolation-auto inline-flex items-center justify-center gap-3 overflow-hidden rounded-full bg-primary px-8 py-4 text-white transition-all shadow-xl hover:shadow-[0_0_30px_rgba(45,175,167,0.4)] w-full sm:w-auto"
                   >
                     <span className="relative z-10 text-sm md:text-base font-bold uppercase tracking-wider font-raleway">
                       Get Free Consultation
@@ -136,10 +136,10 @@ export function HeroSection() {
                   </motion.button>
                 </Link>
 
-                <Link href="/projects">
+                <Link href="/projects" className="w-full sm:w-auto">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
-                    className="px-8 py-4 rounded-full border border-white/20 hover:border-primary/50 text-white font-raleway font-bold text-sm md:text-base uppercase tracking-wider transition-all hover:bg-white/5"
+                    className="px-8 py-4 rounded-full border border-white/20 hover:border-primary/50 text-white font-raleway font-bold text-sm md:text-base uppercase tracking-wider transition-all hover:bg-white/5 w-full sm:w-auto"
                   >
                     View Case Studies
                   </motion.button>
