@@ -31,6 +31,7 @@ export function FooterSection() {
       { name: "Expertise", href: "/about" },
       { name: "Portfolio", href: "/projects" },
       { name: "Careers", href: "#" },
+      { name: "Contact Us", href: "/contact" },
       { name: "Partner Program", href: "#" }
     ],
     legal: [
@@ -116,7 +117,7 @@ export function FooterSection() {
                 {footerLinks.company.map((item) => (
                   <li key={item.name}>
                     <Link href={item.href} className="navbar-header-span w-fit text-white/40 hover:text-white text-base font-raleway transition-all duration-300 flex items-center group">
-                    
+
                       {item.name}
                     </Link>
                   </li>
@@ -132,14 +133,15 @@ export function FooterSection() {
               <div className="flex flex-col gap-6">
                 <div className="flex flex-col gap-1">
                   <span className="text-[10px] font-mono text-white/30 tracking-widest uppercase">Global Support</span>
-                  <a href="mailto:solutions@quadgentics.com" className="navbar-header-span w-fit text-white/80 hover:text-primary transition-colors font-mono text-sm">solutions@quadgentics.com</a>
+                  <a href="mailto:info@quadgentics.com" className="navbar-header-span w-fit text-white/80 hover:text-primary transition-colors font-mono text-sm">info@quadgentics.com</a>
                 </div>
                 <div className="flex flex-col gap-1">
                   <span className="text-[10px] font-mono text-white/30 tracking-widest uppercase">Headquarters</span>
                   <p className="text-white/60 text-sm leading-relaxed font-raleway">
-                    123 Innovation Drive, <br />
-                    Suite 400, <br />
-                    New York, NY 10001
+                    <a href="tel:+92 310 2104511" className="hover:text-primary transition-colors">+92 310 2104511</a><br />
+                    Office 402, Business Center,<br />
+                    Shahrah-e-Faisal,<br />
+                    Karachi, Pakistan
                   </p>
                 </div>
               </div>

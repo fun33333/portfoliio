@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, MotionValue, PanInfo } from "framer-motion"
 import Lottie from "lottie-react"
-import Lenis from 'lenis'
+import Image from "next/image"
 import webDevAnimation from "../assets/Web Development.json"
 import aiAutomationAnimation from "../assets/Ai-Automation.json"
 import graphicDesignAnimation from "../assets/Graphic-design.json"
@@ -20,7 +20,7 @@ import {
   Zap,
   Award,
   BookOpen,
-  Image,
+  // Image,
   MessageSquare,
   Workflow,
   Brain,
@@ -296,7 +296,7 @@ function SwipeCard({ service, index, activeIndex, onSwipe }: {
                     className="w-full h-full p-2"
                   />
                 ) : (
-                  <img src={service.image} alt={service.title} className="w-full h-full object-contain p-4" />
+                  <Image src={service.image} alt={service.title} width={400} height={300} className="w-full h-full object-contain p-4" />
                 )}
               </div>
 
@@ -340,17 +340,8 @@ export function BentoSection() {
     // Add listener
     window.addEventListener('resize', checkDesktop)
 
-    // Initialize Lenis for smooth scrolling
-    const lenis = new Lenis()
-    function raf(time: number) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
-    }
-    requestAnimationFrame(raf)
-
     return () => {
       window.removeEventListener('resize', checkDesktop)
-      lenis.destroy()
     }
   }, [])
 
@@ -477,7 +468,7 @@ export function BentoSection() {
                             {service.animationData ? (
                               <Lottie animationData={service.animationData} loop={true} className="w-full h-full" />
                             ) : (
-                              <img src={service.image} alt={service.title} className="w-full h-full object-contain filter drop-shadow-2xl" />
+                              <Image src={service.image} alt={service.title} width={650} height={360} className="w-full h-full object-contain filter drop-shadow-2xl" />
                             )}
                           </div>
                           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(15,36,35,0.03),transparent_70%)]" />

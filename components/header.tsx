@@ -82,25 +82,49 @@ export function Header() {
           <div className="flex items-center justify-between">
             {/* Logo Section */}
             <Link href="/" className="flex items-center gap-4 group transition-transform duration-300 hover:scale-105 active:scale-95">
-              <div className="relative h-12 w-12">
-                <Image
-                  src="/logos/Dark-theme/light theme logo.png"
-                  alt="Quadgentics Q Logo"
-                  width={60}
-                  height={60}
-                  className="object-contain"
-                />
-              </div>
-
-              <div className="hidden sm:block">
-                <Image
-                  src={scrolled ? "/logos/Mockup/name.png" : "/logos/Dark-theme/WhiteName.png"}
-                  alt="Quadgentics Text"
-                  width={250}
-                  height={50}
-                  className="object-contain z-50"
-                />
-              </div>
+              {scrolled ? (
+                <div className="flex items-center gap-4">
+                  <div className="relative h-12 w-12">
+                    <Image
+                      src="/logos/dark-logo.png"
+                      alt="Quadgentics Q Logo"
+                      width={60}
+                      height={60}
+                      className="object-contain"
+                    />
+                  </div>
+                  <div className="hidden sm:block">
+                    <Image
+                      src="/logos/Mockup/name.png"
+                      alt="Quadgentics Text"
+                      width={250}
+                      height={50}
+                      className="object-contain z-50"
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="flex items-center gap-4">
+                  <div className="relative h-12 w-12">
+                    <Image
+                      src="/logos/Dark-theme/light theme logo.png"
+                      alt="Quadgentics Q Logo"
+                      width={60}
+                      height={60}
+                      className="object-contain"
+                    />
+                  </div>
+                  <div className="hidden sm:block">
+                    <Image
+                      src="/logos/Dark-theme/WhiteName.png"
+                      alt="Quadgentics Text"
+                      width={250}
+                      height={50}
+                      className="object-contain z-50"
+                    />
+                  </div>
+                </div>
+              )}
             </Link>
 
             {/* Desktop Navigation */}

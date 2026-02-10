@@ -1,51 +1,22 @@
-"use client";
-
 import { HeroSection } from "@/components/hero-section";
-import { DashboardPreview } from "@/components/dashboard-preview";
-import { SocialProof } from "@/components/social-proof";
-import { BentoSection } from "@/components/bento-section";
-import { ProjectsSection } from "@/components/projects-section";
-import { LargeTestimonial } from "@/components/large-testimonial";
-import { PricingSection } from "@/components/pricing-section";
-import { TestimonialGridSection } from "@/components/testimonial-grid-section";
-import { FAQSection } from "@/components/faq-section";
-
-import { FooterSection } from "@/components/footer-section";
+import dynamic from "next/dynamic";
 import { AnimatedSection } from "@/components/animated-section";
-import { VideoBackground } from "@/components/video-background";
-import { CounterSection } from "@/components/counter-section";
-import { AboutSection } from "@/components/about-section";
-import { motion } from "framer-motion";
-
-// bitBYTE8
-
-import { useEffect } from "react";
-import Link from "next/link";
-import Lenis from "lenis";
 import { ChatWidget } from "@/components/chat/chat-widget";
 
+// Dynamically import heavy components below the fold
+const BentoSection = dynamic(() => import("@/components/bento-section").then(mod => mod.BentoSection));
+const ProjectsSection = dynamic(() => import("@/components/projects-section").then(mod => mod.ProjectsSection));
+const CounterSection = dynamic(() => import("@/components/counter-section").then(mod => mod.CounterSection));
+const AboutSection = dynamic(() => import("@/components/about-section").then(mod => mod.AboutSection));
+const LargeTestimonial = dynamic(() => import("@/components/large-testimonial").then(mod => mod.LargeTestimonial));
+const TestimonialGridSection = dynamic(() => import("@/components/testimonial-grid-section").then(mod => mod.TestimonialGridSection));
+const FAQSection = dynamic(() => import("@/components/faq-section").then(mod => mod.FAQSection));
+const FooterSection = dynamic(() => import("@/components/footer-section").then(mod => mod.FooterSection));
+
 export default function LandingPage() {
-  useEffect(() => {
-    const lenis = new Lenis();
-
-    function raf(time: any) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
-
   return (
     <div className="min-h-screen relative overflow-hidden pb-0">
-      {/* Sticky Video Background */}
-      {/* Robot Icon - Bottom Right */}
       <ChatWidget />
-      {/* Scrollable Content */}
       <div className="relative z-10">
         <main className="mx-auto relative">
           <HeroSection />
@@ -129,8 +100,6 @@ export default function LandingPage() {
             <FAQSection />
           </div>
         </AnimatedSection>
-
-
 
         {/* Footer - DARK */}
         <AnimatedSection

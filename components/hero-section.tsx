@@ -86,7 +86,7 @@ export function HeroSection() {
                   </span>
                 </motion.div>
 
-                <h1 className="text-4xl sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl font-lastica leading-[1.1] md:leading-[0.9] tracking-tight font-black uppercase">
+                <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-lastica leading-[1.1] md:leading-[0.9] tracking-tight font-black uppercase">
                   <div className="text-primary">We Build</div>
                   <div className="text-white font-mono break-words">
                     {displayedText}
@@ -94,7 +94,8 @@ export function HeroSection() {
                       <span className="inline-block w-[3px] h-[0.8em] bg-primary ml-1 animate-pulse" />
                     )}
                   </div>
-                  <div className="text-primary italic">for the Future</div>
+                  <div className="text-primary italic text-2xl md:text-3xl lg:text
+                  -4xl xl:text-5xl  mt-2">for the Future</div>
                 </h1>
 
                 {/* Service Tags */}
@@ -222,6 +223,7 @@ export function HeroSection() {
                   alt="Wireframe Hand"
                   width={700}
                   height={700}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 700px"
                   className="object-contain drop-shadow-[0_0_50px_rgba(45,175,167,0.2)]"
                   priority
                 />
@@ -252,4 +254,3 @@ export function HeroSection() {
     </section>
   )
 }
-

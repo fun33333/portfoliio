@@ -1,8 +1,27 @@
 import type { Metadata } from 'next'
-import favicon from "@/public/favicon.ico"
-
+import { Inter, Raleway } from 'next/font/google'
+import localFont from 'next/font/local'
 import './globals.css'
 import { Header } from '@/components/header'
+import SmoothScroll from '@/components/SmoothScroll'
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
+
+const raleway = Raleway({
+  subsets: ['latin'],
+  variable: '--font-raleway',
+  display: 'swap',
+})
+
+const lastica = localFont({
+  src: '../public/fonts/Lastica.ttf',
+  variable: '--font-lastica',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Quadgentics - Portfolio',
@@ -20,11 +39,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark antialiased">
+    <html lang="en" className={`dark antialiased ${inter.variable} ${raleway.variable} ${lastica.variable}`}>
       <body className="min-h-screen bg-background font-sans antialiased" >
         <div className="relative flex min-h-screen flex-col">
-          <Header />
-          <div className="flex-1 ">{children}</div>
+          <SmoothScroll>
+            <Header />
+            <div className="flex-1 ">{children}</div>
+          </SmoothScroll>
         </div>
       </body>
     </html>

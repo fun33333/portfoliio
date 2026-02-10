@@ -1,165 +1,52 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'Lastica';
-  src: url('/fonts/Lastica.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Lastica';
-  src: url('/fonts/Lastica.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Lastica';
-  src: url('/fonts/Lastica.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Lastica';
-  src: url('/fonts/Lastica.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Raleway';
-  src: url('/fonts/Raleway/Raleway-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Raleway';
-  src: url('/fonts/Raleway/Raleway-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Raleway';
-  src: url('/fonts/Raleway/Raleway-SemiBold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Raleway';
-  src: url('/fonts/Raleway/Raleway-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
 @layer base {
-
-  /* Light theme */
   :root {
-    /* Light Modern Theme */
     --background: 0 0% 100%;
-    /* White */
     --foreground: 180 33% 11%;
-    /* #172222 */
-
     --muted: 180 33% 96%;
-    /* Light muted cyan */
     --muted-foreground: 180 33% 25%;
     --muted-foreground-light: 180 33% 45%;
     --muted-foreground-dark: 180 33% 15%;
-
     --card: 0 0% 100%;
-    /* White */
     --card-foreground: 180 33% 11%;
-
     --popover: 0 0% 100%;
-    /* White */
     --popover-foreground: 180 33% 11%;
-
-    /* Dark Section Backgrounds */
     --dark-bg-primary: 180 45% 6%;
-    /* #0f1b1b - Deep teal-black */
     --dark-bg-secondary: 180 40% 8%;
-    /* Slightly lighter for footer */
     --dark-foreground: 180 20% 95%;
-    /* Light text for dark sections */
     --dark-muted: 180 15% 70%;
-    /* Muted text on dark */
-
-    /* Light Section Backgrounds */
     --light-bg-pure: 0 0% 100%;
-    /* Pure white */
     --light-bg-tinted: 180 60% 99%;
-    /* #f8fffe - Soft teal tint */
     --light-foreground: 180 33% 11%;
-    /* Dark text for light sections */
-
-    /* Modern Cyan Accents */
     --primary: 177 58% 43%;
-    /* #2dafa7 */
     --primary-foreground: 0 0% 100%;
-    /* White */
     --primary-dark: 177 58% 33%;
-    /* Darker teal */
     --primary-light: 177 58% 53%;
-    /* Lighter teal */
-
     --secondary: 180 33% 98%;
-    /* Very light cyan */
     --secondary-foreground: 180 33% 11%;
-
     --accent: 177 58% 43%;
-    /* #2dafa7 */
     --accent-foreground: 0 0% 100%;
-    /* White */
-
     --border: 180 89% 95% / 0.15;
-    /* Based on e7fdfd */
     --border-light: 180 20% 85%;
-    /* Light border */
     --border-dark: 180 20% 20%;
-    /* Dark border */
-
     --ring: 177 58% 43%;
-    /* #2dafa7 */
     --radius: 0.75rem;
-
-    /* Tech accent colors */
     --tech-green: 177 58% 43%;
-    /* #2dafa7 */
     --tech-orange: 177 58% 53%;
-    /* Lighter primary */
     --tech-purple: 177 58% 33%;
-    /* Darker primary */
     --accent-teal: 170 87% 71%;
-    /* #76f5e0 */
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Raleway', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: var(--font-raleway), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   }
 
   h1,
@@ -169,28 +56,28 @@
   h5,
   h6,
   .heading-font {
-    font-family: 'Lastica', "Inter", sans-serif;
+    font-family: var(--font-lastica), var(--font-inter), sans-serif;
     letter-spacing: -0.02em;
   }
 
   .font-mono {
-    font-family: "Inter", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-family: var(--font-inter), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
 
   .font-tech {
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     font-weight: 700;
     letter-spacing: -0.02em;
   }
 
   .font-lastica {
-    font-family: 'Lastica', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: var(--font-lastica), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     font-weight: 700;
     letter-spacing: -0.02em;
   }
 
   .font-raleway {
-    font-family: 'Raleway', sans-serif;
+    font-family: var(--font-raleway), sans-serif;
   }
 }
 
@@ -756,9 +643,17 @@ body::before {
 
 /* Spotlight Header Animation */
 @keyframes swing-header {
-  0% { clip-path: ellipse(120px 120px at -2.54% -9.25%); }
-  50% { clip-path: ellipse(120px 120px at 49.66% 64.36%); }
-  100% { clip-path: ellipse(120px 120px at 102.62% -1.61%); }
+  0% {
+    clip-path: ellipse(120px 120px at -2.54% -9.25%);
+  }
+
+  50% {
+    clip-path: ellipse(120px 120px at 49.66% 64.36%);
+  }
+
+  100% {
+    clip-path: ellipse(120px 120px at 102.62% -1.61%);
+  }
 }
 
 .spotlight-header {
@@ -777,27 +672,29 @@ body::before {
   animation: swing-header 5s infinite alternate ease-in-out;
   pointer-events: none;
 }
-.navbar-header-span{
+
+.navbar-header-span {
   position: relative;
-  cursor:pointer;
+  cursor: pointer;
   font-family: 'Poppins', sans-serif;
 }
-.navbar-header-span::before{
+
+.navbar-header-span::before {
   content: '';
   position: absolute;
   left: 0;
   bottom: -6px;
   width: 0%;
   height: 3px;
-  background-color:#2eada7 ;
-  box-shadow: 
+  background-color: #2eada7;
+  box-shadow:
     0 0 4px rgba(46, 173, 167, 0.4),
     0 0 10px rgba(46, 173, 167, 0.15);
   transition: width .4s ease;
   border-radius: 0;
 }
 
-.navbar-header-span:hover::before{
-width: 100%;
-border-radius: 50%;
+.navbar-header-span:hover::before {
+  width: 100%;
+  border-radius: 50%;
 }
