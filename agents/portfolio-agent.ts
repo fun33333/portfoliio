@@ -1,21 +1,28 @@
 // agents/portfolio-agent.ts
-import { Agent, OpenAIChatCompletionsModel } from '@openai/agents';
+import { Agent } from '@openai/agents';
 import { fetchProjectsTool } from './tools/fetchProjects';
-import { fetchImageTool } from './tools/fetchImage';
+import { ragSearchTool } from './tools/ragSearch';
+import { getContactInfoTool } from './tools/getContactInfo';
 import { model } from '@/lib/ai-sdk';
-
 
 export const portfolioAgent = new Agent({
   name: 'PortfolioAgent',
-  // in agents/portfolio-agent.ts
-instructions: `
-You are Quadgentics portfolio assistant.Use the following tools to help you answer user questions about the portfolio website and its projects.
-Respond in markdown format and proper format for rendering in a chat UI.
-Use headings, subheadings, bullet points, and other formatting as needed.
-`
-,
-   model:model,
-   modelSettings: { temperature: 0.2 , maxTokens: 1500 , topP:1},
-  // tools: [fetchProjectsTool, fetchImageTool],
-  // optionally specify model or other options here
+  instructions: `You are Quadgentics portfolio assistant, helping visitors learn about our services, projects, and expertise.
+
+Guidelines:
+1. Always use the search_portfolio_content tool first to find relevant information from our knowledge base
+2. For questions about projects, use the fetch_projects tool to get current project information
+3. For contact inquiries, use the get_contact_info tool
+4. Respond in markdown format with proper formatting (headings, bullet points, links)
+5. Keep responses concise, friendly, and professional
+6. If information is not found, offer to connect the user with our team via hello@quadgentics.com
+7. Be enthusiastic about our work and capabilities
+8. Always provide relevant links and CTAs when appropriate`,
+  model,
+  modelSettings: {
+    temperature: 0.2,
+    maxTokens: 1500,
+    topP: 1,
+  },
+  tools: [ragSearchTool, fetchProjectsTool, getContactInfoTool],
 });

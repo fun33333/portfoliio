@@ -6,13 +6,15 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "seed:pinecone": "tsx --env-file=.env.local scripts/seed-pinecone.ts"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
     "@fancyapps/ui": "^6.1.10",
     "@hookform/resolvers": "^3.9.1",
     "@openai/agents": "^0.0.16",
+    "@pinecone-database/pinecone": "^7.0.0",
     "@radix-ui/react-accordion": "1.2.2",
     "@radix-ui/react-alert-dialog": "1.1.4",
     "@radix-ui/react-aspect-ratio": "1.1.1",
@@ -81,6 +83,7 @@
     "@types/react-dom": "^19",
     "postcss": "^8.5",
     "tailwindcss": "^3.4.17",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }

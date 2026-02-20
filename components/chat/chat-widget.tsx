@@ -99,43 +99,107 @@ export function ChatWidget() {
 
     async function sendMessage(text: string) {
         if (!text?.trim()) return;
-        const uid = nanoid();
-        setMessages((m) => [...m, { id: uid, role: 'user', content: text }]);
+
+        const userMsg: Msg = {
+            id: nanoid(),
+            role: 'user',
+            content: text,
+        };
+
+        const assistantId = nanoid();
+
+        // Add user message and placeholder for assistant
+        setMessages((prev) => [
+            ...prev,
+            userMsg,
+            {
+                id: assistantId,
+                role: 'assistant',
+                content: '',
+            },
+        ]);
+
         setIsLoading(true);
 
-        setTimeout(() => {
-            let responseContent = "I'm a frontend-only demo right now, but I can tell you about this portfolio!";
-            let responseBlocks: Block[] | undefined;
+        try {
+            // Call the agent API with streaming
+            const response = await fetch('/api/agent', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    message: text,
+                    messages: [...messages, userMsg], // Include conversation history
+                }),
+            });
 
-            const lowerText = text.toLowerCase();
-
-            if (lowerText.includes('project')) {
-                responseContent = "Check out these projects:";
-                responseBlocks = [
-                    {
-                        type: 'card-grid',
-                        items: [
-                            { title: 'AI Analytics', description: 'Next.js + Python', link: '/projects/analytics' },
-                            { title: 'E-commerce', description: 'React + Node', link: '/projects/ecommerce' }
-                        ]
-                    }
-                ] as any;
-            } else if (lowerText.includes('service')) {
-                responseContent = "I offer these services:";
-                responseBlocks = [
-                    {
-                        type: 'list',
-                        items: ['Web Dev', 'AI Integration', 'UI Design']
-                    }
-                ] as any;
+            if (!response.ok) {
+                throw new Error(`API error: ${response.statusText}`);
             }
 
-            setMessages((prev) => [
-                ...prev,
-                { id: nanoid(), role: 'assistant', content: responseContent, blocks: responseBlocks }
-            ]);
+            if (!response.body) {
+                throw new Error('No response body');
+            }
+
+            // Handle streaming response
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+            let fullContent = '';
+
+            while (true) {
+                const { done, value } = await reader.read();
+
+                if (done) break;
+
+                // Decode the chunk and add to content
+                const chunk = decoder.decode(value, { stream: true });
+                fullContent += chunk;
+
+                // Update the assistant message with accumulated content
+                setMessages((prev) =>
+                    prev.map((m) =>
+                        m.id === assistantId
+                            ? { ...m, content: fullContent }
+                            : m
+                    )
+                );
+            }
+
+            // Final decode to ensure all data is processed
+            const finalChunk = decoder.decode();
+            if (finalChunk) {
+                fullContent += finalChunk;
+                setMessages((prev) =>
+                    prev.map((m) =>
+                        m.id === assistantId
+                            ? { ...m, content: fullContent }
+                            : m
+                    )
+                );
+            }
+        } catch (error) {
+            console.error('Error sending message:', error);
+
+            // Show error message
+            const errorMsg =
+                error instanceof Error
+                    ? error.message
+                    : 'Failed to get response from the server';
+
+            setMessages((prev) =>
+                prev.map((m) =>
+                    m.id === assistantId
+                        ? {
+                              ...m,
+                              content: `Sorry, I encountered an error: ${errorMsg}. Please try again.`,
+                          }
+                        : m
+                )
+            );
+        } finally {
             setIsLoading(false);
-        }, 1000);
+        }
     }
 
     return (
