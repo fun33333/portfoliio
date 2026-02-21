@@ -43,20 +43,26 @@ export function LargeTestimonial() {
             viewport={{ once: true }}
             className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 backdrop-blur-md"
           >
-            <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+            <div className="h-1.5 w-1.5 animate-pulse  bg-primary" />
             <span className="text-[10px] md:text-[11px] font-mono font-bold uppercase tracking-[0.3em] text-primary">
               TESTIMONIALS
             </span>
           </motion.div>
 
           <motion.h2
-            className="text-4xl md:text-5xl lg:text-6xl font-lastica text-[#172222] leading-[1.1] mb-8 uppercase"
+            className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-lastica text-[#172222] leading-[1.2] md:leading-[1.1] mb-8 uppercase"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
             VOICE OF <span className="text-primary italic">OUR</span> <br />
-            <span className="text-primary/60 font-mono block text-3xl md:text-5xl mt-2">GLOBAL CLIENTS</span>
+            <span className="text-primary/60 font-mono block text-xl sm:text-3xl md:text-5xl mt-2"></span>
+            <span
+                                className="spotlight-header text-primary/60 font-mono block text-2xl md:text-5xl mt-2 italic shadow-primary/20"
+                                data-text="GLOBAL CLIENTS"
+                            >
+                                GLOBAL CLIENTS
+                            </span>
           </motion.h2>
         </div>
 
@@ -90,7 +96,7 @@ export function LargeTestimonial() {
 
                   <div className="relative z-10 flex flex-col items-center text-center">
                     <motion.div
-                      className="text-2xl md:text-4xl lg:text-5xl font-raleway font-semibold text-[#172222] italic leading-[1.3] mb-12"
+                      className="text-lg sm:text-2xl md:text-4xl lg:text-5xl font-raleway font-semibold text-[#172222] italic leading-[1.4] sm:leading-[1.3] mb-8 md:mb-12"
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}

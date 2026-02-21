@@ -50,13 +50,13 @@ export function AboutSection() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
                     >
-                        <h4 className="text-primary font-mono text-[10px] md:text-[11px] tracking-[0.5em] uppercase mb-4 md:mb-6 font-bold">
+                        <h4 className="text-primary text-center md:tetx-left font-mono text-[10px] md:text-[11px] tracking-[0.5em] uppercase mb-4 md:mb-6 font-bold">
                             ABOUT QUADGENTICS
                         </h4>
-                        <h2 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-lastica text-white leading-[1.1] uppercase mb-6">
+                        <h2 className="text-3xl text-center md:text-left sm:text-4xl md:text-5xl lg:text-6xl font-lastica text-white leading-[1.2] md:leading-[1.1] uppercase mb-6" >
                             WE BUILD THE <br />
                             <span
-                                className="spotlight-header text-primary/60 font-mono block text-3xl md:text-5xl mt-2 italic shadow-primary/20"
+                                className="spotlight-header text-primary/60 font-mono block text-2xl md:text-5xl mt-2 italic shadow-primary/20"
                                 data-text="FUTURE"
                             >
                                 FUTURE
@@ -123,7 +123,7 @@ export function AboutSection() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="relative"
+                        className="relative hidden md:block"
                     >
                         <div className="relative aspect-square  overflow-hidden">
                             <Image

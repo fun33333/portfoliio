@@ -113,10 +113,10 @@ export default function ServicesPage() {
                         viewport={{ once: true }}
                         className="text-center mb-16"
                     >
-                        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-lastica text-white leading-[1.1] mb-8 uppercase">
+                        <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-lastica text-white leading-[1.2] md:leading-[1.1] mb-8 uppercase">
                             DETAILED <span className="text-primary italic">SERVICE</span> <br />
                             <span
-                                className="spotlight-header text-primary/60 font-mono block text-3xl md:text-5xl mt-2 italic shadow-primary/20"
+                                className="spotlight-header text-primary/60 font-mono block text-2xl md:text-5xl mt-2 italic shadow-primary/20"
                                 data-text="SPECIFICATIONS"
                             >
                                 SPECIFICATIONS
@@ -143,7 +143,7 @@ export default function ServicesPage() {
                                 </div>
 
                                 {/* Title & Description */}
-                                <h3 className="text-2xl md:text-3xl font-lastica text-white uppercase tracking-tight mb-4">
+                                <h3 className="text-xl md:text-3xl font-lastica text-white uppercase tracking-tight mb-4 leading-tight">
                                     {service.title}
                                 </h3>
                                 <p className="text-white/70 font-raleway mb-6 leading-relaxed">

@@ -10,14 +10,14 @@ const contactInfo = [
     {
         icon: Mail,
         title: "Email",
-        value: "hello@quadgentics.com",
-        link: "mailto:hello@quadgentics.com"
+        value: "info@quadgentics.com",
+        link: "mailto:info@quadgentics.com"
     },
     {
         icon: Phone,
         title: "Phone",
-        value: "+92 XXX XXXXXXX",
-        link: "tel:+92XXXXXXXXX"
+        value: "++92 310 2104511",
+        link: "tel:+92 310 2104511"
     },
     {
         icon: MapPin,
@@ -53,11 +53,43 @@ export default function ContactPage() {
         message: ""
     })
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-        // Handle form submission
-        console.log("Form submitted:", formData)
+   const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+        const res = await fetch("/api/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+            alert("Message sent ");
+            setFormData({ name: "", email: "", subject: "", message: "" });
+        } else {
+            alert("Failed to send ");
+            console.error(data.error);
+        }
+    } catch (error) {
+        alert("Something went wrong ");
+        console.error(error);
     }
+};
+
+// const handleSubmit = async (e: React.FormEvent) => {
+//     e.preventDefault();
+
+//     await fetch("https://n8n.laconsultingcorp.com/webhook-test/contact", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify(formData)
+//     });
+
+//     alert("Message sent via Webhook ✅");
+//     setFormData({ name: "", email: "", subject: "", message: "" });
+// };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({

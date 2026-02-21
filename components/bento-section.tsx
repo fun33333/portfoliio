@@ -264,7 +264,7 @@ function SwipeCard({ service, index, activeIndex, onSwipe }: {
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
       className="cursor-grab active:cursor-grabbing"
     >
-      <div className="p-1 h-[680px]">
+      <div className="p-1 h-[550px] sm:h-[600px] md:h-[680px]">
         <Card className="h-full border border-white/20 rounded-[32px] overflow-hidden bg-[#0A1515] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.4)] flex flex-col">
           <CardContent className="p-0 flex flex-col h-full overflow-hidden">
             {/* Header */}
@@ -288,7 +288,7 @@ function SwipeCard({ service, index, activeIndex, onSwipe }: {
                 {service.description}
               </p>
 
-              <div className="shrink-0 relative w-full aspect-[16/10] md:aspect-[4/3] rounded-2xl overflow-hidden bg-white/5 mb-5 flex items-center justify-center border border-white/10">
+              <div className="shrink-0 relative w-full aspect-[16/9] sm:aspect-[16/10] md:aspect-[4/3] rounded-2xl overflow-hidden bg-white/5 mb-5 flex items-center justify-center border border-white/10">
                 {service.animationData ? (
                   <Lottie
                     animationData={service.animationData}
@@ -399,7 +399,7 @@ export function BentoSection() {
             whileInView={{ opacity: 1, y: 0 }}
             className="flex flex-col md:flex-row md:items-end justify-between gap-8"
           >
-            <h2 className="text-7xl md:text-9xl font-raleway font-bold text-[#0F2423] tracking-tighter leading-[0.8] flex flex-col items-start">
+            <h2 className="text-5xl sm:text-7xl md:text-9xl font-raleway font-bold text-[#0F2423] tracking-tighter leading-[0.8] flex flex-col items-start">
               <span>SERVICES</span>
               <span className="spotlight-header font-light text-primary mt-2" data-text=".">.</span>
             </h2>
@@ -579,8 +579,8 @@ export function BentoSection() {
             </div>
           </div>
         ) : (
-          <div className="relative w-full px-4 h-[750px] pb-40 flex justify-center items-start">
-            <div className="relative w-full max-w-[600px] h-[680px] flex justify-center">
+          <div className="relative w-full px-4 h-[650px] sm:h-[700px] md:h-[750px] pb-40 flex justify-center items-start">
+            <div className="relative w-full max-w-[600px] h-[580px] sm:h-[630px] md:h-[680px] flex justify-center">
               {services.map((service, index) => (
                 <SwipeCard
                   key={service.id}

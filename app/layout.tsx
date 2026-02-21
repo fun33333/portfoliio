@@ -4,6 +4,7 @@ import localFont from 'next/font/local'
 import './globals.css'
 import { Header } from '@/components/header'
 import SmoothScroll from '@/components/SmoothScroll'
+import { ChatWidget } from '@/components/chat/chat-widget'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -24,7 +25,7 @@ const lastica = localFont({
 })
 
 export const metadata: Metadata = {
-  title: 'Quadgentics - Portfolio',
+  title: 'Quadgentics',
   icons: {
     icon: [{ url: '/favicon.ico' }],
     shortcut: [{ url: '/favicon.ico' }],
@@ -44,6 +45,7 @@ export default function RootLayout({
         <div className="relative flex min-h-screen flex-col">
           <SmoothScroll>
             <Header />
+             <ChatWidget/>
             <div className="flex-1 ">{children}</div>
           </SmoothScroll>
         </div>

@@ -81,7 +81,7 @@ export function PageHeroBanner({
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.4 }}
-                            className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-lastica text-white leading-[0.95] uppercase tracking-tighter mb-6 md:mb-8"
+                            className="text-3xl sm:text-5xl md:text-5xl lg:text-6xl font-lastica text-white leading-[1.1] sm:leading-[0.95] uppercase tracking-tighter mb-6 md:mb-8"
                         >
                             {title}
                         </motion.h1>
@@ -125,7 +125,7 @@ export function PageHeroBanner({
                         initial={{ opacity: 0, x: 50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-                        className="order-1 lg:order-2 relative"
+                        className="hidden lg:block order-1 lg:order-2 relative"
                     >
                         <div className="relative aspect-square lg:aspect-[4/3] w-full">
                             {/* Glow Effect */}

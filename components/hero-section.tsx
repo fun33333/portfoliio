@@ -35,7 +35,7 @@ function useTypingEffect(text: string, speed: number = 100, startDelay: number =
 }
 
 export function HeroSection() {
-  const { displayedText, isComplete } = useTypingEffect("Scalable Software", 80, 1200)
+  const { displayedText, isComplete } = useTypingEffect("Scalable Software", 60, 1000)
   return (
     <section className="relative min-h-[90vh] bg-[#0a1515] flex flex-col overflow-hidden">
       {/* Premium Background Elements */}
@@ -71,7 +71,7 @@ export function HeroSection() {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.2 }}
-              className="space-y-6 md:space-y-8"
+              className="space-y-6 md:space-y-8 flex flex-col items-start text-left"
             >
               <div className="space-y-4 md:space-y-6">
                 <motion.div
@@ -81,21 +81,20 @@ export function HeroSection() {
                   className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 backdrop-blur-md"
                 >
                   <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
-                  <span className="text-[10px] md:text-[11px] font-mono font-bold uppercase tracking-[0.3em] text-primary">
+                  <span className="text-[11px] md:text-xs font-mono font-bold uppercase tracking-[0.3em] text-primary">
                     Innovation Lab
                   </span>
                 </motion.div>
 
-                <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-lastica leading-[1.1] md:leading-[0.9] tracking-tight font-black uppercase">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-lastica leading-[1.2] md:leading-[0.9] tracking-tight font-black uppercase">
                   <div className="text-primary">We Build</div>
-                  <div className="text-white font-mono break-words">
+                  <div className="text-white break-words text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6 font-raleway">
                     {displayedText}
                     {!isComplete && (
                       <span className="inline-block w-[3px] h-[0.8em] bg-primary ml-1 animate-pulse" />
                     )}
                   </div>
-                  <div className="text-primary italic text-2xl md:text-3xl lg:text
-                  -4xl xl:text-5xl  mt-2">for the Future</div>
+                  <div className="text-primary italic text-2xl md:text-3xl lg:text-4xl xl:text-5xl mt-2">for the Future</div>
                 </h1>
 
                 {/* Service Tags */}
@@ -103,7 +102,7 @@ export function HeroSection() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
-                  className="flex flex-wrap gap-x-3 gap-y-2 text-primary font-mono text-xs md:text-base font-bold"
+                  className="flex flex-wrap gap-x-3 gap-y-2 text-primary font-mono text-[10px] sm:text-xs md:text-base font-bold"
                 >
                   <span>AI</span>
                   <span className="text-white/30">•</span>
@@ -116,13 +115,13 @@ export function HeroSection() {
                   <span>Automation</span>
                 </motion.div>
 
-                <p className="text-sm md:text-lg lg:text-xl text-white/60 font-raleway font-medium leading-relaxed max-w-2xl">
+                <p className="text-sm md:text-lg lg:text-xl text-white/60 font-raleway font-medium leading-relaxed max-w-2xl text-left">
                   We design and develop high-performance digital products using modern technologies and scalable architectures.
                 </p>
               </div>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row flex-wrap gap-4 items-center sm:items-start">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-4 items-start justify-start">
                 <Link href="/contact" className="w-full sm:w-auto">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
@@ -230,21 +229,7 @@ export function HeroSection() {
               </div>
             </motion.div>
 
-            {/* Mobile Visual */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="md:hidden flex flex-col items-center space-y-8 mt-12"
-            >
-              <Image
-                src="/Untitled design (3).png"
-                alt="Wireframe Hand"
-                width={320}
-                height={320}
-                className="object-contain"
-              />
-            </motion.div>
+
           </div>
         </div>
       </div>

@@ -371,6 +371,7 @@ export function ChatWidget() {
                                 <>
                                     <div
                                         ref={listRef}
+                                        onWheel={(e) => e.stopPropagation()} /* keep wheel scrolling inside widget */
                                         className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent"
                                     >
                                         {messages.map((m) => (

@@ -55,6 +55,7 @@ export function ChatWindow({
 
         <div
           ref={listRef}
+          onWheel={(e) => e.stopPropagation()} /* ensure wheel events stay inside the chat area */
           className={cn(
             'flex-1 px-6 md:px-10 py-8 space-y-8 overflow-y-auto custom-scrollbar',
             'scrollbar-thin scrollbar-thumb-primary/10 scrollbar-track-transparent'

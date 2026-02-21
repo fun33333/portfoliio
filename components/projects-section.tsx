@@ -54,20 +54,20 @@ export function ProjectsSection() {
         </motion.div>
 
         <motion.h2
-          className="text-4xl md:text-5xl lg:text-7xl font-lastica text-white leading-[1.1] mb-8 uppercase"
+          className="text-2xl md:text-4xl lg:text-6xl font-lastica text-white leading-[1.1] mb-4 uppercase"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           CRAFTING <span className="text-primary italic">DIGITAL</span> <br />
+        </motion.h2>
           <span
             className="spotlight-header font-mono block text-3xl md:text-5xl mt-2"
             data-text="SUCCESS STORIES"
           >
             SUCCESS STORIES
           </span>
-        </motion.h2>
 
         <motion.p
           className=" max-w-2xl text-base md:text-lg text-white/60 font-raleway font-medium leading-relaxed"
@@ -111,7 +111,7 @@ export function ProjectsSection() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.3 }}
-              className="group relative h-[700px] rounded-2xl overflow-hidden bg-[#0F1B1B] border border-white/10 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10"
+              className="group relative h-[450px] sm:h-[550px] md:h-[650px] lg:h-[700px] rounded-2xl overflow-hidden bg-[#0F1B1B] border border-white/10 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10"
             >
               {/* Image + Fancybox */}
               <div className="relative w-full h-full overflow-hidden">
@@ -126,7 +126,7 @@ export function ProjectsSection() {
                     alt={product.title}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="Imag"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </a>
 

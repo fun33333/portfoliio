@@ -98,10 +98,15 @@ export function CounterSection() {
           <h4 className="text-primary font-mono text-[10px] md:text-[11px] tracking-[0.5em] uppercase mb-4 font-bold">
             OUR ACHIEVEMENTS
           </h4>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-lastica text-foreground leading-[1.1] uppercase mb-8">
+          <h2 className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-lastica text-foreground leading-[1.2] md:leading-[1.1] uppercase mb-4">
             NUMBERS THAT <span className="text-primary italic">SPEAK</span> <br />
-            <span className="text-primary/60 font-mono block text-3xl md:text-5xl mt-2">FOR OUR SUCCESS</span>
           </h2>
+           <span
+                                className="spotlight-header text-primary/60 font-mono block text-2xl md:text-5xl mt-2 italic shadow-primary/20"
+                                data-text="FOR YOUR SUCCESS"
+                            >
+                                FOR YOUR SUCCESS
+                            </span>
         </motion.div>
 
         {/* Stats Grid */}
@@ -136,7 +141,7 @@ export function CounterSection() {
                 {/* Number */}
                 <div className="relative mb-3">
                   <h3
-                    className="text-5xl md:text-6xl lg:text-6xl  font-bold tracking-tight text-primary font-tech"
+                    className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl  font-bold tracking-tight text-primary font-tech"
                   >
                     <Counter end={stat.value} suffix={stat.suffix} prefix={stat.suffix === "%" ? "" : "+"} />
                   </h3>

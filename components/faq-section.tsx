@@ -158,15 +158,20 @@ export function FAQSection() {
           </motion.div>
 
           <motion.h2
-            className="text-4xl md:text-5xl lg:text-7xl font-lastica text-[#172222] leading-[1.1] mb-8 uppercase"
+            className="text-2xl sm:text-4xl lg:text-6xl font-lastica text-[#172222] leading-[1.2] md:leading-[1.1] mb-4 uppercase"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             HAVE <span className="text-primary italic">QUESTIONS?</span> <br />
-            <span className="text-primary/60 font-mono block text-3xl md:text-5xl mt-2">WE HAVE ANSWERS</span>
           </motion.h2>
+           <span
+                                className="spotlight-header text-primary/60 font-mono block text-2xl md:text-5xl mt-2 italic shadow-primary/20"
+                                data-text="WE HAVE ANSWERS"
+                            >
+                                WE HAVE ANSWERS
+                            </span>
 
           <motion.p
             className="mt-8 max-w-2xl text-base md:text-lg text-[#172222]/60 font-raleway font-medium leading-relaxed"
@@ -203,7 +208,7 @@ export function FAQSection() {
           <p className="text-[#172222] font-raleway font-medium mb-4">
             Still have questions? We're here to help.
           </p>
-          <button className="group relative text-2xl inline-flex items-center gap-2 font-mono font-bold uppercase tracking-[0.2em] text-primary hover:text-primary-light transition-colors">
+          <button className="group relative text-xl sm:text-2xl inline-flex items-center gap-2 font-mono font-bold uppercase tracking-[0.2em] text-primary hover:text-primary-light transition-colors">
             Contact Support Team
             <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
           </button>

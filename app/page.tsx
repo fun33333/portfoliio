@@ -1,8 +1,6 @@
 import { HeroSection } from "@/components/hero-section";
 import dynamic from "next/dynamic";
 import { AnimatedSection } from "@/components/animated-section";
-import { ChatWidget } from "@/components/chat/chat-widget";
-
 // Dynamically import heavy components below the fold
 const BentoSection = dynamic(() => import("@/components/bento-section").then(mod => mod.BentoSection));
 const ProjectsSection = dynamic(() => import("@/components/projects-section").then(mod => mod.ProjectsSection));
@@ -16,7 +14,7 @@ const FooterSection = dynamic(() => import("@/components/footer-section").then(m
 export default function LandingPage() {
   return (
     <div className="min-h-screen relative overflow-hidden pb-0">
-      <ChatWidget />
+      
       <div className="relative z-10">
         <main className="mx-auto relative">
           <HeroSection />
