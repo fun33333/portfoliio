@@ -14,7 +14,7 @@ export const getContactInfoTool = tool({
       company: 'Quadgentics',
       description: 'A modern software house dedicated to building exceptional digital products',
       contact: {
-        email: 'hello@quadgentics.com',
+        email: 'info@quadgentics.com',
         support: '24/7 Support Available',
         website: 'https://quadgentics.com',
       },

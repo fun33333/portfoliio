@@ -156,7 +156,7 @@ export const portfolioChunks: PortfolioChunk[] = [
   {
     id: 'contact-2',
     category: 'contact',
-    text: `Email us at hello@quadgentics.com for business inquiries, support requests, or to schedule a consultation with our team.`,
+    text: `Email us at info@quadgentics.com for business inquiries, support requests, or to schedule a consultation with our team.`,
     metadata: { section: 'contact', type: 'email', contactType: 'business' },
   },
   {
